@@ -1,0 +1,9 @@
+.vs
+.vscode
+Logs
+TDSGlobalUnity
+TDSGlobalUnity.apk
+*.meta
+Temp
+obj
+Library
