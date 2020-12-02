@@ -1,3 +1,15 @@
-﻿{
-	"name": "TDSGlobal"
+{
+    "name": "TDSGlobal",
+    "includePlatforms": [
+		"Android",
+        "Editor",
+        "iOS"
+	],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

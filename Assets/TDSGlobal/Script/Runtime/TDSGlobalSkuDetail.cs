@@ -24,6 +24,11 @@ namespace TDSGlobal
             JsonUtility.FromJsonOverwrite(json, this);
         }
 
+        public string ToJSON(){
+            return JsonUtility.ToJson(this);
+        }
+        
+
     }
     [Serializable]
     public class PriceLocale
@@ -80,6 +85,11 @@ namespace TDSGlobal
         public string title;
 
         public string type;
+
+        public string ToJSON(){
+            return JsonUtility.ToJson(this);
+        }
+
     }
 #endif
 }

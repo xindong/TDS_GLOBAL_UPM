@@ -19,7 +19,7 @@ typedef void(^TDSGlobalQueryRestoreProductsResultHandler)(NSArray<TDSGlobalTrans
 /**
  
  */
-typedef void(^TDSGlobalInAppPurchaseResultHandler)(NSDictionary *orderInfo,NSError *error);
+typedef void(^TDSGlobalInAppPurchaseResultHandler)(TDSGlobalOrderInfo *orderInfo,NSError *error);
 
 @interface TDSGlobalInAppPurchaseManager : NSObject
 

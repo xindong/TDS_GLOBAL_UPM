@@ -149,7 +149,7 @@ namespace TDSGlobal
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("setLanguage", languageType);
-            Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME, "setLanguage", false, null, dic);
+            Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME, "changeLanguageType", false, null, dic);
             EngineBridge.GetInstance().CallHandler(command);
         }
 
@@ -293,6 +293,12 @@ namespace TDSGlobal
                 }
                 callback(result.content);
             });
+        }
+
+        public void StoreReview()
+        {
+            Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME,"storeReview",false,null,null);
+            EngineBridge.GetInstance().CallHandler(command);
         }
 
         private bool checkResultSuccess(Result result){

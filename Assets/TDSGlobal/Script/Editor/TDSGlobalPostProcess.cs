@@ -22,6 +22,7 @@ using UnityEngine;
         */
         public static void OnPostprocessBuild(BuildTarget BuildTarget, string path)
         {
+            
             if (BuildTarget == BuildTarget.iOS)
             {   
                 // 获得工程路径
@@ -111,11 +112,14 @@ using UnityEngine;
                 string parentFolder = Directory.GetParent(Application.dataPath).FullName;
                 // 复制资源文件夹到工程目录
                 CopyAndReplaceDirectory(parentFolder + "/Assets/TDSGlobal/Plugins/IOS/Resource", resourcePath);
+                // 复制Assets的plist到工程目录
+                File.Copy(parentFolder + "/Assets/PLugins/IOS/Resource/TDSGlobal-Info.plist",resourcePath + "/TDSGlobal-Info.plist");
 
                 List<string> names = new List<string>();
                 names.Add("TDSGlobalSDKResources.bundle");
                 names.Add("LineSDKResource.bundle");
                 names.Add("GoogleSignIn.bundle");
+                names.Add("TDSGlobal-Info.plist");
                 foreach (var name in names)
                 {
                     proj.AddFileToBuild(target, proj.AddFile(Path.Combine(resourcePath,name), Path.Combine(resourcePath,name), PBXSourceTree.Source));
@@ -128,7 +132,9 @@ using UnityEngine;
                 SetPlist(path);
                 SetScriptClass(path);
                 Debug.Log("测试打包成功");
+                return;
             }
+
         }
 
         // 添加动态库 注意路径
@@ -200,50 +206,28 @@ using UnityEngine;
                 _list.AddString(items[i]);
             }
             
-            // PlistElementDict _dict = _rootDic.CreateDict("NSAppTransportSecurity");
-            // _dict.SetBoolean("NSAllowsArbitraryLoads", true); // HTTP
-            // _rootDic.SetString("CFBundleVersion", AddBuildNumber());
-            // //添加url
-            // PlistElementDict dict = _plist.root.AsDict();
+            //添加url
+            PlistElementDict dict = _plist.root.AsDict();
 
-            // //心动
-            // PlistElementArray array = dict.CreateArray("CFBundleURLTypes");
-            // PlistElementDict dict2 = array.AddDict();
-            // dict2.SetString("CFBundleURLName", "XD");
-            // PlistElementArray array2 = dict2.CreateArray("CFBundleURLSchemes");
-            // array2.AddString("XD-d4bjgwom9zk84wk");
+            //心动
+            PlistElementArray array = dict.CreateArray("CFBundleURLTypes");
+            PlistElementDict dict2 = array.AddDict();
+            dict2.SetString("CFBundleURLName", "TapTap");
+            PlistElementArray array2 = dict2.CreateArray("CFBundleURLSchemes");
+            array2.AddString("ttuNS7fT9rTgG010leoG");
 
             // // 微信
-            // dict2 = array.AddDict();
-            // dict2.SetString("CFBundleURLName", "wechat");
-            // array2 = dict2.CreateArray("CFBundleURLSchemes");
-            // array2.AddString("wxbdfbe5dbd3e3c64b");
+            dict2 = array.AddDict();
+            dict2.SetString("CFBundleURLName", "Google");
+            array2 = dict2.CreateArray("CFBundleURLSchemes");
+            array2.AddString("com.googleusercontent.apps.888194877532-08sa8mvbgoqb54a605miomb9um2jqfab");
 
             // // qq
-            // dict2 = array.AddDict();
-            // dict2.SetString("CFBundleURLName", "tencent");
-            // array2 = dict2.CreateArray("CFBundleURLSchemes");
-            // array2.AddString("tencent1106148555");
-            // //taptap
-            // dict2 = array.AddDict();
-            // dict2.SetString("CFBundleURLName", "tt");
-            // array2 = dict2.CreateArray("CFBundleURLSchemes");
-            // array2.AddString("ttp60jgYd4FUWc4Rr8pK");
-
-            // // TapFriends
-            // dict2 = array.AddDict();
-            // dict2.SetString("CFBundleURLName", "tapfriends");
-            // array2 = dict2.CreateArray("CFBundleURLSchemes");
-            // array2.AddString("tapfriendsfz5gunjnu0ow40o");
-
-            // string exitsOnSuspendKey = "UIApplicationExitsOnSuspend";
-            // if(_rootDic.values.ContainsKey(exitsOnSuspendKey))
-            // {
-            //     _rootDic.values.Remove(exitsOnSuspendKey);
-            // }
-
-            // // 权限声明，文案可修改
-			// _rootDic.SetString("NSCameraUsageDescription", "XDSDK-DEMO需要使用您的相机");
+            dict2 = array.AddDict();
+            dict2.SetString("CFBundleURLName", "Facebook");
+            array2 = dict2.CreateArray("CFBundleURLSchemes");
+            array2.AddString("337997064271037");
+           
             File.WriteAllText(_plistPath, _plist.WriteToString());
             Debug.Log("修改添加info文件成功");
         }
@@ -258,13 +242,10 @@ using UnityEngine;
             XClass UnityAppController = new XClass(unityAppControllerPath);
 //             //在指定代码后面增加一行代码
             UnityAppController.WriteBelow(@"#import <OpenGLES/ES2/glext.h>", @"#import <TDSGlobalSDKCoreKit/TDSGlobalSDK.h>");
-            // UnityAppController.WriteBelow(@"[KeyboardDelegate Initialize];",@"[XDCore setupXDStore];");
-            // UnityAppController.WriteBelow(@"AppController_SendNotificationWithArg(kUnityOnOpenURL, notifData);",
-// @"// [TapFriends handleOpenUrlWithUrl:url];   
-// return [XDCore HandleXDOpenURL:url];");
-            // UnityAppController.WriteBelow(@"NSURL* url = userActivity.webpageURL;",
-// @"// [TapFriends handleUniversalLinksWithUserActivity:userActivity];
-//         [XDCore handleOpenUniversalLink:userActivity];");
+            UnityAppController.WriteBelow(@"[KeyboardDelegate Initialize];",@"[TDSGlobalSDK application:application didFinishLaunchingWithOptions:launchOptions];");
+            UnityAppController.WriteBelow(@"AppController_SendNotificationWithArg(kUnityOnOpenURL, notifData);",@"[TDSGlobalSDK application:app openURL:url options:options];");
+            UnityAppController.WriteBelow(@"NSURL* url = userActivity.webpageURL;",@"[TDSGlobalSDK application:application continueUserActivity:userActivity restorationHandler:restorationHandler];");
+            UnityAppController.WriteBelow(@"handler(UIBackgroundFetchResultNoData);",@"[TDSGlobalSDK application:application didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];");
             Debug.Log("修改代码成功");
         }
     }

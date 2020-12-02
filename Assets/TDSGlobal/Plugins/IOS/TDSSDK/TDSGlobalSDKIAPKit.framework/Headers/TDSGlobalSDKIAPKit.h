@@ -4,4 +4,6 @@
 #import <TDSGlobalSDKIAPKit/TDSGlobalInAppPurchaseManager.h>
 #import <TDSGlobalSDKIAPKit/TDSGlobalProductInfo.h>
 #import <TDSGlobalSDKIAPKit/TDSGlobalTransactionInfo.h>
+#import <TDSGlobalSDKIAPKit/TDSGlobalOrderInfo.h>
+
 

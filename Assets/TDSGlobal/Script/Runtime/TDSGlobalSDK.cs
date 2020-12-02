@@ -111,5 +111,11 @@ namespace TDSGlobal
         {
             TDSGlobalImpl.GetInstance().GetVersionName(callback);
         }
+
+        public static void StoreReview()
+        {
+            TDSGlobalImpl.GetInstance().StoreReview();
+        }
+
     }
 }

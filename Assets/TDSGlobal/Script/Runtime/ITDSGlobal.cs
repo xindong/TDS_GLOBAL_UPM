@@ -48,6 +48,8 @@ namespace TDSGlobal
 
         void GetVersionName(Action<string> callback);
 
+        void StoreReview();
+
     }
 
     public interface TDSGlobalShareCallback
