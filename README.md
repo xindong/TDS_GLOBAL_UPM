@@ -21,6 +21,16 @@
 ```
  * 或者添加TDSGlobal.unitypackage到项目中
 
+ ```json
+//在需要使用TDSGlobal的{your.Project}.asmdef中添加TDSGlobal依赖
+{
+    "name": "YourProject",
+    "references": [
+        "TDSGlobal"
+    ]
+}
+ ```
+
 ### 2.配置TDSGlobal Unity SDK
 
 获取针对当前平台的TDSGlobal配置文件

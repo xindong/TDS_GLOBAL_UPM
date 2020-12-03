@@ -630,14 +630,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="TDSGlobal.csproj">
-      <Project>{a527829e-1203-6126-875d-ed212c15d9ef}</Project>
-      <Name>TDSGlobal</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
     <ProjectReference Include="Scene.csproj">
       <Project>{f2ff6760-c564-2b08-651f-07904815e676}</Project>
       <Name>Scene</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="TDSGlobal.csproj">
+      <Project>{a527829e-1203-6126-875d-ed212c15d9ef}</Project>
+      <Name>TDSGlobal</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
   </ItemGroup>
