@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEditor.Callbacks;
+using TDSGlobalEditor;
 #if UNITY_IOS
 using UnityEditor.iOS.Xcode;
 using UnityEditor.iOS.Xcode.Extensions;
 #endif
 using UnityEngine;
 
- public class TDSGlobalPostProcess : MonoBehaviour
+ public class TDSGlobalIOSPostBuildProcessor : MonoBehaviour
     {
 #if UNITY_IOS
         // 添加标签，unity导出工程后自动执行该函数
@@ -90,7 +91,6 @@ using UnityEngine;
                 proj.AddFrameworkToProject(unityFrameworkTarget, "SystemConfiguration.framework", false);
                 proj.AddFrameworkToProject(unityFrameworkTarget, "Accelerate.framework", false);
                 proj.AddFrameworkToProject(unityFrameworkTarget, "SafariServices.framework", false);
-                // proj.AddFrameworkToProject(target, "TapFriends.framework", false);
                 // 动态库
                 // AddFramework("TapFriends.framework", proj, target);
                 Debug.Log("添加framework成功");
@@ -98,24 +98,30 @@ using UnityEngine;
                 // 添加 tbd
                 // 参数: 目标targetGUID, tdbGUID
                 proj.AddFileToBuild(unityFrameworkTarget, proj.AddFile("usr/lib/libc++.tbd", "libc++.tbd",PBXSourceTree.Sdk));
-                // proj.AddFileToBuild(unityFrameworkTarget, proj.AddFile("usr/lib/libiconv.tbd", "libiconv.tbd",PBXSourceTree.Sdk));
-                // proj.AddFileToBuild(unityFrameworkTarget, proj.AddFile("usr/lib/libsqlite3.0.tbd", "libsqlite3.0.tbd",PBXSourceTree.Sdk));
-                // proj.AddFileToBuild(unityFrameworkTarget, proj.AddFile("usr/lib/libz.tbd", "libz.tbd",PBXSourceTree.Sdk));
-                // proj.AddFileToBuild(unityFrameworkTarget, proj.AddFile("usr/lib/libresolv.9.tbd", "libresolv.9.tbd",PBXSourceTree.Sdk));
-                // proj.AddFileToBuild(unityFrameworkTarget, proj.AddFile("usr/lib/libicucore.tbd", "libicucore.tbd",PBXSourceTree.Sdk));
                 
                 Debug.Log("添加tbd成功");
 
 
                 // 添加资源文件，注意文件路径
-                var resourcePath = Path.Combine(path, "resource");
+                var resourcePath = Path.Combine(path, "TDSGlobalResource");
                 string parentFolder = Directory.GetParent(Application.dataPath).FullName;
+                if (Directory.Exists(resourcePath))
+                {
+                    Directory.Delete(resourcePath);
+                }
+                Directory.CreateDirectory(resourcePath);
+                if(Directory.Exists(parentFolder + "/Assets/TDSGlobal/Plugins/IOS/Resource")){
+                    //使用unitypackage接入
+                    CopyAndReplaceDirectory(parentFolder + "/Assets/TDSGlobal/Plugins/IOS/Resource", resourcePath);
+                }else if(Directory.Exists(parentFolder + "/Library/PacakgeCache/com.tds.gloabl@1.0.0/TDSGlobal/Plugins/IOS/Resource")){
+                    //使用UPM接入
+                    CopyAndReplaceDirectory(parentFolder + "/Library/PacakgeCache/com.tds.gloabl@1.0.0/TDSGlobal/Plugins/IOS/Resource", resourcePath);
+                }
                 // 复制资源文件夹到工程目录
-                CopyAndReplaceDirectory(parentFolder + "/Assets/TDSGlobal/Plugins/IOS/Resource", resourcePath);
                 // 复制Assets的plist到工程目录
-                File.Copy(parentFolder + "/Assets/PLugins/IOS/Resource/TDSGlobal-Info.plist",resourcePath + "/TDSGlobal-Info.plist");
+                File.Copy(parentFolder + "/Assets/Plugins/IOS/Resource/TDSGlobal-Info.plist",resourcePath + "/TDSGlobal-Info.plist");
 
-                List<string> names = new List<string>();
+                List<string> names = new List<string>();    
                 names.Add("TDSGlobalSDKResources.bundle");
                 names.Add("LineSDKResource.bundle");
                 names.Add("GoogleSignIn.bundle");
@@ -129,7 +135,7 @@ using UnityEngine;
 
                 // rewrite to file  
                 File.WriteAllText(projPath, proj.WriteToString());
-                SetPlist(path);
+                SetPlist(path,resourcePath + "/TDSGlobal-Info.plist");
                 SetScriptClass(path);
                 Debug.Log("测试打包成功");
                 return;
@@ -172,7 +178,7 @@ using UnityEngine;
         }
 
         // 修改pilist
-        private static void SetPlist(string pathToBuildProject)
+        private static void SetPlist(string pathToBuildProject,string infoPlistPath)
         {
             //添加info
             string _plistPath = pathToBuildProject + "/Info.plist";
@@ -206,27 +212,72 @@ using UnityEngine;
                 _list.AddString(items[i]);
             }
             
+            Dictionary<string, object> dic = (Dictionary<string, object>)TDSGlobalEditor.Plist.readPlist(infoPlistPath);
+            
+            string facebookId = null;
+            string taptapId = null;
+            string googleId = null;
+
+            foreach (var item in dic)
+            {
+                if(item.Key.Equals("facebook")){
+                    Dictionary<string,object> facebookDic = (Dictionary<string,object>)item.Value;
+                    foreach (var facebookItem in facebookDic)
+                    {   
+                        if(facebookItem.Key.Equals("app_id")){
+                            facebookId = "fb" + (string)facebookItem.Value;
+                        }
+                    }
+                }else if(item.Key.Equals("taptap")){
+                    Dictionary<string,object> taptapDic = (Dictionary<string,object>) item.Value;
+                    foreach (var taptapItem in taptapDic)
+                    {
+                        if(taptapItem.Key.Equals("client_id")){
+                            taptapId = "tt" + (string) taptapItem.Value;
+                        }
+                    }
+                }else if(item.Key.Equals("google")){
+                    Dictionary<string,object> googleDic = (Dictionary<string,object>) item.Value;
+                    foreach (var googleItem in googleDic)
+                    {
+                        if(googleItem.Key.Equals("REVERSED_CLIENT_ID")){
+                            googleId = (string)googleItem.Value;
+                        }
+                    }
+                }
+            }
+
             //添加url
             PlistElementDict dict = _plist.root.AsDict();
 
-            //心动
             PlistElementArray array = dict.CreateArray("CFBundleURLTypes");
             PlistElementDict dict2 = array.AddDict();
-            dict2.SetString("CFBundleURLName", "TapTap");
-            PlistElementArray array2 = dict2.CreateArray("CFBundleURLSchemes");
-            array2.AddString("ttuNS7fT9rTgG010leoG");
 
-            // // 微信
-            dict2 = array.AddDict();
-            dict2.SetString("CFBundleURLName", "Google");
-            array2 = dict2.CreateArray("CFBundleURLSchemes");
-            array2.AddString("com.googleusercontent.apps.888194877532-08sa8mvbgoqb54a605miomb9um2jqfab");
+            if(taptapId!=null)
+            {
+                dict2.SetString("CFBundleURLName", "TapTap");
+                PlistElementArray array2 = dict2.CreateArray("CFBundleURLSchemes");
+                array2.AddString(taptapId);
+            }
 
-            // // qq
-            dict2 = array.AddDict();
-            dict2.SetString("CFBundleURLName", "Facebook");
-            array2 = dict2.CreateArray("CFBundleURLSchemes");
-            array2.AddString("337997064271037");
+            if(googleId!=null)
+            {
+                dict2 = array.AddDict();
+                dict2.SetString("CFBundleURLName", "Google");
+                PlistElementArray array2 = dict2.CreateArray("CFBundleURLSchemes");
+                array2 = dict2.CreateArray("CFBundleURLSchemes");
+                array2.AddString(googleId);             
+            }
+            
+            if(facebookId!=null)
+            {
+                dict2 = array.AddDict();
+                dict2.SetString("CFBundleURLName", "Facebook");
+                PlistElementArray array2 = dict2.CreateArray("CFBundleURLSchemes");
+                array2 = dict2.CreateArray("CFBundleURLSchemes");
+                array2.AddString(facebookId);
+            }
+            
            
             File.WriteAllText(_plistPath, _plist.WriteToString());
             Debug.Log("修改添加info文件成功");
@@ -239,7 +290,7 @@ using UnityEngine;
 //             //插入代码
 //             //读取UnityAppController.mm文件
             string unityAppControllerPath = pathToBuildProject + "/Classes/UnityAppController.mm";
-            XClass UnityAppController = new XClass(unityAppControllerPath);
+            TDSGlobalEditor.TDSGlobalScriptStreamWriterHelper UnityAppController = new TDSGlobalEditor.TDSGlobalScriptStreamWriterHelper(unityAppControllerPath);
 //             //在指定代码后面增加一行代码
             UnityAppController.WriteBelow(@"#import <OpenGLES/ES2/glext.h>", @"#import <TDSGlobalSDKCoreKit/TDSGlobalSDK.h>");
             UnityAppController.WriteBelow(@"[KeyboardDelegate Initialize];",@"[TDSGlobalSDK application:application didFinishLaunchingWithOptions:launchOptions];");
@@ -250,60 +301,6 @@ using UnityEngine;
         }
     }
 
-    internal partial class XClass : System.IDisposable
-    {
-        private string filePath;
-
-        public XClass(string fPath)
-        {
-            filePath = fPath;
-            if (!System.IO.File.Exists(filePath))
-            {
-                Debug.LogError(filePath + "路径下文件不存在");
-                return;
-            }
-        }
-
-        public void WriteBelow(string below, string text)
-        {
-            StreamReader streamReader = new StreamReader(filePath);
-            string all = streamReader.ReadToEnd();
-            streamReader.Close();
-            int beginIndex = all.IndexOf(below, StringComparison.Ordinal);
-            if (beginIndex == -1)
-            {
-                Debug.LogError(filePath + "中没有找到字符串" + below);
-                return;
-            }
-
-            int endIndex = all.LastIndexOf("\n", beginIndex + below.Length, StringComparison.Ordinal);
-            all = all.Substring(0, endIndex) + "\n" + text + "\n" + all.Substring(endIndex);
-            StreamWriter streamWriter = new StreamWriter(filePath);
-            streamWriter.Write(all);
-            streamWriter.Close();
-        }
-
-        public void Replace(string below, string newText)
-        {
-            StreamReader streamReader = new StreamReader(filePath);
-            string all = streamReader.ReadToEnd();
-            streamReader.Close();
-            int beginIndex = all.IndexOf(below, StringComparison.Ordinal);
-            if (beginIndex == -1)
-            {
-                Debug.LogError(filePath + "中没有找到字符串" + below);
-                return;
-            }
-
-            all = all.Replace(below, newText);
-            StreamWriter streamWriter = new StreamWriter(filePath);
-            streamWriter.Write(all);
-            streamWriter.Close();
-        }
-
-        public void Dispose()
-        {
-        }
+    
 #endif
-}
 #endif

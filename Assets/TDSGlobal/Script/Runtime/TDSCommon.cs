@@ -5,16 +5,16 @@ using UnityEngine;
 
 namespace TDSCommon
 {
-    public class TDSCommonHelper
+    public class TDSCommon
     {
-        private static TDSCommonHelper sInstance = new TDSCommonHelper();
+        private static TDSCommon sInstance = new TDSCommon();
 
-        public static TDSCommonHelper GetInstance()
+        public static TDSCommon GetInstance()
         {
             return sInstance;
         }
 
-        private TDSCommonHelper()
+        private TDSCommon()
         {
             EngineBridge.GetInstance().Register("com.tds.common.wrapper.TDSCommonService", "com.tds.common.wrapper.TDSCommonServiceImpl");
         }

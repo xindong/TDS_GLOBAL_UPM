@@ -10,17 +10,76 @@
 
 ### 1.添加TDSGlobal Unity SDK
 
-使用Unity Package Manager 添加SDK到项目中。
+* 使用Unity Package Manager 添加SDK到项目中。
 ```json
 //在Packages/manifest.json 中添加TDSGlobalUnity SDK
 {
     "dependencies":{
-        "com.tds.global":"https://github.com/xindong/TDS_GLOABL_UPM#{verison}",
+        "com.tds.global":"https://github.com/xindong/TDS_GLOABL_UPM#{verison_name}",
     }
 }
 ```
+ * 或者添加TDSGlobal.unitypackage到项目中
 
-### 2.添加配置文件
+### 2.配置TDSGlobal Unity SDK
+
+获取针对当前平台的TDSGlobal配置文件
+* IOS 将**TDSGlobal-Info.plist**配置文件复制到**Assets/Plugins/IOS**中
+* Android 将**TDSGlobal_info.json**、**google-Service.json** 文件复制到**Assets/Plugins/Android/assets**中
+
+自动配置脚本参考 [注意事项](#tips)
+
+#### 2.1 [IOS](https://git.gametaptap.com/tds-public/tdsglobal/-/blob/master/doc/iOS/ios_doc.md)
+
+##### 2.1.1 配置编译选项
+**在Build Setting中的Other Link Flag中添加-ObjC**
+
+**在Build Setting中的Always Embed Swift Standard Libraried设置为YES**
+
+在**Capabilities**中打开以下功能
+
+<img src="./DocImages/capabilities.jpg"></img>
+
+#### 2.2 [Android](https://git.gametaptap.com/tds-public/tdsglobal/-/blob/master/doc/Android/android_doc.md)
+
+##### 2.2.1 配置AndroidManifest.xml文件
+
+打开Project Settings/Player/Publishing Settings/Build/Custom Main Manifest 配置，编辑Manifest.xml文件
+
+```xml
+ <meta-data
+android:name="com.facebook.sdk.ApplicationId"
+android:value="{facebook-cliendId}" />
+
+     <activity
+android:name="com.facebook.FacebookActivity"
+android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+android:label="@string/app_name" />
+
+    <activity
+        android:name="com.facebook.CustomTabActivity"
+        android:exported="true">
+        <intent-filter>
+<action android:name="android.intent.action.VIEW" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <category android:name="android.intent.category.BROWSABLE" />
+    <data android:scheme="{facebook-scheme}" />
+</intent-filter>
+    </activity>
+
+    <!-- Facebook 分享图片使用 -->
+    <provider
+        android:name="com.facebook.FacebookContentProvider"
+        android:authorities="com.facebook.app.FacebookContentProvider{facebook-cliendId}"
+        android:exported="true" />
+
+    
+    <!-- 添加权限 -->
+    <uses-permission android:name="com.android.vending.BILLING" />
+    <!-- 获取用户设备信息用 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+```
 
 ### 3.接口使用
 
@@ -83,7 +142,16 @@ TDSGlobal.TDSGlobalSDK.GetUser((tdsUser)=
 ```c#
 TDSGlobal.TDSGlobalSDK.AddUserStatusChangeCallback((code)=
 {
-
+    if(code == TDSGlobalUserStatusCode.LOGOUT)
+    {
+        //退出登录
+    }else if(code == TDSGlobalUserStatusCode.BIND_CHANGE)
+    {
+        //绑定状态变更
+    }else if(code == TDSGlobalUserStatusCode.DELETE)
+    {
+        //删除账号
+    }
 });
 ```
 ##### 3.3.4用户中心
@@ -222,4 +290,137 @@ TDSGlobal.TDSGlobalSDK.EventCompletedTutorial();
 
 ```c#
 TDSGlobal.TDSGlobalSDK.StoreReview();
+```
+
+### <div id="tips">4.注意事项</div>
+
+TDSGlobal/Script/Editor目录下的脚本，会帮助游戏自动配置。
+
+#### 4.1 Android
+确保TDSGlobal_info.json、google-Service.json 拷贝到 Asssets/Plugins/Android/Assets目录中。
+
+```c#
+//TDSGlobal/Script/Editor/TDSGlobakAndroidPostBuildProcessor.cs
+//脚本会自动把 Assets中的google-Service.json 文件copy到主工程一级目录下
+if(File.Exists(googleServiceOriginPath)){
+    //copy google-service.json 到目录下
+    File.Copy(googleServiceOriginPath,targetServicePath,true);
+}
+
+// 修改project级别的build.gradle 添加GMS插件和TDS私有仓库
+writerHelper.WriteBelow(@"task clean(type: Delete) {
+    delete rootProject.buildDir
+}",@"allprojects {
+    buildscript {
+        dependencies {
+classpath 'com.google.gms:google-services:4.0.2'
+        }
+    }
+    repositories {
+        maven { url 'http://beta.tapdb.com:18081/repository/maven-releases/' }
+        maven { url 'http://beta.tapdb.com:18081/repository/maven-snapshots/' }
+    }
+}");
+
+//添加 firebase和GMS插件。如果项目使用GMS或者firebase，请酌情修改。
+writerHelper.WriteBelow(@"apply plugin: 'com.android.application'",@"apply plugin: 'com.google.gms.google-services'");
+
+//添加项目所需要的依赖
+writerHelper.WriteBelow(@"implementation fileTree(dir: 'libs', include: ['*.jar'])",@"
+        implementation 'com.google.firebase:firebase-core:16.0.1'
+        implementation 'com.google.firebase:firebase-analytics:15.0.1'
+        implementation 'com.google.firebase:firebase-messaging:17.3.4'
+    
+        implementation 'com.taptap.android:reactor:0.0.8.3-SNAPSHOT'
+        implementation 'com.taptap.android:skynet:1.0.15-SNAPSHOT'
+        implementation 'com.google.code.gson:gson:2.8.5'
+
+        implementation 'com.google.android.gms:play-services-auth:16.0.1'
+        implementation 'com.facebook.android:facebook-login:5.15.3'
+        implementation 'com.facebook.android:facebook-share:5.15.3'
+        implementation 'com.appsflyer:af-android-sdk:4.11.0'
+        implementation 'com.adjust.sdk:adjust-android:4.24.1'
+        implementation 'com.android.installreferrer:installreferrer:2.1'
+        implementation 'com.android.billingclient:billing:3.0.0'
+    
+        implementation 'com.android.support:support-annotations:28.0.0'
+        implementation 'com.android.support:appcompat-v7:28.0.0'
+        implementation 'com.android.support:recyclerview-v7:28.0.0'
+    ");
+
+```
+
+#### 4.2 IOS
+确保TDSGlobal-Info.plist 拷贝到 Assets/Plugins/IOS目录中
+
+```c#
+
+//脚本拷贝 TDSGlobal/Plugins/IOS/Resource 下的资源文件并且添加到framework的依赖中
+List<string> names = new List<string>();    
+names.Add("TDSGlobalSDKResources.bundle");
+names.Add("LineSDKResource.bundle");
+names.Add("GoogleSignIn.bundle");
+names.Add("TDSGlobal-Info.plist");
+foreach (var name in names)
+{
+    proj.AddFileToBuild(target, proj.AddFile(Path.Combine(resourcePath,name), Path.Combine(resourcePath,name), PBXSourceTree.Source));
+}
+
+//脚本自动添加plist
+List<string> items = new List<string>()
+{
+    "tapsdk",
+    "tapiosdk",
+    "fbapi",
+    "fbapi20130214",
+    "fbapi20130410",
+    "fbapi20130702",
+    "fbapi20131010",
+    "fbapi20131219",
+    "fbapi20140410",
+    "fbapi20140116",
+    "fbapi20150313",
+    "fbapi20150629",
+    "fbapi20160328",
+    "fb-messenger-share-api",
+    "fbauth2",
+    "fbshareextension",
+    "lineauth2"
+};
+
+//自动添加 Global-Info.plist 中的facebook、Google、TapTap等第三方SDK的ClientId
+if(taptapId!=null)
+{
+    dict2.SetString("CFBundleURLName", "TapTap");
+    PlistElementArray array2 = dict2.CreateArray("CFBundleURLSchemes");
+    array2.AddString(taptapId);
+}
+if(googleId!=null)
+{
+    dict2 = array.AddDict();
+    dict2.SetString("CFBundleURLName", "Google");
+    PlistElementArray array2 = dict2.CreateArray("CFBundleURLSchemes");
+    array2 = dict2.CreateArray("CFBundleURLSchemes");
+    array2.AddString(googleId); 
+}
+if(facebookId!=null)
+{
+    dict2 = array.AddDict();
+    dict2.SetString("CFBundleURLName", "Facebook");
+    PlistElementArray array2 = dict2.CreateArray("CFBundleURLSchemes");
+    array2 = dict2.CreateArray("CFBundleURLSchemes");
+    array2.AddString(facebookId);
+}          
+File.WriteAllText(_plistPath, _plist.WriteToString());
+
+//自动修改UnityAppController.mm文件，进行TDSGlobalSDK的配置
+string unityAppControllerPath = pathToBuildProject + "/Classes/UnityAppController.mm";
+TDSGlobalEditor.TDSGlobalScriptStreamWriterHelper UnityAppController = new TDSGlobalEditor.TDSGlobalScriptStreamWriterHelper(unityAppControllerPath);
+//在指定代码后面增加一行代码
+UnityAppController.WriteBelow(@"#import <OpenGLES/ES2/glext.h>", @"#import <TDSGlobalSDKCoreKit/TDSGlobalSDK.h>");
+UnityAppController.WriteBelow(@"[KeyboardDelegate Initialize];",@"[TDSGlobalSDK application:application didFinishLaunchingWithOptions:launchOptions];");
+UnityAppController.WriteBelow(@"AppController_SendNotificationWithArg(kUnityOnOpenURL, notifData);",@"[TDSGlobalSDK application:app openURL:url options:options];");
+UnityAppController.WriteBelow(@"NSURL* url = userActivity.webpageURL;",@"[TDSGlobalSDK application:application continueUserActivity:userActivity restorationHandler:restorationHandler];");
+UnityAppController.WriteBelow(@"handler(UIBackgroundFetchResultNoData);",@"[TDSGlobalSDK application:application didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];");
+Debug.Log("修改代码成功");
 ```

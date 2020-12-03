@@ -27,11 +27,11 @@ namespace TDSCommon
 
         private EngineBridge()
         {
-            if (TDSCommon.Platform.isAndroid())
+            if (Platform.isAndroid())
             {
                 bridge = BridgeAndroid.GetInstance();
             }
-            else if (TDSCommon.Platform.isIOS())
+            else if (Platform.isIOS())
             {
                 bridge = BridgeIOS.GetInstance();
             }

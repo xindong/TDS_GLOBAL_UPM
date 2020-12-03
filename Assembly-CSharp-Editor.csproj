@@ -36,9 +36,10 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\TDSGlobal\Script\Editor\TDSGlobalPostProcess.cs" />
+     <Compile Include="Assets\TDSGlobal\Script\Editor\TDSGlobalPlist.cs" />
      <Compile Include="Assets\TDSGlobal\Script\Editor\TDSGlobalAndroidPostBuildProcessor.cs" />
      <Compile Include="Assets\TDSGlobal\Script\Editor\TDSGlobalScriptHandlerProcessor.cs" />
+     <Compile Include="Assets\TDSGlobal\Script\Editor\TDSGlobalIOSPostBuildProcessor.cs" />
     <Reference Include="UnityEngine">
         <HintPath>/Applications/Unity/Hub/Editor/2020.1.5f1c1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

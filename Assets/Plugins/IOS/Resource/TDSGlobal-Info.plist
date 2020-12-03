@@ -7,7 +7,7 @@
     <key>game_name</key>
     <string>TDSGlobalDemo</string>
     <key>domain</key>
-    <string>https://tds-xdg-hk.taptap-api.com</string>
+    <string>https://tds-dev.xindong.com/</string>
     <key>channel</key>
     <string>App Store</string>
     <key>line</key>
