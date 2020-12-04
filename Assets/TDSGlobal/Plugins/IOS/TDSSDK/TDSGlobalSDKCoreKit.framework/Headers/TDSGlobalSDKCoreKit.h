@@ -33,5 +33,5 @@
 #import <TDSGlobalSDKCoreKit/NSDictionary+JSON.h>
 #import <TDSGlobalSDKCoreKit/NSString+Tools.h>
 
-#define TDSGLOBALSDK_VERSION @"1.0.0"
+#define TDSGLOBALSDK_VERSION @"1.0.1"
 

@@ -27,6 +27,14 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - configs
 + (BOOL)isGameInKorea;
 + (BOOL)isGameInNA;
+
++ (BOOL)googleEnable;
++ (BOOL)facebookEnable;
++ (BOOL)taptapEnable;
++ (BOOL)tapdbEnable;
++ (BOOL)adjustEnable;
++ (BOOL)appsflyersEnable;
++ (BOOL)lineEnable;
 @end
 
 NS_ASSUME_NONNULL_END
