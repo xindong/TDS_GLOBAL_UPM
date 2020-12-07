@@ -64,10 +64,6 @@ public class TDSGlobalAndroidPostBuildProcessor : IPostGenerateGradleAndroidProj
             classpath 'com.google.gms:google-services:4.0.2'
         }
     }
-    repositories {
-        maven { url 'http://beta.tapdb.com:18081/repository/maven-releases/' }
-        maven { url 'http://beta.tapdb.com:18081/repository/maven-snapshots/' }
-    }
 }");
         }
 
@@ -79,8 +75,6 @@ public class TDSGlobalAndroidPostBuildProcessor : IPostGenerateGradleAndroidProj
                 implementation 'com.google.firebase:firebase-analytics:15.0.1'
                 implementation 'com.google.firebase:firebase-messaging:17.3.4'
     
-                implementation 'com.taptap.android:reactor:0.0.8.3-SNAPSHOT'
-                implementation 'com.taptap.android:skynet:1.0.15-SNAPSHOT'
                 implementation 'com.google.code.gson:gson:2.8.5'
 
                 implementation 'com.google.android.gms:play-services-auth:16.0.1'
