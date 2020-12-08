@@ -302,7 +302,7 @@ TDSGlobal.TDSGlobalSDK.EventCompletedTutorial();
 TDSGlobal.TDSGlobalSDK.StoreReview();
 ```
 
-### <div id="tips">4.注意事项</div>
+### 4.注意事项<a id="tips"></a>
 
 TDSGlobal/Script/Editor目录下的脚本，会帮助游戏自动配置。
 
@@ -326,10 +326,6 @@ writerHelper.WriteBelow(@"task clean(type: Delete) {
 classpath 'com.google.gms:google-services:4.0.2'
         }
     }
-    repositories {
-        maven { url 'http://beta.tapdb.com:18081/repository/maven-releases/' }
-        maven { url 'http://beta.tapdb.com:18081/repository/maven-snapshots/' }
-    }
 }");
 
 //添加 firebase和GMS插件。如果项目使用GMS或者firebase，请酌情修改。
@@ -340,10 +336,6 @@ writerHelper.WriteBelow(@"implementation fileTree(dir: 'libs', include: ['*.jar'
         implementation 'com.google.firebase:firebase-core:16.0.1'
         implementation 'com.google.firebase:firebase-analytics:15.0.1'
         implementation 'com.google.firebase:firebase-messaging:17.3.4'
-    
-        implementation 'com.taptap.android:reactor:0.0.8.3-SNAPSHOT'
-        implementation 'com.taptap.android:skynet:1.0.15-SNAPSHOT'
-        implementation 'com.google.code.gson:gson:2.8.5'
 
         implementation 'com.google.android.gms:play-services-auth:16.0.1'
         implementation 'com.facebook.android:facebook-login:5.15.3'

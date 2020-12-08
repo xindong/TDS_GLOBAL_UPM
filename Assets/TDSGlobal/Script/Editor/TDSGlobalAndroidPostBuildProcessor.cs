@@ -16,7 +16,7 @@ public class TDSGlobalAndroidPostBuildProcessor : IPostGenerateGradleAndroidProj
     {
         get
         {
-            return 999;
+            return 1;
         }
     }
 
