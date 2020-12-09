@@ -8,18 +8,18 @@ using UnityEditor.Callbacks;
 using UnityEditor.Android;
 #endif
 using UnityEngine;
-using TDSGlobalEditor;
 
-public class TDSGlobalAndroidPostBuildProcessor : IPostGenerateGradleAndroidProject
+using TDSEditor;
+
+public class TDSAndroidPostBuildProcessor : IPostGenerateGradleAndroidProject
 {
     public int callbackOrder
     {
         get
         {
-            return 1;
+            return 100;
         }
     }
-
 
     void IPostGenerateGradleAndroidProject.OnPostGenerateGradleAndroidProject(string path)
     {   

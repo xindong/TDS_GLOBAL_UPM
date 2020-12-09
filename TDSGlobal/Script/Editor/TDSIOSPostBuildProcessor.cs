@@ -4,14 +4,15 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEditor.Callbacks;
-using TDSGlobalEditor;
 #if UNITY_IOS
 using UnityEditor.iOS.Xcode;
 using UnityEditor.iOS.Xcode.Extensions;
 #endif
 using UnityEngine;
-
- public class TDSGlobalIOSPostBuildProcessor : MonoBehaviour
+namespace TDSEditor
+{
+    
+ public class TDSIOSPostBuildProcessor : MonoBehaviour
     {
 #if UNITY_IOS
         // 添加标签，unity导出工程后自动执行该函数
@@ -22,7 +23,8 @@ using UnityEngine;
             导出工程后核对配置或依赖是否正确，根据需要修改脚本
         */
         public static void OnPostprocessBuild(BuildTarget BuildTarget, string path)
-        {
+        {   
+            Debug.Log("build IOS");
             
             if (BuildTarget == BuildTarget.iOS)
             {   
@@ -45,23 +47,6 @@ using UnityEngine;
                     return;
                 }
 
-                // capabilities 
-                // string fileName = "Unity-iPhone" + ".entitlements";
-                // string entitleFilePath = path + "/" + fileName;
-                // PlistDocument tempEntitlements = new PlistDocument();
-                // string key_associatedDomains = "com.apple.developer.associated-domains";
-                // string key_signinWithApple = "com.apple.developer.applesignin";
-                // var arr_associateDomains = (tempEntitlements.root[key_associatedDomains] = new PlistElementArray()) as PlistElementArray;
-                // var arr_signinWithApple = (tempEntitlements.root[key_signinWithApple] = new PlistElementArray()) as PlistElementArray;
-                // // www.xd.com 需要替换成游戏自己官网域名
-                // arr_associateDomains.values.Add(new PlistElementString("applinks:www.xd.com"));
-                // arr_signinWithApple.values.Add(new PlistElementString("Default"));
-                // // AssciateDomains
-                // proj.AddCapability(target, PBXCapabilityType.AssociatedDomains, entitleFilePath);
-                // // Sign In With Apple
-                // proj.AddCapability (target, PBXCapabilityType.SignInWithApple,entitleFilePath);
-                // tempEntitlements.WriteToFile(entitleFilePath);
-
                 // 编译配置
                 proj.AddBuildProperty(target, "OTHER_LDFLAGS", "-ObjC");
                 proj.AddBuildProperty(unityFrameworkTarget, "OTHER_LDFLAGS", "-ObjC");
@@ -76,7 +61,6 @@ using UnityEngine;
                 proj.SetBuildProperty(unityFrameworkTarget, "SWIFT_VERSION", "5.0");
                 proj.SetBuildProperty(unityFrameworkTarget, "CLANG_ENABLE_MODULES", "YES");
                 
-
                 // add extra framework(s)
                 // 参数: 目标targetGUID, framework,是否required:fasle->required,true->optional
                 proj.AddFrameworkToProject(unityFrameworkTarget, "CoreTelephony.framework", false);
@@ -109,13 +93,20 @@ using UnityEngine;
                 {
                     Directory.Delete(resourcePath);
                 }
+
                 Directory.CreateDirectory(resourcePath);
-                if(Directory.Exists(parentFolder + "/Assets/TDSGlobal/Plugins/IOS/Resource")){
-                    //使用unitypackage接入
-                    CopyAndReplaceDirectory(parentFolder + "/Assets/TDSGlobal/Plugins/IOS/Resource", resourcePath);
-                }else if(Directory.Exists(parentFolder + "/Library/PacakgeCache/com.tds.gloabl@1.0.0/TDSGlobal/Plugins/IOS/Resource")){
+
+                string remotePackagePath = TDSFileHelper.FilterFile(parentFolder + "/Library/PackageCache/","com.tds.global");
+
+                string localPacckagePath = TDSFileHelper.FilterFile(parentFolder,"TDSGlobal");
+
+                string tdsResourcePath = remotePackagePath !=null? remotePackagePath + "/TDSGlobal/Plugins/IOS/Resource" : localPacckagePath + "/Plugins/IOS/Resource";
+
+                Debug.Log("tdsGlobalResource:" + tdsResourcePath);
+
+                if(Directory.Exists(tdsResourcePath)){
                     //使用UPM接入
-                    CopyAndReplaceDirectory(parentFolder + "/Library/PacakgeCache/com.tds.gloabl@1.0.0/TDSGlobal/Plugins/IOS/Resource", resourcePath);
+                    CopyAndReplaceDirectory(tdsResourcePath, resourcePath);
                 }
                 // 复制资源文件夹到工程目录
                 // 复制Assets的plist到工程目录
@@ -212,7 +203,7 @@ using UnityEngine;
                 _list.AddString(items[i]);
             }
             
-            Dictionary<string, object> dic = (Dictionary<string, object>)TDSGlobalEditor.Plist.readPlist(infoPlistPath);
+            Dictionary<string, object> dic = (Dictionary<string, object>)TDSEditor.Plist.readPlist(infoPlistPath);
             
             string facebookId = null;
             string taptapId = null;
@@ -290,7 +281,7 @@ using UnityEngine;
 //             //插入代码
 //             //读取UnityAppController.mm文件
             string unityAppControllerPath = pathToBuildProject + "/Classes/UnityAppController.mm";
-            TDSGlobalEditor.TDSGlobalScriptStreamWriterHelper UnityAppController = new TDSGlobalEditor.TDSGlobalScriptStreamWriterHelper(unityAppControllerPath);
+            TDSEditor.TDSScriptStreamWriterHelper UnityAppController = new TDSEditor.TDSScriptStreamWriterHelper(unityAppControllerPath);
 //             //在指定代码后面增加一行代码
             UnityAppController.WriteBelow(@"#import <OpenGLES/ES2/glext.h>", @"#import <TDSGlobalSDKCoreKit/TDSGlobalSDK.h>");
             UnityAppController.WriteBelow(@"[KeyboardDelegate Initialize];",@"[TDSGlobalSDK application:application didFinishLaunchingWithOptions:launchOptions];");
@@ -300,7 +291,7 @@ using UnityEngine;
             Debug.Log("修改代码成功");
         }
     }
-
+}
     
 #endif
 #endif

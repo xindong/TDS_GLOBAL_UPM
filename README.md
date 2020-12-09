@@ -2,7 +2,7 @@
 
 ### 前提条件
 
-* 安装Unity **5.6.4**或更高版本
+* 安装Unity **2018.3**或更高版本
 
 * IOS **10**或更高版本
 
@@ -15,21 +15,10 @@
 //在Packages/manifest.json 中添加TDSGlobalUnity SDK
 {
     "dependencies":{
-        "com.tds.global":"https://github.com/xindong/TDS_GLOABL_UPM#{verison_name}",
+        "com.tds.global":"https://github.com/xindong/TDS_GLOABL_UPM#{verison}",
     }
 }
 ```
- * 或者添加TDSGlobal.unitypackage到项目中
-
- ```json
-//在需要使用TDSGlobal的{your.Project}.asmdef中添加TDSGlobal依赖
-{
-    "name": "YourProject",
-    "references": [
-        "TDSGlobal"
-    ]
-}
- ```
 
 ### 2.配置TDSGlobal Unity SDK
 

@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "com.tds.global": {
+      "version": "file:../TDSGlobal",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.unity.collab-proxy": {
       "version": "1.3.9",
       "depth": 0,

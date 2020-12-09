@@ -5,7 +5,7 @@ using System.IO;
 using System.Text;
 using System.Xml;
 
-namespace TDSGlobalEditor
+namespace TDSEditor
 {
     public static class Plist
     {

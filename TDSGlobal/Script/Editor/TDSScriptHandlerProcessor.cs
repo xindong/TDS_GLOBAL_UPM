@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-namespace TDSGlobalEditor
+namespace TDSEditor
 {
-    public class TDSGlobalScriptStreamWriterHelper : System.IDisposable
+    public class TDSScriptStreamWriterHelper : System.IDisposable
     {
         private string filePath;
 
-        public TDSGlobalScriptStreamWriterHelper(string fPath)
+        public TDSScriptStreamWriterHelper(string fPath)
         {
             filePath = fPath;
             if (!System.IO.File.Exists(filePath))
@@ -61,7 +61,7 @@ namespace TDSGlobalEditor
         }
     }
 
-    public class TDSGlobalFileHelper
+    public class TDSFileHelper
     {
         public static void CopyAndReplaceDirectory(string srcPath, string dstPath)
         {
@@ -78,6 +78,24 @@ namespace TDSGlobalEditor
             foreach (var dir in Directory.GetDirectories(srcPath))
                 CopyAndReplaceDirectory(dir, Path.Combine(dstPath, Path.GetFileName(dir)));
         }
+
+        public static string FilterFile(string srcPath,string filterName){
+            if(!Directory.Exists(srcPath)){
+                return null;
+            }          
+            foreach(var dir in Directory.GetDirectories(srcPath))
+            {
+                string fileName = Path.GetFileName(dir);
+                if (fileName.StartsWith(filterName))
+                {   
+                    Debug.Log("筛选到指定文件夹:" + Path.Combine(srcPath,Path.GetFileName(dir)));
+                    return Path.Combine(srcPath,Path.GetFileName(dir));
+                }
+            } 
+            return null; 
+        }
+
     }
+
 
 }
