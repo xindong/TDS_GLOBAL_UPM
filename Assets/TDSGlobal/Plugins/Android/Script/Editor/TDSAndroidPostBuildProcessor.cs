@@ -44,7 +44,7 @@ public class TDSAndroidPostBuildProcessor : IPostGenerateGradleAndroidProject
 
         if(File.Exists(launcherGradle)){
             Debug.Log("write launch gradle");
-            TDSGlobalEditor.TDSGlobalScriptStreamWriterHelper writerHelper = new TDSGlobalEditor.TDSGlobalScriptStreamWriterHelper(launcherGradle);
+            TDSEditor.TDSScriptStreamWriterHelper writerHelper = new TDSEditor.TDSScriptStreamWriterHelper(launcherGradle);
             writerHelper.WriteBelow(@"implementation project(':unityLibrary')", @"
                 implementation 'com.google.firebase:firebase-core:16.0.1'
                 implementation 'com.google.firebase:firebase-analytics:15.0.1'
@@ -55,7 +55,7 @@ public class TDSAndroidPostBuildProcessor : IPostGenerateGradleAndroidProject
 
         if(File.Exists(baseProjectGradle)){
             Debug.Log("write project gradle");
-            TDSGlobalEditor.TDSGlobalScriptStreamWriterHelper writerHelper = new TDSGlobalEditor.TDSGlobalScriptStreamWriterHelper(baseProjectGradle);
+            TDSEditor.TDSScriptStreamWriterHelper writerHelper = new TDSEditor.TDSScriptStreamWriterHelper(baseProjectGradle);
             writerHelper.WriteBelow(@"task clean(type: Delete) {
     delete rootProject.buildDir
 }",@"allprojects {
@@ -69,7 +69,7 @@ public class TDSAndroidPostBuildProcessor : IPostGenerateGradleAndroidProject
 
         if(File.Exists(unityLibraryGradle)){
             Debug.Log("write unity gradle");
-            TDSGlobalEditor.TDSGlobalScriptStreamWriterHelper writerHelper = new TDSGlobalEditor.TDSGlobalScriptStreamWriterHelper(unityLibraryGradle);
+            TDSEditor.TDSScriptStreamWriterHelper writerHelper = new TDSEditor.TDSScriptStreamWriterHelper(unityLibraryGradle);
             writerHelper.WriteBelow(@"implementation fileTree(dir: 'libs', include: ['*.jar'])",@"
                 implementation 'com.google.firebase:firebase-core:16.0.1'
                 implementation 'com.google.firebase:firebase-analytics:15.0.1'

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SampleScene : MonoBehaviour,TDSGlobal.TDSGlobalShareCallback
+public class SampleScene : MonoBehaviour, TDSGlobal.TDSGlobalShareCallback
 {
     private string productId = "输入productId";
 
@@ -15,11 +15,11 @@ public class SampleScene : MonoBehaviour,TDSGlobal.TDSGlobalShareCallback
     // Start is called before the first frame update
     void Start()
     {
-        Screen.orientation = ScreenOrientation.AutoRotation; 
-	    Screen.autorotateToLandscapeLeft = true;
-	    Screen.autorotateToLandscapeRight = true;
-	    Screen.autorotateToPortrait = false;
-	    Screen.autorotateToPortraitUpsideDown = false;
+        Screen.orientation = ScreenOrientation.AutoRotation;
+        Screen.autorotateToLandscapeLeft = true;
+        Screen.autorotateToLandscapeRight = true;
+        Screen.autorotateToPortrait = false;
+        Screen.autorotateToPortraitUpsideDown = false;
     }
 
     // Update is called once per frame
@@ -28,21 +28,28 @@ public class SampleScene : MonoBehaviour,TDSGlobal.TDSGlobalShareCallback
 
     }
 
+    public void CapturePic(string path)
+    {
+        ScreenCapture.CaptureScreenshot(path, 0);
+    }
+
+
     public void ShareSuccess()
     {
         Debug.Log("分享成功");
-        this.logText= "分享成功";
+        this.logText = "分享成功";
     }
     public void ShareCancel()
     {
         Debug.Log("分享取消");
-        this.logText= "分享取消";
+        this.logText = "分享取消";
     }
-    public void ShareError(string error) { 
+    public void ShareError(string error)
+    {
         Debug.Log("分享失败:" + error);
-        this.logText= "分享失败" + error;
+        this.logText = "分享失败" + error;
     }
-    
+
     private void OnGUI()
     {
         GUIStyle myButtonStyle = new GUIStyle(GUI.skin.button)
@@ -51,22 +58,22 @@ public class SampleScene : MonoBehaviour,TDSGlobal.TDSGlobalShareCallback
         };
 
         GUIStyle myLabelStyle = new GUIStyle(GUI.skin.label)
-		{
-			fontSize = 20
-		};
+        {
+            fontSize = 20
+        };
 
 
         GUI.depth = 0;
-        
-        productId = GUI.TextArea(new Rect(850,50,300,150),productId,myButtonStyle);
 
-        productIds = GUI.TextArea(new Rect(850,220,300,150),productIds,myButtonStyle);
+        productId = GUI.TextArea(new Rect(850, 50, 300, 150), productId, myButtonStyle);
 
-        imagePath = GUI.TextArea(new Rect(850,380,300,150),imagePath,myButtonStyle);
+        productIds = GUI.TextArea(new Rect(850, 220, 300, 150), productIds, myButtonStyle);
 
-        GUI.Label(new Rect(850,600,500,300), logText, myLabelStyle);
-        
-        if (GUI.Button(new Rect(50,50,200,60), "简体", myButtonStyle))
+        imagePath = GUI.TextArea(new Rect(850, 380, 300, 150), imagePath, myButtonStyle);
+
+        GUI.Label(new Rect(850, 600, 500, 300), logText, myLabelStyle);
+
+        if (GUI.Button(new Rect(50, 50, 200, 60), "简体", myButtonStyle))
         {
             TDSGlobal.TDSGlobalSDK.SetLanguage(TDSGlobal.TDSGlobalLanguage.ZH_CN);
             this.logText = "简体";
@@ -100,10 +107,13 @@ public class SampleScene : MonoBehaviour,TDSGlobal.TDSGlobalShareCallback
         {
             TDSGlobal.TDSGlobalSDK.Init((initSuccess) =>
             {
-                if(initSuccess){
+                if (initSuccess)
+                {
                     Debug.Log("初始化成功");
                     this.logText = "初始化成功";
-                }else {
+                }
+                else
+                {
                     Debug.Log("初始化失败");
                     this.logText = "初始化失败";
                 }
@@ -112,13 +122,15 @@ public class SampleScene : MonoBehaviour,TDSGlobal.TDSGlobalShareCallback
 
         if (GUI.Button(new Rect(50, 510, 200, 60), "登陆", myButtonStyle))
         {
-            TDSGlobal.TDSGlobalSDK.Login((tdsUser) => { 
+            TDSGlobal.TDSGlobalSDK.Login((tdsUser) =>
+            {
                 Debug.Log("user:" + tdsUser.ToJSON());
                 this.logText = "user:" + tdsUser.ToJSON();
-            }, (tdsError) => {
+            }, (tdsError) =>
+            {
                 this.logText = "error:" + tdsError.ToJSON();
                 Debug.Log("error:" + tdsError.ToJSON());
-             });
+            });
         }
 
         if (GUI.Button(new Rect(50, 590, 200, 60), "账户中心", myButtonStyle))
@@ -138,7 +150,8 @@ public class SampleScene : MonoBehaviour,TDSGlobal.TDSGlobalShareCallback
 
         if (GUI.Button(new Rect(300, 210, 200, 60), "网页支付", myButtonStyle))
         {
-            TDSGlobal.TDSGlobalSDK.PayWithWeb("1", "4332464624", (error)=>{
+            TDSGlobal.TDSGlobalSDK.PayWithWeb("1", "4332464624", (error) =>
+            {
                 Debug.Log("pay With Web:" + error.ToJSON());
                 this.logText = "网页支付:" + error.ToJSON();
             });
@@ -147,25 +160,27 @@ public class SampleScene : MonoBehaviour,TDSGlobal.TDSGlobalShareCallback
 
         if (GUI.Button(new Rect(300, 290, 200, 60), "查询商品", myButtonStyle))
         {
-            TDSGlobal.TDSGlobalSDK.QueryWithProductIds(productIds.Split(','), (sku)=>{
-                this.logText = "查询商品:";
-                foreach(TDSGlobal.TDSGlobalSkuDetail detail in sku)
-                {
-                    this.logText= this.logText + detail.ToJSON();
-                }
-            },(error)=>
+            TDSGlobal.TDSGlobalSDK.QueryWithProductIds(productIds.Split(','), (sku) =>
             {
-                this.logText = "查询商品错误:" + error.ToJSON();
-                Debug.Log("查询商品错误:" + error.ToJSON());
-            });
-            
+                this.logText = "查询商品:";
+                foreach (TDSGlobal.TDSGlobalSkuDetail detail in sku)
+                {
+                    this.logText = this.logText + detail.ToJSON();
+                }
+            }, (error) =>
+             {
+                 this.logText = "查询商品错误:" + error.ToJSON();
+                 Debug.Log("查询商品错误:" + error.ToJSON());
+             });
+
         }
 
         if (GUI.Button(new Rect(300, 370, 200, 60), "未完成订单", myButtonStyle))
         {
-            TDSGlobal.TDSGlobalSDK.QueryRestoredPurchases((list)=>{
-                this.logText="未完成订单:";
-                foreach(TDSGlobal.TDSGlobalRestoredPurchases purchaes in list)
+            TDSGlobal.TDSGlobalSDK.QueryRestoredPurchases((list) =>
+            {
+                this.logText = "未完成订单:";
+                foreach (TDSGlobal.TDSGlobalRestoredPurchases purchaes in list)
                 {
                     this.logText = this.logText + JsonUtility.ToJson(purchaes);
                 }
@@ -182,35 +197,45 @@ public class SampleScene : MonoBehaviour,TDSGlobal.TDSGlobalShareCallback
             TDSGlobal.TDSGlobalSDK.Share(TDSGlobal.TDSGlobalShareFlavors.FACEBOOK, imagePath, this);
         }
 
-        if(GUI.Button(new Rect(300,610,200,60),"添加用户状态",myButtonStyle)){
-            TDSGlobal.TDSGlobalSDK.AddUserStatusChangeCallback((code)=>{
+        if (GUI.Button(new Rect(300, 610, 200, 60), "添加用户状态", myButtonStyle))
+        {
+            TDSGlobal.TDSGlobalSDK.AddUserStatusChangeCallback((code) =>
+            {
                 Debug.Log("code:" + code);
-                this.logText="用户状态回调" + code;
+                this.logText = "用户状态回调" + code;
             });
         }
 
-        if(GUI.Button(new Rect(550,50,200,60),"获取用户信息",myButtonStyle)){
-            TDSGlobal.TDSGlobalSDK.GetUser((tdsUser)=>{
+        if (GUI.Button(new Rect(550, 50, 200, 60), "获取用户信息", myButtonStyle))
+        {
+            TDSGlobal.TDSGlobalSDK.GetUser((tdsUser) =>
+            {
                 Debug.Log("user:" + tdsUser.ToJSON());
-                this.logText="user:" + tdsUser.ToJSON();
-            },(tdsError)=>{
+                this.logText = "user:" + tdsUser.ToJSON();
+            }, (tdsError) =>
+            {
                 Debug.Log("error:" + tdsError.ToJSON());
-                this.logText="error:" + tdsError.ToJSON();
+                this.logText = "error:" + tdsError.ToJSON();
             });
         }
 
-        if(GUI.Button(new Rect(550,130,200,60),"获取SDK版本",myButtonStyle)){
-            TDSGlobal.TDSGlobalSDK.GetVersionName((version)=>{
+        if (GUI.Button(new Rect(550, 130, 200, 60), "获取SDK版本", myButtonStyle))
+        {
+            TDSGlobal.TDSGlobalSDK.GetVersionName((version) =>
+            {
                 Debug.Log("version:" + version);
                 this.logText = "version:" + version;
             });
         }
 
-        if(GUI.Button(new Rect(550,210,200,60),"支付商品", myButtonStyle)){
-            TDSGlobal.TDSGlobalSDK.PayWithProduct("orderId",productId,"4332464624","serverId","ext",(orderInfo)=>{
+        if (GUI.Button(new Rect(550, 210, 200, 60), "支付商品", myButtonStyle))
+        {
+            TDSGlobal.TDSGlobalSDK.PayWithProduct("orderId", productId, "4332464624", "serverId", "ext", (orderInfo) =>
+            {
                 Debug.Log("orderInfo:" + orderInfo.ToJSON());
                 this.logText = "orderInfo:" + orderInfo.ToJSON();
-            },(tdsError)=>{
+            }, (tdsError) =>
+            {
                 Debug.Log("tdsError:" + tdsError.ToJSON());
                 this.logText = "tdsError:" + tdsError.ToJSON();
             });
@@ -218,26 +243,35 @@ public class SampleScene : MonoBehaviour,TDSGlobal.TDSGlobalShareCallback
 
         if (GUI.Button(new Rect(550, 290, 200, 60), "补单", myButtonStyle))
         {
-            TDSGlobal.TDSGlobalSDK.RestorePurchase("info","orderId",productId,"4332464624","serverId","ext",(info)=>{
+            TDSGlobal.TDSGlobalSDK.RestorePurchase("info", "orderId", productId, "4332464624", "serverId", "ext", (info) =>
+            {
                 Debug.Log("补单:" + info.ToJSON());
                 this.logText = "补单:" + info.ToJSON();
-            },(tdsError)=>{
+            }, (tdsError) =>
+            {
                 Debug.Log("tdsError:" + tdsError.ToJSON());
                 this.logText = "tdsError:" + tdsError.ToJSON();
-            });        
+            });
         }
 
         if (GUI.Button(new Rect(550, 370, 200, 60), "获取地区", myButtonStyle))
         {
-           TDSCommon.TDSCommon.GetInstance().GetRegionCode((isMainLand)=>{
-               Debug.Log("是否是国内:" + isMainLand);
-               this.logText = "是否是国内:" + isMainLand;
-           });
+            TDSCommon.TDSCommon.GetInstance().GetRegionCode((isMainLand) =>
+            {
+                Debug.Log("是否是国内:" + isMainLand);
+                this.logText = "是否是国内:" + isMainLand;
+            });
         }
 
-        if(GUI.Button(new Rect(550,450,200,60),"跳转商店",myButtonStyle))
+        if (GUI.Button(new Rect(550, 450, 200, 60), "跳转商店", myButtonStyle))
         {
             TDSGlobal.TDSGlobalSDK.StoreReview();
+        }
+
+        if (GUI.Button(new Rect(550, 530, 200, 60), "IOS截图", myButtonStyle))
+        {
+            this.imagePath = Application.dataPath + "\\ScreenShot\\ScreenShot1.png";
+            CapturePic(imagePath);
         }
 
     }

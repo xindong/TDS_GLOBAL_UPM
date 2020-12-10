@@ -8,7 +8,7 @@ namespace TDSGlobal
     [Serializable]
     public class TDSGlobalUser
     {
-        public string id;
+        public string userId;
 
         public string sub;
 
