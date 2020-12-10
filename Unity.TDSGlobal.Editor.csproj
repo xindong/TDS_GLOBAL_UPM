@@ -36,11 +36,11 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\TDSGlobal\Plugins\Android\Script\Editor\TDSPlist.cs" />
-     <Compile Include="Assets\TDSGlobal\Plugins\Android\Script\Editor\TDSScriptHandlerProcessor.cs" />
-     <Compile Include="Assets\TDSGlobal\Plugins\Android\Script\Editor\TDSIOSPostBuildProcessor.cs" />
-     <Compile Include="Assets\TDSGlobal\Plugins\Android\Script\Editor\TDSAndroidPostBuildProcessor.cs" />
-     <None Include="Assets\TDSGlobal\Plugins\Android\Script\Editor\Unity.TDSGlobal.Editor.asmdef" />
+     <Compile Include="Assets\TDSGlobal\Script\Editor\TDSPlist.cs" />
+     <Compile Include="Assets\TDSGlobal\Script\Editor\TDSScriptHandlerProcessor.cs" />
+     <Compile Include="Assets\TDSGlobal\Script\Editor\TDSIOSPostBuildProcessor.cs" />
+     <Compile Include="Assets\TDSGlobal\Script\Editor\TDSAndroidPostBuildProcessor.cs" />
+     <None Include="Assets\TDSGlobal\Script\Editor\Unity.TDSGlobal.Editor.asmdef" />
     <Reference Include="UnityEngine">
         <HintPath>/Applications/Unity/Hub/Editor/2020.1.5f1c1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

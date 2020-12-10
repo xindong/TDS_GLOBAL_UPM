@@ -15,7 +15,7 @@
 //在Packages/manifest.json 中添加TDSGlobalUnity SDK
 {
     "dependencies":{
-        "com.tds.global":"https://github.com/xindong/TDS_GLOABL_UPM.git#{verison}",
+        "com.tds.global":"https://github.com/xindong/TDS_GLOABL_UPM#{verison}",
     }
 }
 ```
@@ -31,11 +31,8 @@
 #### 2.1 [IOS](https://git.gametaptap.com/tds-public/tdsglobal/-/blob/master/doc/iOS/ios_doc.md)
 
 ##### 2.1.1 配置编译选项
-**在Build Setting中的Other Link Flag中添加-ObjC**
 
-**在Build Setting中的Always Embed Swift Standard Libraried设置为YES**
-
-在**Capabilities**中打开以下功能
+在**Capabilities**中打开In-App Purchase、Push Notifications、Sign In With Apple功能。
 
 <img src="./DocImages/capabilities.jpg"></img>
 

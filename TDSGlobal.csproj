@@ -36,27 +36,27 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\TDSGlobal\Plugins\Android\Script\Runtime\TDSGlobalUser.cs" />
-     <Compile Include="Assets\TDSGlobal\Plugins\Android\Script\Runtime\Bridge.cs" />
-     <Compile Include="Assets\TDSGlobal\Plugins\Android\Script\Runtime\TDSGlobalRestoredPurchases.cs" />
-     <Compile Include="Assets\TDSGlobal\Plugins\Android\Script\Runtime\Command.cs" />
-     <Compile Include="Assets\TDSGlobal\Plugins\Android\Script\Runtime\TDSGlobalError.cs" />
-     <Compile Include="Assets\TDSGlobal\Plugins\Android\Script\Runtime\BridgeAndroid.cs" />
-     <Compile Include="Assets\TDSGlobal\Plugins\Android\Script\Runtime\TDSGlobalImpl.cs" />
-     <Compile Include="Assets\TDSGlobal\Plugins\Android\Script\Runtime\TDSGlobalOrderInfo.cs" />
-     <Compile Include="Assets\TDSGlobal\Plugins\Android\Script\Runtime\BridgeIOS.cs" />
-     <Compile Include="Assets\TDSGlobal\Plugins\Android\Script\Runtime\BridgeCallback.cs" />
-     <Compile Include="Assets\TDSGlobal\Plugins\Android\Script\Runtime\Result.cs" />
-     <Compile Include="Assets\TDSGlobal\Plugins\Android\Script\Runtime\Json.cs" />
-     <Compile Include="Assets\TDSGlobal\Plugins\Android\Script\Runtime\TDSGlobalConstants.cs" />
-     <Compile Include="Assets\TDSGlobal\Plugins\Android\Script\Runtime\TDSGlobalSkuDetail.cs" />
-     <Compile Include="Assets\TDSGlobal\Plugins\Android\Script\Runtime\ITDSGlobal.cs" />
-     <Compile Include="Assets\TDSGlobal\Plugins\Android\Script\Runtime\TDSCommon.cs" />
-     <Compile Include="Assets\TDSGlobal\Plugins\Android\Script\Runtime\Platform.cs" />
-     <Compile Include="Assets\TDSGlobal\Plugins\Android\Script\Runtime\IBridge.cs" />
-     <Compile Include="Assets\TDSGlobal\Plugins\Android\Script\Runtime\TDSGlobalSDK.cs" />
-     <Compile Include="Assets\TDSGlobal\Plugins\Android\Script\Runtime\TDSGlobalBridgeWrapper.cs" />
-     <None Include="Assets\TDSGlobal\Plugins\Android\Script\Runtime\TDSGlobal.asmdef" />
+     <Compile Include="Assets\TDSGlobal\Script\Runtime\TDSGlobalUser.cs" />
+     <Compile Include="Assets\TDSGlobal\Script\Runtime\Bridge.cs" />
+     <Compile Include="Assets\TDSGlobal\Script\Runtime\TDSGlobalRestoredPurchases.cs" />
+     <Compile Include="Assets\TDSGlobal\Script\Runtime\Command.cs" />
+     <Compile Include="Assets\TDSGlobal\Script\Runtime\TDSGlobalError.cs" />
+     <Compile Include="Assets\TDSGlobal\Script\Runtime\BridgeAndroid.cs" />
+     <Compile Include="Assets\TDSGlobal\Script\Runtime\TDSGlobalImpl.cs" />
+     <Compile Include="Assets\TDSGlobal\Script\Runtime\TDSGlobalOrderInfo.cs" />
+     <Compile Include="Assets\TDSGlobal\Script\Runtime\BridgeIOS.cs" />
+     <Compile Include="Assets\TDSGlobal\Script\Runtime\BridgeCallback.cs" />
+     <Compile Include="Assets\TDSGlobal\Script\Runtime\Result.cs" />
+     <Compile Include="Assets\TDSGlobal\Script\Runtime\Json.cs" />
+     <Compile Include="Assets\TDSGlobal\Script\Runtime\TDSGlobalConstants.cs" />
+     <Compile Include="Assets\TDSGlobal\Script\Runtime\TDSGlobalSkuDetail.cs" />
+     <Compile Include="Assets\TDSGlobal\Script\Runtime\ITDSGlobal.cs" />
+     <Compile Include="Assets\TDSGlobal\Script\Runtime\TDSCommon.cs" />
+     <Compile Include="Assets\TDSGlobal\Script\Runtime\Platform.cs" />
+     <Compile Include="Assets\TDSGlobal\Script\Runtime\IBridge.cs" />
+     <Compile Include="Assets\TDSGlobal\Script\Runtime\TDSGlobalSDK.cs" />
+     <Compile Include="Assets\TDSGlobal\Script\Runtime\TDSGlobalBridgeWrapper.cs" />
+     <None Include="Assets\TDSGlobal\Script\Runtime\TDSGlobal.asmdef" />
     <Reference Include="UnityEngine">
         <HintPath>/Applications/Unity/Hub/Editor/2020.1.5f1c1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
