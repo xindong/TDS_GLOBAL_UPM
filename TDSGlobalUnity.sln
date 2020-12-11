@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scene", "Scene.csproj", "{f2ff6760-c564-2b08-651f-07904815e676}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TDSGlobal", "TDSGlobal.csproj", "{a527829e-1203-6126-875d-ed212c15d9ef}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scene", "Scene.csproj", "{f2ff6760-c564-2b08-651f-07904815e676}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.TDSGlobal.Editor", "Unity.TDSGlobal.Editor.csproj", "{24800632-446f-c5fb-6fdc-fb3f3ca974ce}"
 EndProject
@@ -12,10 +12,10 @@ Global
 		Debug|Any CPU = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{f2ff6760-c564-2b08-651f-07904815e676}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{f2ff6760-c564-2b08-651f-07904815e676}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{a527829e-1203-6126-875d-ed212c15d9ef}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{a527829e-1203-6126-875d-ed212c15d9ef}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{f2ff6760-c564-2b08-651f-07904815e676}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{f2ff6760-c564-2b08-651f-07904815e676}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24800632-446f-c5fb-6fdc-fb3f3ca974ce}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{24800632-446f-c5fb-6fdc-fb3f3ca974ce}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection

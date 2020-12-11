@@ -91,7 +91,7 @@ namespace TDSEditor
                 string parentFolder = Directory.GetParent(Application.dataPath).FullName;
                 if (Directory.Exists(resourcePath))
                 {
-                    Directory.Delete(resourcePath);
+                    Directory.Delete(resourcePath,true);
                 }
 
                 Directory.CreateDirectory(resourcePath);
@@ -155,7 +155,7 @@ namespace TDSEditor
         public static void CopyAndReplaceDirectory(string srcPath, string dstPath)
         {
             if (Directory.Exists(dstPath))
-                Directory.Delete(dstPath);
+                Directory.Delete(dstPath,true);
             if (File.Exists(dstPath))
                 File.Delete(dstPath);
 

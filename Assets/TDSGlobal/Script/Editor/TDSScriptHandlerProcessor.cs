@@ -66,7 +66,7 @@ namespace TDSEditor
         public static void CopyAndReplaceDirectory(string srcPath, string dstPath)
         {
             if (Directory.Exists(dstPath))
-                Directory.Delete(dstPath);
+                Directory.Delete(dstPath,true);
             if (File.Exists(dstPath))
                 File.Delete(dstPath);
 
