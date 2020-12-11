@@ -36,12 +36,17 @@ namespace TDSGlobal
     {
         public bool cancel;
 
-        public TDSGlobalError shareError;
+        public TDSGlobalError error;
 
         public TDSGlobalShareWrapper(string json)
         {
             JsonUtility.FromJsonOverwrite(json, this);
         }
+    
+        public string ToJSON(){
+            return JsonUtility.ToJson(this);
+        }
+    
     }
 
     [Serializable]

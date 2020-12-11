@@ -270,7 +270,7 @@ public class SampleScene : MonoBehaviour, TDSGlobal.TDSGlobalShareCallback
 
         if (GUI.Button(new Rect(550, 530, 200, 60), "IOS截图", myButtonStyle))
         {
-            this.imagePath = Application.dataPath + "\\ScreenShot\\ScreenShot1.png";
+            this.imagePath = Application.dataPath + "/ScreenShot/ScreenShot1.png";
             CapturePic(imagePath);
         }
 

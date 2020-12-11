@@ -307,19 +307,22 @@ namespace TDSGlobal
 
         private void handlerShareCallback(Result result,TDSGlobalShareCallback callback)
         {
-            if(!checkResultSuccess(result)){
-                    return;
-                }
-                TDSGlobalShareWrapper shareWrapper = new TDSGlobalShareWrapper(result.content);
-                if(shareWrapper.cancel){
-                    callback.ShareCancel();
-                    return;
-                }
-                if(shareWrapper.shareError!=null){
-                    callback.ShareError(shareWrapper.shareError.error_msg);
-                    return;
-                }
-                callback.ShareSuccess();
+            if(!checkResultSuccess(result))
+            {
+                return;
+            }
+            TDSGlobalShareWrapper shareWrapper = new TDSGlobalShareWrapper(result.content);
+            Debug.Log("shareWrapper:" + shareWrapper.ToJSON());
+            if(shareWrapper.cancel)
+            {
+                callback.ShareCancel();
+                return;
+            }
+            if(shareWrapper.error!=null && !string.IsNullOrEmpty(shareWrapper.error.error_msg)){
+                callback.ShareError(shareWrapper.error.error_msg);
+                return;
+            }
+            callback.ShareSuccess();
         }
 
         private void handlerOrderInfoCallback(Result result,Action<TDSGlobalOrderInfo> callback,Action<TDSGlobalError> errorCallback)
