@@ -99,8 +99,8 @@ namespace TDSEditor
                 string remotePackagePath = TDSFileHelper.FilterFile(parentFolder + "/Library/PackageCache/","com.tds.global");
 
                 string localPacckagePath = TDSFileHelper.FilterFile(parentFolder,"TDSGlobal");
-
-                string tdsResourcePath = remotePackagePath !=null? remotePackagePath + "/TDSGlobal/Plugins/IOS/Resource" : localPacckagePath + "/Plugins/IOS/Resource";
+                
+                string tdsResourcePath = remotePackagePath !=null? remotePackagePath + "/Plugins/IOS/Resource" : localPacckagePath + "/Plugins/IOS/Resource";
 
                 Debug.Log("tdsGlobalResource:" + tdsResourcePath);
 
