@@ -120,9 +120,8 @@ namespace TDSGlobal
 
         public string type;
 
-        public TDSGlobalSkuDetail(string json)
+        public TDSGlobalSkuDetail(Dictionary<string,object> dic)
         {
-            Dictionary<string,object> dic = Json.Deserialize(json) as Dictionary<string,object>;
             this.description = SafeDictionary.SafeGetValueByKey(dic,"description") as string;
             this.freeTrialPeriod = SafeDictionary.SafeGetValueByKey(dic,"freeTrialPeriod") as string;
             this.iconUrl = SafeDictionary.SafeGetValueByKey(dic,"iconUrl") as string;
