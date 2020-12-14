@@ -15,7 +15,7 @@
 //在Packages/manifest.json 中添加TDSGlobalUnity SDK
 {
     "dependencies":{
-        "com.tds.global":"https://github.com/xindong/TDS_GLOABL_UPM#{verison}",
+        "com.tds.global":"https://github.com/xindong/TDS_GLOABL_UPM.git#{verison}",
     }
 }
 ```
