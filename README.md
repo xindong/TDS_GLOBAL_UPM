@@ -20,6 +20,20 @@
 }
 ```
 
+* 在使用到TDSGlobal的脚本目录中新建.asmdef文件，添加以下代码
+```json
+{
+    "references": [
+        "TDSGlobal"
+    ],
+    "includePlatforms": [
+        "Android",
+        "Editor",
+        "iOS"
+    ],
+}
+```
+
 ### 2.配置TDSGlobal Unity SDK
 
 获取针对当前平台的TDSGlobal配置文件
@@ -33,8 +47,6 @@
 ##### 2.1.1 配置编译选项
 
 在**Capabilities**中打开In-App Purchase、Push Notifications、Sign In With Apple功能。
-
-<img src="./DocImages/capabilities.jpg"></img>
 
 #### 2.2 [Android](https://git.gametaptap.com/tds-public/tdsglobal/-/blob/master/doc/Android/android_doc.md)
 

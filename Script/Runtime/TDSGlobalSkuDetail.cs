@@ -147,4 +147,13 @@ namespace TDSGlobal
 
     }
 #endif
+
+     public class TDSGlobalSkuDetail
+     {
+         public TDSGlobalSkuDetail(Dictionary<string,object> dic)
+         {
+             
+         }
+     }
+
 }

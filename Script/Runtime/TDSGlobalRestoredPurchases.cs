@@ -68,5 +68,16 @@ namespace TDSGlobal
     }
 
     #endif
+    public class TDSGlobalRestoredPurchases
+    {
+        public TDSGlobalRestoredPurchases(Dictionary<string,object> dic)
+        {
 
+        }
+
+        public TDSGlobalRestoredPurchases(string json)
+        {
+            
+        }
+    }
 }
