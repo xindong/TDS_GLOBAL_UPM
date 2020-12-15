@@ -5,8 +5,8 @@ using UnityEngine;
 using TDSCommon;
 
 namespace TDSGlobal
-{       
-    #if UNITY_IOS
+{
+#if UNITY_IOS
     [Serializable]
     public class TDSGlobalRestoredPurchases
     {
@@ -26,7 +26,7 @@ namespace TDSGlobal
         }
     }
 
-    #elif UNITY_ANDROID
+#elif UNITY_ANDROID
     [Serializable]
     public class TDSGlobalRestoredPurchases
     {
@@ -67,7 +67,7 @@ namespace TDSGlobal
         }
     }
 
-    #endif
+#elif UNITY_EDITOR
     public class TDSGlobalRestoredPurchases
     {
         public TDSGlobalRestoredPurchases(Dictionary<string,object> dic)
@@ -80,4 +80,5 @@ namespace TDSGlobal
             
         }
     }
+#endif
 }

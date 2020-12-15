@@ -146,8 +146,7 @@ namespace TDSGlobal
         }
 
     }
-#endif
-
+#elif UNITY_EDITOR
      public class TDSGlobalSkuDetail
      {
          public TDSGlobalSkuDetail(Dictionary<string,object> dic)
@@ -155,5 +154,6 @@ namespace TDSGlobal
              
          }
      }
+#endif
 
 }
