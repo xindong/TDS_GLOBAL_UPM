@@ -318,9 +318,11 @@ namespace TDSGlobal
                 callback.ShareCancel();
                 return;
             }
-            if(shareWrapper.error!=null && !string.IsNullOrEmpty(shareWrapper.error.error_msg)){
-                callback.ShareError(shareWrapper.error.error_msg);
-                return;
+            if(shareWrapper.error!=null){
+                if(!string.IsNullOrEmpty(shareWrapper.error.error_msg)){
+                    callback.ShareError(shareWrapper.error.error_msg);
+                    return;
+                }
             }
             callback.ShareSuccess();
         }

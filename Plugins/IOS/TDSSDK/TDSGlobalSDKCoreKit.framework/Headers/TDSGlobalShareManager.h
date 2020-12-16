@@ -16,6 +16,12 @@ typedef void(^TDSGlobalShareResultHandler)(NSError * _Nullable error, BOOL cance
 /// @param completeHandler 分享结果回调
 + (void)shareWithType:(TDSGlobalShareType)type image:(UIImage *)image completeHandler:(TDSGlobalShareResultHandler)completeHandler;
 
+/// 分享图片
+/// @param type 分享平台类型
+/// @param imagePath 待分享图片沙盒路径
+/// @param completeHandler 分享结果回调
++ (void)shareWithType:(TDSGlobalShareType)type imagePath:(NSString *)imagePath completeHandler:(TDSGlobalShareResultHandler)completeHandler;
+
 /// 分享URL
 /// @param type 分享平台类型
 /// @param url 待分享URL
