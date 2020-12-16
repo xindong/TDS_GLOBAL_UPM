@@ -136,7 +136,7 @@ namespace TDSGlobal
         public void Share(int shareFlavors, string imagePath, TDSGlobalShareCallback callback)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
-            dic.Add("image", imagePath);
+            dic.Add("imagePath", imagePath);
             dic.Add("shareWithType", shareFlavors);
             Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME, "shareWithImage", true, System.Guid.NewGuid().ToString(), dic);
             EngineBridge.GetInstance().CallHandler(command, (result) =>
