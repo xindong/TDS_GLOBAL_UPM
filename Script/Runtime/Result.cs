@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 namespace TDSCommon
 {
 
@@ -29,7 +28,7 @@ namespace TDSCommon
 
         public Result()
         {
-            
+
         }
 
         public Result(string json)

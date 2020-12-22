@@ -32,6 +32,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
+//Serializer,Serialize
+
 namespace TDSCommon
 {
     // Example usage:
@@ -74,12 +76,9 @@ namespace TDSCommon
     /// JSON uses Arrays and Objects. These correspond here to the datatypes IList and IDictionary.
     /// All numbers are parsed to doubles.
     /// </summary>
-
-    //Serialize 
-    //Deserialize
-
     public static class Json
-    {
+    {   
+
         /// <summary>
         /// Parses the string json into a value
         /// </summary>

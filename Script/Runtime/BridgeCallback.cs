@@ -17,13 +17,12 @@ namespace TDSCommon
         }
 
         public override AndroidJavaObject Invoke(string method, object[] args)
-        {   
+        {
             if (method.Equals("onResult"))
             {
                 if (args[0] is string)
                 {
                     string result = (string)(args[0]);
-                    Debug.Log("BridgeAndroid:"+result);
                     callback(new Result(result));
                 }
             }

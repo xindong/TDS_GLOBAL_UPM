@@ -88,6 +88,7 @@ public class TDSAndroidPostBuildProcessor : IPostGenerateGradleAndroidProject
                 implementation 'com.android.support:support-annotations:28.0.0'
                 implementation 'com.android.support:appcompat-v7:28.0.0'
                 implementation 'com.android.support:recyclerview-v7:28.0.0'
+                implementation 'com.google.android.gms:play-services-ads-identifier:15.0.1'
             ");
         }
 

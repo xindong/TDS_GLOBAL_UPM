@@ -7,65 +7,14 @@ namespace TDSCommon
 {
     public class TDSCommon
     {
-        private static TDSCommon sInstance = new TDSCommon();
-
-        public static TDSCommon GetInstance()
+        public static void SetLanguage(string language)
         {
-            return sInstance;
+            TDSCommonImpl.GetInstance().SetLanguage(language);
         }
 
-        private TDSCommon()
+        public static void GetRegionCode(Action<bool> callback)
         {
-            EngineBridge.GetInstance().Register("com.tds.common.wrapper.TDSCommonService", "com.tds.common.wrapper.TDSCommonServiceImpl");
+            TDSCommonImpl.GetInstance().GetRegionCode(callback);
         }
-
-        public void SetLanguage(string language)
-        {
-            Dictionary<string, object> dic = new Dictionary<string, object>();
-            dic.Add("language", language);
-            Command command = new Command("TDSCommonService", "setLanguage", false, null, dic);
-            EngineBridge.GetInstance().CallHandler(command);
-        }
-
-        public void GetRegionCode(Action<bool> callback)
-        {
-            Command command = new Command("TDSCommonService", "getRegionCode", true, System.Guid.NewGuid().ToString(), null);
-            EngineBridge.GetInstance().CallHandler(command, (result) =>
-            {
-                if (result.code != Result.RESULT_SUCCESS)
-                {
-                    return;
-                }
-
-                if (string.IsNullOrEmpty(result.content))
-                {
-                    return;
-                }
-
-                CommonRegionWrapper wrapper = new CommonRegionWrapper(result.content);
-                if(wrapper!=null)
-                {
-                    callback(wrapper.isMainland);
-                }
-
-            });
-
-            
-
-        }
-
     }
-
-    [Serializable]
-    public class CommonRegionWrapper
-    {
-        public bool isMainland;
-
-        public CommonRegionWrapper(string json)
-        {
-            JsonUtility.FromJsonOverwrite(json, this);
-        }
-
-    }
-
 }
