@@ -35,7 +35,7 @@ namespace TDSGlobal
 
         public void Init(Action<bool> callback)
         {
-            Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME, "initTDSGlobalSDK", true, System.Guid.NewGuid().ToString(), null);
+            Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME, "initTDSGlobalSDK", true, null);
             EngineBridge.GetInstance().CallHandler(command, (result) =>
             {
                 Debug.Log("initSDK result:" + result.toJSON());
@@ -54,7 +54,7 @@ namespace TDSGlobal
 
         public void Login(Action<TDSGlobalUser> callback, Action<TDSGlobalError> errorCallback)
         {
-            Command command = new Command(TDSGlobalBridgeName.LOGIN_SERVICE_NAME, "login", true, System.Guid.NewGuid().ToString(), null);
+            Command command = new Command(TDSGlobalBridgeName.LOGIN_SERVICE_NAME, "login", true, null);
             EngineBridge.GetInstance().CallHandler(command, (result) =>
             {   
                 Debug.Log("login result:" + result.toJSON());
@@ -75,13 +75,13 @@ namespace TDSGlobal
 
         public void Logout()
         {
-            Command command = new Command(TDSGlobalBridgeName.LOGIN_SERVICE_NAME, "logout", true, System.Guid.NewGuid().ToString(), null);
+            Command command = new Command(TDSGlobalBridgeName.LOGIN_SERVICE_NAME, "logout", false, null);
             EngineBridge.GetInstance().CallHandler(command);
         }
 
         public void AddUserStatusChangeCallback(Action<int> callback)
         {
-            Command command = new Command(TDSGlobalBridgeName.LOGIN_SERVICE_NAME, "addUserStatusChangeCallback", true, System.Guid.NewGuid().ToString(), null);
+            Command command = new Command(TDSGlobalBridgeName.LOGIN_SERVICE_NAME, "addUserStatusChangeCallback", true,  null);
             EngineBridge.GetInstance().CallHandler(command, (result) =>
             {
                 if(!checkResultSuccess(result)){
@@ -96,7 +96,7 @@ namespace TDSGlobal
 
         public void GetUser(Action<TDSGlobalUser> callback, Action<TDSGlobalError> errorCallback)
         {
-            Command command = new Command(TDSGlobalBridgeName.LOGIN_SERVICE_NAME, "getUser", true, System.Guid.NewGuid().ToString(), null);
+            Command command = new Command(TDSGlobalBridgeName.LOGIN_SERVICE_NAME, "getUser", true, null);
             EngineBridge.GetInstance().CallHandler(command, (result) =>
             {
                 Debug.Log("getUser result:" + result.toJSON());
@@ -116,7 +116,7 @@ namespace TDSGlobal
 
         public void UserCenter()
         {
-            Command command = new Command(TDSGlobalBridgeName.LOGIN_SERVICE_NAME, "userCenter", true, System.Guid.NewGuid().ToString(), null);
+            Command command = new Command(TDSGlobalBridgeName.LOGIN_SERVICE_NAME, "userCenter", false, null);
             EngineBridge.GetInstance().CallHandler(command);
         }
 
@@ -126,7 +126,7 @@ namespace TDSGlobal
             dic.Add("url", uri);
             dic.Add("message", message);
             dic.Add("shareWithType", shareFlavors);
-            Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME, "shareWithUriMessage", true, System.Guid.NewGuid().ToString(), dic);
+            Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME, "shareWithUriMessage", true, dic);
             EngineBridge.GetInstance().CallHandler(command, (result) =>
             {
                 handlerShareCallback(result,callback);
@@ -138,7 +138,7 @@ namespace TDSGlobal
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("imagePath", imagePath);
             dic.Add("shareWithType", shareFlavors);
-            Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME, "shareWithImage", true, System.Guid.NewGuid().ToString(), dic);
+            Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME, "shareWithImage", true, dic);
             EngineBridge.GetInstance().CallHandler(command, (result) =>
             {
                 handlerShareCallback(result,callback);
@@ -149,7 +149,7 @@ namespace TDSGlobal
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("setLanguage", languageType);
-            Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME, "changeLanguageType", false, null, dic);
+            Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME, "changeLanguageType", false, dic);
             EngineBridge.GetInstance().CallHandler(command);
         }
 
@@ -161,7 +161,7 @@ namespace TDSGlobal
             dic.Add("roleId", roleId);
             dic.Add("serverId", serverId);
             dic.Add("ext", ext);
-            Command command = new Command(TDSGlobalBridgeName.IAP_SERVICE_NAME, "payWithProduct", true, System.Guid.NewGuid().ToString(), dic);
+            Command command = new Command(TDSGlobalBridgeName.IAP_SERVICE_NAME, "payWithProduct", true, dic);
             EngineBridge.GetInstance().CallHandler(command, (result) => { 
                 handlerOrderInfoCallback(result,callback,errorCallback);
             });
@@ -172,7 +172,7 @@ namespace TDSGlobal
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("roleId", roleId);
             dic.Add("serverId", serverId);
-            Command command = new Command(TDSGlobalBridgeName.IAP_SERVICE_NAME, "payWithWeb", true, System.Guid.NewGuid().ToString(), dic);
+            Command command = new Command(TDSGlobalBridgeName.IAP_SERVICE_NAME, "payWithWeb", true,  dic);
             EngineBridge.GetInstance().CallHandler(command, (result) => {
                 if(!checkResultSuccess(result))
                 {
@@ -187,7 +187,7 @@ namespace TDSGlobal
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("queryWithProductIds", productIds);
-            Command command = new Command(TDSGlobalBridgeName.IAP_SERVICE_NAME, "querySKUWithProductIds", true, System.Guid.NewGuid().ToString(), dic);
+            Command command = new Command(TDSGlobalBridgeName.IAP_SERVICE_NAME, "querySKUWithProductIds", true, dic);
             EngineBridge.GetInstance().CallHandler(command, (result) => 
             { 
                 if(!checkResultSuccess(result))
@@ -210,7 +210,7 @@ namespace TDSGlobal
 
         public void QueryRestoredPurchases(Action<List<TDSGlobalRestoredPurchases>> callback)
         {
-            Command command = new Command(TDSGlobalBridgeName.IAP_SERVICE_NAME,"queryRestoredPurchases",true,System.Guid.NewGuid().ToString(),null);
+            Command command = new Command(TDSGlobalBridgeName.IAP_SERVICE_NAME,"queryRestoredPurchases",true,null);
             EngineBridge.GetInstance().CallHandler(command, (result) => { 
                 if(!checkResultSuccess(result))
                 {
@@ -230,7 +230,7 @@ namespace TDSGlobal
             dic.Add("serverId", serverId);
             dic.Add("ext", ext);
             dic.Add("productId", productId);
-            Command command = new Command(TDSGlobalBridgeName.IAP_SERVICE_NAME, "queryRestoredPurchasesWithInfo", true, System.Guid.NewGuid().ToString(), dic);
+            Command command = new Command(TDSGlobalBridgeName.IAP_SERVICE_NAME, "queryRestoredPurchasesWithInfo", true, dic);
             EngineBridge.GetInstance().CallHandler(command, (result) => { 
                 handlerOrderInfoCallback(result,callback,errorCallback);
             });
@@ -242,7 +242,7 @@ namespace TDSGlobal
             dic.Add("reportWithServerId", serverId);
             dic.Add("roleId", roleId);
             dic.Add("roleName", roleName);
-            Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME, "report", false, null, dic);
+            Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME, "report", false, dic);
             EngineBridge.GetInstance().CallHandler(command);
         }
 
@@ -253,7 +253,7 @@ namespace TDSGlobal
             dic.Add("trackUser", roleId);
             dic.Add("roleName", roleName);
             dic.Add("level", level);
-            Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME, "trackUser", false, null, dic);
+            Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME, "trackUser", false, dic);
             EngineBridge.GetInstance().CallHandler(command);
         }
 
@@ -261,31 +261,31 @@ namespace TDSGlobal
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("trackEvent", eventName);
-            Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME, "trackEvent", false, null, dic);
+            Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME, "trackEvent", false, dic);
             EngineBridge.GetInstance().CallHandler(command);
         }
 
         public void TrackAchievement()
         {
-            Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME, "trackAchievement", false, null, null);
+            Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME, "trackAchievement", false, null);
             EngineBridge.GetInstance().CallHandler(command);
         }
 
         public void EventCompletedTutorial()
         {
-            Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME, "eventCompletedTutorial", false, null, null);
+            Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME, "eventCompletedTutorial", false, null);
             EngineBridge.GetInstance().CallHandler(command);
         }
 
         public void EventCreateRole()
         {
-            Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME, "eventCreateRole", false, null, null);
+            Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME, "eventCreateRole", false, null);
             EngineBridge.GetInstance().CallHandler(command);
         }
         
         public void GetVersionName(Action<string> callback)
         {
-            Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME, "getTDSGlobalSDKVersion", true, System.Guid.NewGuid().ToString(), null);
+            Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME, "getTDSGlobalSDKVersion", true, null);
             EngineBridge.GetInstance().CallHandler(command, (result) =>
             {
                 if(!checkResultSuccess(result)){
@@ -297,7 +297,7 @@ namespace TDSGlobal
 
         public void StoreReview()
         {
-            Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME,"storeReview",false,null,null);
+            Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME,"storeReview",false,null);
             EngineBridge.GetInstance().CallHandler(command);
         }
 
