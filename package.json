@@ -2,7 +2,7 @@
     "name": "com.tds.global",
     "displayName": "TDSGlobal",
     "description": "TapTap develop Service Global",
-    "version": "0.1.1-alpha",
+    "version": "0.1.2-alpha",
     "unity": "2020.1",
     "author": "tds-develop",
     "license": "MIT"
