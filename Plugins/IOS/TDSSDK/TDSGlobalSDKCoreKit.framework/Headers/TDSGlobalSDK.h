@@ -18,16 +18,20 @@ typedef NS_ENUM(NSInteger,TDSGlobalLanguageLocale) {
 typedef void(^TDSGlobalInitResultHandler)(BOOL success);
 
 @interface TDSGlobalSDK : NSObject
-#pragma mark - SDK CONFIG
+/// 设置调试模式，debug会输出SDK日志
+/// @param debug 是否debug模式,默认no
++ (void)setDebugMode:(BOOL)debug;
+
+/// 获取当前SDK版本
 + (NSString *)getTDSGlobalSDKVersion;
 
+/// 设置SDK显示语言
+/// @param locale 语言，在TDSGlobalLanguageLocale 枚举中查看
 + (void)setLanguage:(TDSGlobalLanguageLocale)locale;
 
 /// 初始化SDK
 /// @param handler 初始化结果回调
 + (void)initTDSGlobalSDK:(TDSGlobalInitResultHandler)handler;
-
-#pragma mark - SDK FUCTIONS
 
 /// 当前登录用户，打开客服中心
 /// @param serverId 服务器ID，可为空
