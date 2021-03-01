@@ -25,21 +25,21 @@ namespace TDSGlobal
         public TDSGlobalSkuDetail(string json)
         {
             Dictionary<string,object> dic = Json.Deserialize(json) as Dictionary<string,object>;
-            this.localeIdentifier = SafeDictionary.SafeGetValueByKey(dic,"localeIdentifier") as string;
-            this.localizedTitle = SafeDictionary.SafeGetValueByKey(dic,"localizedTitle") as string ;
-            this.price = float.Parse(SafeDictionary.SafeGetValueByKey(dic,"price")as string);
-            this.productIdentifier = SafeDictionary.SafeGetValueByKey(dic,"productIdentifier") as string;
-            Dictionary<string,object> priceLocaleDic = SafeDictionary.SafeGetValueByKey(dic,"priceLocale") as Dictionary<string,object>;
+            this.localeIdentifier = SafeDictionary.GetValue<string>(dic,"localeIdentifier") as string;
+            this.localizedTitle = SafeDictionary.GetValue<string>(dic,"localizedTitle") as string ;
+            this.price = float.Parse(SafeDictionary.GetValue<string>(dic,"price")as string);
+            this.productIdentifier = SafeDictionary.GetValue<string>(dic,"productIdentifier") as string;
+            Dictionary<string,object> priceLocaleDic = SafeDictionary.GetValue<Dictionary<string,object>>(dic,"priceLocale") as Dictionary<string,object>;
             this.priceLocale = new PriceLocale(priceLocaleDic);
         }
 
         public TDSGlobalSkuDetail(Dictionary<string,object> dic)
         {
-            this.localeIdentifier = SafeDictionary.SafeGetValueByKey(dic,"localeIdentifier") as string;
-            this.localizedTitle = SafeDictionary.SafeGetValueByKey(dic,"localizedTitle") as string ;
-            this.price = float.Parse(SafeDictionary.SafeGetValueByKey(dic,"price")as string);
-            this.productIdentifier = SafeDictionary.SafeGetValueByKey(dic,"productIdentifier") as string;
-            Dictionary<string,object> priceLocaleDic = SafeDictionary.SafeGetValueByKey(dic,"priceLocale") as Dictionary<string,object>;
+            this.localeIdentifier = SafeDictionary.GetValue<string>(dic,"localeIdentifier") as string;
+            this.localizedTitle = SafeDictionary.GetValue<string>(dic,"localizedTitle") as string ;
+            this.price = float.Parse(SafeDictionary.GetValue<string>(dic,"price")as string);
+            this.productIdentifier = SafeDictionary.GetValue<string>(dic,"productIdentifier") as string;
+            Dictionary<string,object> priceLocaleDic = SafeDictionary.GetValue<Dictionary<string,object>>(dic,"priceLocale") as Dictionary<string,object>;
             this.priceLocale = new PriceLocale(priceLocaleDic);
         }
 
@@ -73,13 +73,13 @@ namespace TDSGlobal
 
         public PriceLocale(Dictionary<string,object> dic)
         {
-            this.localeIdentifier = SafeDictionary.SafeGetValueByKey(dic,"localeIdentifier") as string;
-            this.languageCode = SafeDictionary.SafeGetValueByKey(dic,"languageCode") as string;
-            this.countryCode = SafeDictionary.SafeGetValueByKey(dic,"countryCode") as string;
-            this.scriptCode = SafeDictionary.SafeGetValueByKey(dic,"scriptCode") as string;
-            this.calendarIdentifier = SafeDictionary.SafeGetValueByKey(dic,"calendarIdentifier") as string;
-            this.decimalSeparator = SafeDictionary.SafeGetValueByKey(dic,"decimalSeparator") as string;
-            this.currencySymbol = SafeDictionary.SafeGetValueByKey(dic,"currencySymbol") as string;
+            this.localeIdentifier = SafeDictionary.GetValue<string>(dic,"localeIdentifier") as string;
+            this.languageCode = SafeDictionary.GetValue<string>(dic,"languageCode") as string;
+            this.countryCode = SafeDictionary.GetValue<string>(dic,"countryCode") as string;
+            this.scriptCode = SafeDictionary.GetValue<string>(dic,"scriptCode") as string;
+            this.calendarIdentifier = SafeDictionary.GetValue<string>(dic,"calendarIdentifier") as string;
+            this.decimalSeparator = SafeDictionary.GetValue<string>(dic,"decimalSeparator") as string;
+            this.currencySymbol = SafeDictionary.GetValue<string>(dic,"currencySymbol") as string;
         }
     }
 
@@ -122,22 +122,22 @@ namespace TDSGlobal
 
         public TDSGlobalSkuDetail(Dictionary<string,object> dic)
         {
-            this.description = SafeDictionary.SafeGetValueByKey(dic,"description") as string;
-            this.freeTrialPeriod = SafeDictionary.SafeGetValueByKey(dic,"freeTrialPeriod") as string;
-            this.iconUrl = SafeDictionary.SafeGetValueByKey(dic,"iconUrl") as string;
-            this.introductoryPrice = SafeDictionary.SafeGetValueByKey(dic,"introductoryPrice") as string;
-            this.introductoryPriceAmountMicros =long.Parse(SafeDictionary.SafeGetValueByKey(dic,"introductoryPriceAmountMicros")as string);
-            this.introductoryPriceCycles = int.Parse(SafeDictionary.SafeGetValueByKey(dic,"introductoryPriceCycles")as string);
-            this.originJson = SafeDictionary.SafeGetValueByKey(dic,"originJson") as string;
-            this.originPrice = SafeDictionary.SafeGetValueByKey(dic,"originPrice") as string;
-            this.originPriceAmountMicors = long.Parse(SafeDictionary.SafeGetValueByKey(dic,"originPriceAmountMicors")as string );
-            this.price = SafeDictionary.SafeGetValueByKey(dic,"price") as string;
-            this.priceAmountMicros = long.Parse(SafeDictionary.SafeGetValueByKey(dic,"priceAmountMicros") as string);
-            this.priceCurrencyCode = SafeDictionary.SafeGetValueByKey(dic,"priceCurrencyCode") as string;
-            this.productId = SafeDictionary.SafeGetValueByKey(dic,"productId") as string;
-            this.subscriptionPeroid = SafeDictionary.SafeGetValueByKey(dic,"subscriptionPeroid") as string;
-            this.title = SafeDictionary.SafeGetValueByKey(dic,"title") as string;
-            this.type = SafeDictionary.SafeGetValueByKey(dic,"type") as string;
+            this.description = SafeDictionary.GetValue<string>(dic,"description") as string;
+            this.freeTrialPeriod = SafeDictionary.GetValue<string>(dic,"freeTrialPeriod") as string;
+            this.iconUrl = SafeDictionary.GetValue<string>(dic,"iconUrl") as string;
+            this.introductoryPrice = SafeDictionary.GetValue<string>(dic,"introductoryPrice") as string;
+            this.introductoryPriceAmountMicros =long.Parse(SafeDictionary.GetValue<string>(dic,"introductoryPriceAmountMicros")as string);
+            this.introductoryPriceCycles = int.Parse(SafeDictionary.GetValue<string>(dic,"introductoryPriceCycles")as string);
+            this.originJson = SafeDictionary.GetValue<string>(dic,"originJson") as string;
+            this.originPrice = SafeDictionary.GetValue<string>(dic,"originPrice") as string;
+            this.originPriceAmountMicors = long.Parse(SafeDictionary.GetValue<string>(dic,"originPriceAmountMicors")as string );
+            this.price = SafeDictionary.GetValue<string>(dic,"price") as string;
+            this.priceAmountMicros = long.Parse(SafeDictionary.GetValue<string>(dic,"priceAmountMicros") as string);
+            this.priceCurrencyCode = SafeDictionary.GetValue<string>(dic,"priceCurrencyCode") as string;
+            this.productId = SafeDictionary.GetValue<string>(dic,"productId") as string;
+            this.subscriptionPeroid = SafeDictionary.GetValue<string>(dic,"subscriptionPeroid") as string;
+            this.title = SafeDictionary.GetValue<string>(dic,"title") as string;
+            this.type = SafeDictionary.GetValue<string>(dic,"type") as string;
         }
 
 

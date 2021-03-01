@@ -26,11 +26,11 @@ namespace TDSGlobal
 
         public TDSGlobalOrderInfo(Dictionary<string,object> dic)
         {
-            this.orderId = SafeDictionary.SafeGetValueByKey(dic,"orderId") as string;
-            this.productId = SafeDictionary.SafeGetValueByKey(dic,"productId") as string;
-            this.roleId = SafeDictionary.SafeGetValueByKey(dic,"roleId") as string;
-            this.serverId = SafeDictionary.SafeGetValueByKey(dic,"serverId") as string;
-            this.ext = SafeDictionary.SafeGetValueByKey(dic,"ext") as string;
+            this.orderId = SafeDictionary.GetValue<string>(dic,"orderId") as string;
+            this.productId = SafeDictionary.GetValue<string>(dic,"productId") as string;
+            this.roleId = SafeDictionary.GetValue<string>(dic,"roleId") as string;
+            this.serverId = SafeDictionary.GetValue<string>(dic,"serverId") as string;
+            this.ext = SafeDictionary.GetValue<string>(dic,"ext") as string;
         }
 
         public string ToJSON()

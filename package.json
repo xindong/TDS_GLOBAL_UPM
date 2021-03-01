@@ -5,5 +5,8 @@
     "version": "0.1.2-alpha",
     "unity": "2020.1",
     "author": "tds-develop",
-    "license": "MIT"
+    "license": "MIT",
+    "dependencies": {
+        "com.tds.sdk":"https://github.com/xindong/TAPSDK_UPM.git#1.0.2.1-alpha-rnd"
+    }
 }

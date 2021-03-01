@@ -21,8 +21,8 @@ namespace TDSGlobal
 
         public TDSGlobalRestoredPurchases(Dictionary<string,object> dic)
         {
-            this.transactionIdentifier = SafeDictionary.SafeGetValueByKey(dic,"transactionIdentifier") as string;
-            this.productIdentifier = SafeDictionary.SafeGetValueByKey(dic,"productIdentifier") as string;
+            this.transactionIdentifier = SafeDictionary.GetValue<string>(dic,"transactionIdentifier") as string;
+            this.productIdentifier = SafeDictionary.GetValue<string>(dic,"productIdentifier") as string;
         }
     }
 
@@ -55,15 +55,15 @@ namespace TDSGlobal
 
         public TDSGlobalRestoredPurchases(Dictionary<string,object> dic)
         {
-            this.orderId = SafeDictionary.SafeGetValueByKey(dic,"orderId") as string;
-            this.packageName = SafeDictionary.SafeGetValueByKey(dic,"packageName") as string;
-            this.productId = SafeDictionary.SafeGetValueByKey(dic,"productId") as string;
-            this.purchaseTime = long.Parse(SafeDictionary.SafeGetValueByKey(dic,"purchaseTime") as string);
-            this.purchaseToken = SafeDictionary.SafeGetValueByKey(dic,"purchaseToken") as string;
-            this.purchaseState = int.Parse(SafeDictionary.SafeGetValueByKey(dic,"purchaseState") as string);
-            this.developerPayload = SafeDictionary.SafeGetValueByKey(dic,"developerPayload") as string;
-            this.acknowledged = (bool)SafeDictionary.SafeGetValueByKey(dic,"acknowledged");
-            this.autoRenewing = (bool)SafeDictionary.SafeGetValueByKey(dic,"autoRenewing");
+            this.orderId = SafeDictionary.GetValue<string>(dic,"orderId") as string;
+            this.packageName = SafeDictionary.GetValue<string>(dic,"packageName") as string;
+            this.productId = SafeDictionary.GetValue<string>(dic,"productId") as string;
+            this.purchaseTime = long.Parse(SafeDictionary.GetValue<string>(dic,"purchaseTime") as string);
+            this.purchaseToken = SafeDictionary.GetValue<string>(dic,"purchaseToken") as string;
+            this.purchaseState = int.Parse(SafeDictionary.GetValue<string>(dic,"purchaseState") as string);
+            this.developerPayload = SafeDictionary.GetValue<string>(dic,"developerPayload") as string;
+            this.acknowledged = SafeDictionary.GetValue<bool>(dic,"acknowledged");
+            this.autoRenewing = SafeDictionary.GetValue<bool>(dic,"autoRenewing");
         }
     }
 

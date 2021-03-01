@@ -28,8 +28,8 @@ namespace TDSGlobal
         public TDSGlobalUserWrapper(string json)
         {
             Dictionary<string,object> dic = Json.Deserialize(json) as Dictionary<string,object>;
-            Dictionary<string,object> userDic =(Dictionary<string,object>) SafeDictionary.SafeGetValueByKey(dic,"user");
-            Dictionary<string,object> errorDic = (Dictionary<string,object> ) SafeDictionary.SafeGetValueByKey(dic,"error");
+            Dictionary<string,object> userDic = SafeDictionary.GetValue<Dictionary<string,object>>(dic,"user");
+            Dictionary<string,object> errorDic = SafeDictionary.GetValue<Dictionary<string,object>>(dic,"error");
             if(userDic !=null)
             {
                 this.user = new TDSGlobalUser(userDic);
@@ -56,8 +56,8 @@ namespace TDSGlobal
         public TDSGlobalShareWrapper(string json)
         {
             Dictionary<string,object> dic = Json.Deserialize(json) as Dictionary<string,object>;
-            this.cancel = (bool) SafeDictionary.SafeGetValueByKey(dic,"cancel");
-            Dictionary<string,object> errorDic = SafeDictionary.SafeGetValueByKey(dic,"error") as Dictionary<string,object>;
+            this.cancel = (bool) SafeDictionary.GetValue<bool>(dic,"cancel");
+            Dictionary<string,object> errorDic = SafeDictionary.GetValue<Dictionary<string,object>>(dic,"error") as Dictionary<string,object>;
             if(errorDic!=null)
             {
                 this.error = new TDSGlobalError(errorDic);
@@ -78,7 +78,7 @@ namespace TDSGlobal
         public TDSGlobalUserStatusChangeWrapper(string json)
         {
             Dictionary<string,object> dic = Json.Deserialize(json) as Dictionary<string,object>;
-            this.code =int.Parse(SafeDictionary.SafeGetValueByKey(dic,"code").ToString());
+            this.code = SafeDictionary.GetValue<int>(dic,"code");
         }
     }
 
@@ -97,8 +97,8 @@ namespace TDSGlobal
         public TDSGlobalOrderInfoWrapper(string json)
         {
             Dictionary<string,object> dic = Json.Deserialize(json) as Dictionary<string,object>;
-            Dictionary<string,object> orderInfoDic = SafeDictionary.SafeGetValueByKey(dic,"orderInfo") as Dictionary<string,object>;
-            Dictionary<string,object> errorDic = SafeDictionary.SafeGetValueByKey(dic,"error") as Dictionary<string,object>;
+            Dictionary<string,object> orderInfoDic = SafeDictionary.GetValue<Dictionary<string,object>>(dic,"orderInfo");
+            Dictionary<string,object> errorDic = SafeDictionary.GetValue<Dictionary<string,object>>(dic,"error");
             if(orderInfoDic != null)
             {
                 this.orderInfo = new TDSGlobalOrderInfo(orderInfoDic);
@@ -119,7 +119,7 @@ namespace TDSGlobal
         public TDSGlobalRestoredPurchasesWrapper(string json)
         {
             Dictionary<string,object> dic = Json.Deserialize(json) as Dictionary<string,object>;
-            List<object> list = SafeDictionary.SafeGetValueByKey(dic,"transactions") as List<object>;
+            List<object> list = SafeDictionary.GetValue<List<object>>(dic,"transactions");
             if(list == null)
             {
                 return;
@@ -146,8 +146,8 @@ namespace TDSGlobal
         public TDSGlobalSkuDetailWrapper(string json)
         {
             Dictionary<string,object> dic = Json.Deserialize(json) as Dictionary<string,object>;
-            Dictionary<string,object> errorDic = SafeDictionary.SafeGetValueByKey(dic,"error") as Dictionary<string,object>;
-            List<object> list = SafeDictionary.SafeGetValueByKey(dic,"products") as List<object>;
+            Dictionary<string,object> errorDic = SafeDictionary.GetValue<Dictionary<string,object>>(dic,"error");
+            List<object> list = SafeDictionary.GetValue<List<object>>(dic,"products");
             if(errorDic!=null)
             {
                 this.error = new TDSGlobalError(errorDic);

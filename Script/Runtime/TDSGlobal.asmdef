@@ -1,10 +1,14 @@
 {
     "name": "TDSGlobal",
+    "references": [
+        "GUID:c3aa43f4a24be4ccd88d8393d31461cc"
+    ],
     "includePlatforms": [
-		"Android",
+        "Android",
         "Editor",
         "iOS"
-	],
+    ],
+    "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],

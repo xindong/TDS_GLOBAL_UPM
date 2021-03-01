@@ -20,18 +20,18 @@ namespace TDSGlobal
         public TDSGlobalUser(string json)
         {
             Dictionary<string,object> dic = Json.Deserialize(json) as Dictionary<string,object>;
-            this.userId = int.Parse(SafeDictionary.SafeGetValueByKey(dic,"userId").ToString());
-            this.sub = SafeDictionary.SafeGetValueByKey(dic,"sub") as string;
-            this.name = SafeDictionary.SafeGetValueByKey(dic,"name") as string;
-            this.token  = new TDSGlobalAccessToken(SafeDictionary.SafeGetValueByKey(dic,"token") as Dictionary<string,object>);
+            this.userId = SafeDictionary.GetValue<int>(dic,"userId");
+            this.sub = SafeDictionary.GetValue<string>(dic,"sub");
+            this.name = SafeDictionary.GetValue<string>(dic,"name");
+            this.token  = new TDSGlobalAccessToken(SafeDictionary.GetValue<Dictionary<string,object>>(dic,"token") as Dictionary<string,object>);
         }
 
         public TDSGlobalUser(Dictionary<string,object> dic)
         {   
-            this.userId = int.Parse(SafeDictionary.SafeGetValueByKey(dic,"userId").ToString());
-            this.sub = SafeDictionary.SafeGetValueByKey(dic,"sub") as string;
-            this.name = SafeDictionary.SafeGetValueByKey(dic,"name") as string;
-            this.token  = new TDSGlobalAccessToken(SafeDictionary.SafeGetValueByKey(dic,"token") as Dictionary<string,object>);
+            this.userId = SafeDictionary.GetValue<int>(dic,"userId");
+            this.sub = SafeDictionary.GetValue<string>(dic,"sub");
+            this.name = SafeDictionary.GetValue<string>(dic,"name");
+            this.token  = new TDSGlobalAccessToken(SafeDictionary.GetValue<Dictionary<string,object>>(dic,"token") as Dictionary<string,object>);
         }
 
         public string ToJSON(){
@@ -55,11 +55,11 @@ namespace TDSGlobal
             
         public TDSGlobalAccessToken(Dictionary<string,object> dic)
         {   
-            this.accessToken = SafeDictionary.SafeGetValueByKey(dic,"accessToken") as string;
-            this.kid = SafeDictionary.SafeGetValueByKey(dic,"kid") as string;
-            this.macKey = SafeDictionary.SafeGetValueByKey(dic,"macKey") as string;
-            this.macAlgorithm = SafeDictionary.SafeGetValueByKey(dic,"macAlgorithm") as string;
-            this.tokenType = SafeDictionary.SafeGetValueByKey(dic,"tokenType") as string;
+            this.accessToken = SafeDictionary.GetValue<string>(dic,"accessToken");
+            this.kid = SafeDictionary.GetValue<string>(dic,"kid");
+            this.macKey = SafeDictionary.GetValue<string>(dic,"macKey");
+            this.macAlgorithm = SafeDictionary.GetValue<string>(dic,"macAlgorithm");
+            this.tokenType = SafeDictionary.GetValue<string>(dic,"tokenType");
         }
     }
 }

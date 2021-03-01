@@ -16,8 +16,8 @@ namespace TDSGlobal
         public TDSGlobalError(string json)
         {
             Dictionary<string,object> dic = Json.Deserialize(json) as Dictionary<string,object>;
-            this.error_msg = SafeDictionary.SafeGetValueByKey(dic,"error_msg") as string;
-            string codeStr = SafeDictionary.SafeGetValueByKey(dic,"code") as string;
+            this.error_msg = SafeDictionary.GetValue<string>(dic,"error_msg") as string;
+            string codeStr = SafeDictionary.GetValue<string>(dic,"code") as string;
             if(!string.IsNullOrEmpty(codeStr))
             {
                 this.code = int.Parse(codeStr);
@@ -27,8 +27,8 @@ namespace TDSGlobal
 
         public TDSGlobalError(Dictionary<string,object> dic)
         {
-            this.error_msg = SafeDictionary.SafeGetValueByKey(dic,"error_msg") as string;
-            string codeStr = SafeDictionary.SafeGetValueByKey(dic,"code") as string;
+            this.error_msg = SafeDictionary.GetValue<string>(dic,"error_msg") as string;
+            string codeStr = SafeDictionary.GetValue<string>(dic,"code") as string;
             if(!string.IsNullOrEmpty(codeStr))
             {
                 this.code = int.Parse(codeStr);
