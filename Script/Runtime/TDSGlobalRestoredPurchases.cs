@@ -21,8 +21,8 @@ namespace TDSGlobal
 
         public TDSGlobalRestoredPurchases(Dictionary<string,object> dic)
         {
-            this.transactionIdentifier = SafeDictionary.GetValue<string>(dic,"transactionIdentifier") as string;
-            this.productIdentifier = SafeDictionary.GetValue<string>(dic,"productIdentifier") as string;
+            this.transactionIdentifier = SafeDictionary.GetValue<string>(dic,"transactionIdentifier") ;
+            this.productIdentifier = SafeDictionary.GetValue<string>(dic,"productIdentifier") ;
         }
     }
 
@@ -55,13 +55,13 @@ namespace TDSGlobal
 
         public TDSGlobalRestoredPurchases(Dictionary<string,object> dic)
         {
-            this.orderId = SafeDictionary.GetValue<string>(dic,"orderId") as string;
-            this.packageName = SafeDictionary.GetValue<string>(dic,"packageName") as string;
-            this.productId = SafeDictionary.GetValue<string>(dic,"productId") as string;
-            this.purchaseTime = long.Parse(SafeDictionary.GetValue<string>(dic,"purchaseTime") as string);
-            this.purchaseToken = SafeDictionary.GetValue<string>(dic,"purchaseToken") as string;
-            this.purchaseState = int.Parse(SafeDictionary.GetValue<string>(dic,"purchaseState") as string);
-            this.developerPayload = SafeDictionary.GetValue<string>(dic,"developerPayload") as string;
+            this.orderId = SafeDictionary.GetValue<string>(dic,"orderId") ;
+            this.packageName = SafeDictionary.GetValue<string>(dic,"packageName") ;
+            this.productId = SafeDictionary.GetValue<string>(dic,"productId") ;
+            this.purchaseTime = SafeDictionary.GetValue<long>(dic,"purchaseTime") ;
+            this.purchaseToken = SafeDictionary.GetValue<string>(dic,"purchaseToken") ;
+            this.purchaseState = SafeDictionary.GetValue<int>(dic,"purchaseState");
+            this.developerPayload = SafeDictionary.GetValue<string>(dic,"developerPayload") ;
             this.acknowledged = SafeDictionary.GetValue<bool>(dic,"acknowledged");
             this.autoRenewing = SafeDictionary.GetValue<bool>(dic,"autoRenewing");
         }

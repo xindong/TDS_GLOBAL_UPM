@@ -7,6 +7,6 @@
     "author": "tds-develop",
     "license": "MIT",
     "dependencies": {
-        "com.tds.sdk":"https://github.com/xindong/TAPSDK_UPM.git#1.0.2.1-alpha-rnd"
+        "com.tds.sdk":"https://github.com/xindong/TAPSDK_UPM.git#1.0.2.3-alpha-rnd"
     }
 }

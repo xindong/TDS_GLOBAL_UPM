@@ -341,6 +341,7 @@ namespace TDSGlobal
             }
             if(infoWrapper.error != null)
             {
+                Debug.Log("OrderInfo Error Callback:" + infoWrapper.error);
                 errorCallback(infoWrapper.error);
                 return;
             }

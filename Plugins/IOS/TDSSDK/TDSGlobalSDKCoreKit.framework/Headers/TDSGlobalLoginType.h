@@ -13,13 +13,17 @@ typedef NS_ENUM(NSInteger,TDSGlobalSDKLoginType) {
     TDSGlobalSDKLoginTypeTwitter,
     TDSGlobalSDKLoginTypeGuest
 };
-extern NSString *const TAPTAP_LOGIN;
-extern NSString *const GOOGLE_LOGIN;
-extern NSString *const FACEBOOK_LOGIN;
-extern NSString *const APPLE_LOGIN;
-extern NSString *const LINE_LOGIN;
-extern NSString *const TWITTER_LOGIN;
-extern NSString *const GUEST_LOGIN;
+
+/*
+ enum of loginType in string
+ */
+extern NSString *const TDSGLOBAL_TAPTAP_ENTRY;
+extern NSString *const TDSGLOBAL_GOOGLE_ENTRY;
+extern NSString *const TDSGLOBAL_FACEBOOK_ENTRY;
+extern NSString *const TDSGLOBAL_APPLE_ENTRY;
+extern NSString *const TDSGLOBAL_LINE_ENTRY;
+extern NSString *const TDSGLOBAL_TWITTER_ENTRY;
+extern NSString *const TDSGLOBAL_GUEST_ENTRY;
 
 @interface TDSGlobalLoginType : NSObject
 + (NSString *)accountStringByLoginType:(TDSGlobalSDKLoginType)loginType;
@@ -27,6 +31,10 @@ extern NSString *const GUEST_LOGIN;
 
 + (NSString *)logoImageByLoginType:(TDSGlobalSDKLoginType)loginType;
 + (NSString *)buttonImageByLoginType:(TDSGlobalSDKLoginType)loginType;
+
+/// convert integer to string
+/// @param loginType loginType in integer
++ (NSString *)stringByLoginType:(TDSGlobalSDKLoginType)loginType;
 
 @end
 

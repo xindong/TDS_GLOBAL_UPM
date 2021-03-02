@@ -57,7 +57,7 @@ namespace TDSGlobal
         {
             Dictionary<string,object> dic = Json.Deserialize(json) as Dictionary<string,object>;
             this.cancel = (bool) SafeDictionary.GetValue<bool>(dic,"cancel");
-            Dictionary<string,object> errorDic = SafeDictionary.GetValue<Dictionary<string,object>>(dic,"error") as Dictionary<string,object>;
+            Dictionary<string,object> errorDic = SafeDictionary.GetValue<Dictionary<string,object>>(dic,"error");
             if(errorDic!=null)
             {
                 this.error = new TDSGlobalError(errorDic);
@@ -96,13 +96,18 @@ namespace TDSGlobal
     
         public TDSGlobalOrderInfoWrapper(string json)
         {
+            Debug.Log("TDSGlobalOrderInfoWrapper json:" + json);
             Dictionary<string,object> dic = Json.Deserialize(json) as Dictionary<string,object>;
             Dictionary<string,object> orderInfoDic = SafeDictionary.GetValue<Dictionary<string,object>>(dic,"orderInfo");
             Dictionary<string,object> errorDic = SafeDictionary.GetValue<Dictionary<string,object>>(dic,"error");
+            Debug.Log("TDSGlobalOrderInfoWrapper parse after orderInfoDic json:" + orderInfoDic);
+            Debug.Log("TDSGlobalOrderInfoWrapper parse after errorDic json:" + errorDic);
+
             if(orderInfoDic != null)
             {
                 this.orderInfo = new TDSGlobalOrderInfo(orderInfoDic);
             }
+            
             if(errorDic != null)
             {
                 this.error = new TDSGlobalError(errorDic);

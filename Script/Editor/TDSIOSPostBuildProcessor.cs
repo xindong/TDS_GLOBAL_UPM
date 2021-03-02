@@ -16,7 +16,7 @@ namespace TDSEditor
     {
 #if UNITY_IOS
         // 添加标签，unity导出工程后自动执行该函数
-        [PostProcessBuild]
+        [PostProcessBuildAttribute(999)]
         /* 
             2020-11-20 Jiang Jiahao
             该脚本中参数为DEMO参数，项目组根据实际参数修改
@@ -46,7 +46,8 @@ namespace TDSEditor
                     Debug.Log("target is null ?");
                     return;
                 }
-
+                //获取bundleId
+                var bundleId = proj.GetBuildPropertyForAnyConfig(target, "PRODUCT_BUNDLE_IDENTIFIER");
                 // 编译配置
                 proj.AddBuildProperty(target, "OTHER_LDFLAGS", "-ObjC");
                 proj.AddBuildProperty(unityFrameworkTarget, "OTHER_LDFLAGS", "-ObjC");
@@ -123,10 +124,10 @@ namespace TDSEditor
                 }
 
                 Debug.Log("添加resource成功");
-
+                Debug.Log("bundleId:" + bundleId);
                 // rewrite to file  
                 File.WriteAllText(projPath, proj.WriteToString());
-                SetPlist(path,resourcePath + "/TDSGlobal-Info.plist");
+                SetPlist(path,resourcePath + "/TDSGlobal-Info.plist",bundleId);
                 SetScriptClass(path);
                 Debug.Log("测试打包成功");
                 return;
@@ -169,7 +170,7 @@ namespace TDSEditor
         }
 
         // 修改pilist
-        private static void SetPlist(string pathToBuildProject,string infoPlistPath)
+        private static void SetPlist(string pathToBuildProject,string infoPlistPath,string bundleId)
         {
             //添加info
             string _plistPath = pathToBuildProject + "/Info.plist";
@@ -268,7 +269,15 @@ namespace TDSEditor
                 array2 = dict2.CreateArray("CFBundleURLSchemes");
                 array2.AddString(facebookId);
             }
-            
+
+            if(bundleId!=null)
+            {
+                dict2 = array.AddDict();
+                dict2.SetString("CFBundleURLName", "Line");
+                PlistElementArray array2 = dict2.CreateArray("CFBundleURLSchemes");
+                array2 = dict2.CreateArray("CFBundleURLSchemes");
+                array2.AddString("line3rdp." + bundleId);
+            }
            
             File.WriteAllText(_plistPath, _plist.WriteToString());
             Debug.Log("修改添加info文件成功");

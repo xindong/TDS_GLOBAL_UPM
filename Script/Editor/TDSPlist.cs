@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml;
+using UnityEngine;
 
 namespace TDSEditor
 {
@@ -242,7 +243,8 @@ namespace TDSEditor
 
                 if (keynode.Name != "key")
                 {
-                    throw new ApplicationException("expected a key node");
+                    Debug.LogError("expected a key node:" + keynode.Name);
+                    continue;
                 }
 
                 object result = parse(valnode);

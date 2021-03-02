@@ -1,6 +1,7 @@
 
 #import <Foundation/Foundation.h>
 #import <TDSGlobalSDKCoreKit/TDSGlobalUserToken.h>
+#import <TDSGlobalSDKCoreKit/TDSGlobalLoginType.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,6 +20,11 @@ The user’s user ID in string.
 The user's user name.
 */
 @property (nonatomic,copy) NSString *name;
+
+/**
+The user's current loginType.
+*/
+@property (nonatomic,assign) TDSGlobalSDKLoginType loginType;
 
 /**
 The user's token.
