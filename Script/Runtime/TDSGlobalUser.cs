@@ -9,7 +9,7 @@ namespace TDSGlobal
     [Serializable]
     public class TDSGlobalUser
     {
-        public int userId;
+        public long userId;
 
         public string sub;
 
@@ -20,18 +20,20 @@ namespace TDSGlobal
         public TDSGlobalUser(string json)
         {
             Dictionary<string,object> dic = Json.Deserialize(json) as Dictionary<string,object>;
-            this.userId = SafeDictionary.GetValue<int>(dic,"userId");
+            this.userId = SafeDictionary.GetValue<long>(dic,"userId");
             this.sub = SafeDictionary.GetValue<string>(dic,"sub");
             this.name = SafeDictionary.GetValue<string>(dic,"name");
-            this.token  = new TDSGlobalAccessToken(SafeDictionary.GetValue<Dictionary<string,object>>(dic,"token") as Dictionary<string,object>);
+            this.token  = new TDSGlobalAccessToken(SafeDictionary.GetValue<Dictionary<string,object>>(dic,"token"));
         }
 
         public TDSGlobalUser(Dictionary<string,object> dic)
         {   
-            this.userId = SafeDictionary.GetValue<int>(dic,"userId");
+            Debug.Log("parse TDSGlobalUser before:" + dic);
+            this.userId = SafeDictionary.GetValue<long>(dic,"userId");
             this.sub = SafeDictionary.GetValue<string>(dic,"sub");
             this.name = SafeDictionary.GetValue<string>(dic,"name");
-            this.token  = new TDSGlobalAccessToken(SafeDictionary.GetValue<Dictionary<string,object>>(dic,"token") as Dictionary<string,object>);
+            Debug.Log("parse TDSGlobalUser:" + dic);
+            this.token  = new TDSGlobalAccessToken(SafeDictionary.GetValue<Dictionary<string,object>>(dic,"token"));
         }
 
         public string ToJSON(){
@@ -60,6 +62,7 @@ namespace TDSGlobal
             this.macKey = SafeDictionary.GetValue<string>(dic,"macKey");
             this.macAlgorithm = SafeDictionary.GetValue<string>(dic,"macAlgorithm");
             this.tokenType = SafeDictionary.GetValue<string>(dic,"tokenType");
+            Debug.Log("parse AccessToken:" + dic);
         }
     }
 }

@@ -30,6 +30,7 @@ namespace TDSGlobal
             Dictionary<string,object> dic = Json.Deserialize(json) as Dictionary<string,object>;
             Dictionary<string,object> userDic = SafeDictionary.GetValue<Dictionary<string,object>>(dic,"user");
             Dictionary<string,object> errorDic = SafeDictionary.GetValue<Dictionary<string,object>>(dic,"error");
+            Debug.Log("TDSGlobal User Parse After:" + json);
             if(userDic !=null)
             {
                 this.user = new TDSGlobalUser(userDic);
@@ -56,7 +57,7 @@ namespace TDSGlobal
         public TDSGlobalShareWrapper(string json)
         {
             Dictionary<string,object> dic = Json.Deserialize(json) as Dictionary<string,object>;
-            this.cancel = (bool) SafeDictionary.GetValue<bool>(dic,"cancel");
+            this.cancel = SafeDictionary.GetValue<bool>(dic,"cancel");
             Dictionary<string,object> errorDic = SafeDictionary.GetValue<Dictionary<string,object>>(dic,"error");
             if(errorDic!=null)
             {

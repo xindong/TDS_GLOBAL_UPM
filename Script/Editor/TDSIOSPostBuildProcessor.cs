@@ -220,7 +220,7 @@ namespace TDSEditor
                             facebookId = "fb" + (string)facebookItem.Value;
                         }
                     }
-                }else if(item.Key.Equals("taptap")){
+                }else if(item.Key.Equals("tapsdk")){
                     Dictionary<string,object> taptapDic = (Dictionary<string,object>) item.Value;
                     foreach (var taptapItem in taptapDic)
                     {

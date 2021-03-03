@@ -64,12 +64,16 @@ namespace TDSGlobal
                 }
 
                 TDSGlobalUserWrapper userWrapper = new TDSGlobalUserWrapper(result.content);
-                if(userWrapper.user!=null){
+                if(userWrapper.error!=null)
+                {
+                    errorCallback(userWrapper.error);
+                    return;
+                }            
+                if(userWrapper.user!=null)
+                {
                     callback(userWrapper.user);
                 }
-                else if(userWrapper.error!=null){
-                    errorCallback(userWrapper.error);
-                }                
+                    
             });
         }
 
