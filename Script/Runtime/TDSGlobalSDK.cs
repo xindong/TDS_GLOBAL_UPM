@@ -26,7 +26,7 @@ namespace TDSGlobal
             TDSGlobalImpl.GetInstance().UserCenter();
         }
 
-        public static void AddUserStatusChangeCallback(Action<int> callback)
+        public static void AddUserStatusChangeCallback(Action<int,string> callback)
         {
             TDSGlobalImpl.GetInstance().AddUserStatusChangeCallback(callback);
         }

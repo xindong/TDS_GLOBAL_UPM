@@ -12,7 +12,7 @@ namespace TDSGlobal
 
         void Logout();
 
-        void AddUserStatusChangeCallback(Action<int> callback);
+        void AddUserStatusChangeCallback(Action<int,string> callback);
 
         void GetUser(Action<TDSGlobalUser> callback, Action<TDSGlobalError> errorCallback);
 

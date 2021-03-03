@@ -83,7 +83,7 @@ namespace TDSGlobal
             EngineBridge.GetInstance().CallHandler(command);
         }
 
-        public void AddUserStatusChangeCallback(Action<int> callback)
+        public void AddUserStatusChangeCallback(Action<int,string> callback)
         {
             Command command = new Command(TDSGlobalBridgeName.LOGIN_SERVICE_NAME, "addUserStatusChangeCallback", true,  null);
             EngineBridge.GetInstance().CallHandler(command, (result) =>
@@ -93,8 +93,7 @@ namespace TDSGlobal
                 }
                 
                 TDSGlobalUserStatusChangeWrapper statusChangeWrapper = new TDSGlobalUserStatusChangeWrapper(result.content);
-                callback(statusChangeWrapper.code);
-
+                callback(statusChangeWrapper.code,statusChangeWrapper.message);
             });
         }
 
