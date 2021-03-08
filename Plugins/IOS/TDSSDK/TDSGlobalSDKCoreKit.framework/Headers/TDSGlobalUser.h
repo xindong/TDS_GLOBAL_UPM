@@ -27,6 +27,11 @@ The user's current loginType.
 @property (nonatomic,assign) TDSGlobalSDKLoginType loginType;
 
 /**
+The user's related accounts. eg.@[@"TAPTAP",@"GOOGLE",@"FACEBOOK"]
+*/
+@property (nonatomic,copy) NSArray<NSString *> *relatedAccounts;
+
+/**
 The user's token.
 */
 @property (nonatomic,strong) TDSGlobalUserToken *token;

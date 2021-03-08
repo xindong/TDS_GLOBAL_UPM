@@ -17,13 +17,13 @@ typedef NS_ENUM(NSInteger,TDSGlobalSDKLoginType) {
 /*
  enum of loginType in string
  */
-extern NSString *const TDSGLOBAL_TAPTAP_ENTRY;
-extern NSString *const TDSGLOBAL_GOOGLE_ENTRY;
-extern NSString *const TDSGLOBAL_FACEBOOK_ENTRY;
-extern NSString *const TDSGLOBAL_APPLE_ENTRY;
-extern NSString *const TDSGLOBAL_LINE_ENTRY;
-extern NSString *const TDSGLOBAL_TWITTER_ENTRY;
-extern NSString *const TDSGLOBAL_GUEST_ENTRY;
+extern NSString *const TDSGLOBAL_TAPTAP_ENTRY;              // @"TAPTAP"
+extern NSString *const TDSGLOBAL_GOOGLE_ENTRY;              // @"GOOGLE"
+extern NSString *const TDSGLOBAL_FACEBOOK_ENTRY;            // @"FACEBOOK"
+extern NSString *const TDSGLOBAL_APPLE_ENTRY;               // @"APPLE"
+extern NSString *const TDSGLOBAL_LINE_ENTRY;                // @"LINE"
+extern NSString *const TDSGLOBAL_TWITTER_ENTRY;             // @"TWITTER"
+extern NSString *const TDSGLOBAL_GUEST_ENTRY;               // @"GUEST"
 
 @interface TDSGlobalLoginType : NSObject
 + (NSString *)accountStringByLoginType:(TDSGlobalSDKLoginType)loginType;
@@ -35,6 +35,10 @@ extern NSString *const TDSGLOBAL_GUEST_ENTRY;
 /// convert integer to string
 /// @param loginType loginType in integer
 + (NSString *)stringByLoginType:(TDSGlobalSDKLoginType)loginType;
+
+/// convert string to integer enum
+/// @param loginTypeInString loginType in string
++ (TDSGlobalSDKLoginType)loginTypeByString:(NSString *)loginTypeInString;
 
 @end
 

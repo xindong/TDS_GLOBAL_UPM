@@ -14,4 +14,6 @@
 #import <TDSGlobalSDKCoreKit/TDSGlobalUserToken.h>
 
 #define TDSGLOBALSDK_VERSION @"1.0.4"
+#define TDSGLOBALSDK_NAME @"TDSGlobalSDK"
+
 

@@ -44,7 +44,6 @@ namespace TDSGlobal
         public static void Share(int shareFlavors, string imagePath, TDSGlobalShareCallback callback)
         {
             TDSGlobalImpl.GetInstance().Share(shareFlavors, imagePath, callback);
-
         }
 
         public static void SetLanguage(int languageType)

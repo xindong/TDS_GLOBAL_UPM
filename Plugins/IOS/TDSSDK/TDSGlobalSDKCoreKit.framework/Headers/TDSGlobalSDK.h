@@ -9,7 +9,15 @@ typedef NS_ENUM(NSInteger,TDSGlobalLanguageLocale) {
     TDSGlobalLanguageLocaleTraditionalChinese,                    // 繁体中文
     TDSGlobalLanguageLocaleEnglish,                               // 英文
     TDSGlobalLanguageLocaleThai,                                  // 泰文
-    TDSGlobalLanguageLocaleBahasa                                 // 印尼文
+    TDSGlobalLanguageLocaleBahasa,                                // 印尼文
+    TDSGlobalLanguageLocaleKorean,                                // 韩文
+    TDSGlobalLanguageLocaleJapanese,                              // 日文
+    TDSGlobalLanguageLocaleGerman,                                // 德语
+    TDSGlobalLanguageLocaleFrench,                                // 法语
+    TDSGlobalLanguageLocalePortuguese,                            // 葡萄牙语
+    TDSGlobalLanguageLocaleSpanish,                               // 西班牙语
+    TDSGlobalLanguageLocaleTurkish,                               // 土耳其语
+    TDSGlobalLanguageLocaleRussian,                               // 俄语
 };
 
 /**

@@ -195,6 +195,7 @@ namespace TDSEditor
                 "fbapi20160328",
                 "fb-messenger-share-api",
                 "fbauth2",
+                "fbauth",
                 "fbshareextension",
                 "lineauth2"
             };
