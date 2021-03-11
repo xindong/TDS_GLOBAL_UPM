@@ -97,7 +97,7 @@ namespace TDSEditor
 
                 Directory.CreateDirectory(resourcePath);
 
-                string remotePackagePath = TDSFileHelper.FilterFile(parentFolder + "/Library/PackageCache/","com.tds.global");
+                string remotePackagePath = TDSFileHelper.FilterFile(parentFolder + "/Library/PackageCache/","com.tds.global@");
 
                 string localPacckagePath = TDSFileHelper.FilterFile(parentFolder,"TDSGlobal");
                 
