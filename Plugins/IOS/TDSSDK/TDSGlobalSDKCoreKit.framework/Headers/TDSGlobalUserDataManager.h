@@ -6,13 +6,13 @@
 NS_ASSUME_NONNULL_BEGIN
 @interface TDSGlobalUserDataManager : NSObject
 
++ (void)setCurrentUser:(TDSGlobalUser *)user;
 + (TDSGlobalUser *)getCurrentUserData;
 
 + (void)updateLoginState:(BOOL)loggedIn;
 + (BOOL)isUserLoggedIn;
 + (BOOL)isUserTokenValid;
 
-+ (void)updateLoginType:(TDSGlobalSDKLoginType)loginType;
 + (TDSGlobalSDKLoginType)getCurLoginType;
 
 + (void)userLoginSuccess;

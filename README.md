@@ -15,6 +15,7 @@
 //在Packages/manifest.json 中添加TDSGlobalUnity SDK
 {
     "dependencies":{
+        "com.tds.sdk":"https://github.com/xindong/TAPSDK_UPM.git#{version}",
         "com.tds.global":"https://github.com/xindong/TDS_GLOBAL_UPM.git#{verison}",
     }
 }
