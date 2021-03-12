@@ -151,8 +151,12 @@ namespace TDSGlobal
      {
          public TDSGlobalSkuDetail(Dictionary<string,object> dic)
          {
-             
+            
          }
+
+         public string ToJSON(){
+            return JsonUtility.ToJson(this);
+        }
      }
 #endif
 
