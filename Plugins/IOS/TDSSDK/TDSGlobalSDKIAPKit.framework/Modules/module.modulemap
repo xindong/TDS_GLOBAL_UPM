@@ -1,6 +1,0 @@
-framework module TDSGlobalSDKIAPKit {
-  umbrella header "TDSGlobalSDKIAPKit.h"
-
-  export *
-  module * { export * }
-}
