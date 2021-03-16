@@ -86,6 +86,11 @@ namespace TDSGlobal
             TDSGlobalImpl.GetInstance().TrackUser(serverId, roleId, roleName, level);
         }
 
+        public static void TrackUser(string userId)
+        {
+            TDSGlobalImpl.GetInstance().TrackUser(userId);
+        }
+
         public static void TrackEvent(string eventName)
         {
             TDSGlobalImpl.GetInstance().TrackEvent(eventName);

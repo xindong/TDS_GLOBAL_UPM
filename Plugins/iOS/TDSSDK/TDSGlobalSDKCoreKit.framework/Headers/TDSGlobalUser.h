@@ -27,9 +27,9 @@ The user's current loginType.
 @property (nonatomic,assign,readonly) TDSGlobalSDKLoginType loginType;
 
 /**
-The user's related accounts. eg.@[@"TAPTAP",@"GOOGLE",@"FACEBOOK"]
+The user's bound accounts. eg.@[@"TAPTAP",@"GOOGLE",@"FACEBOOK"]
 */
-@property (nonatomic,copy,readonly) NSArray<NSString *> *relatedAccounts;
+@property (nonatomic,copy,readonly) NSArray<NSString *> *boundAccounts;
 
 /**
 The user's token.
@@ -40,7 +40,7 @@ The user's token.
                            sub:(NSString *)sub
                           name:(NSString *)name
                      loginType:(TDSGlobalSDKLoginType)loginType
-               relatedAccounts:(NSArray *)relatedAccounts
+               boundAccounts:(NSArray *)boundAccounts
                          token:(TDSGlobalUserToken *)token;
 
 @end

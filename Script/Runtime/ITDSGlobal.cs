@@ -36,6 +36,8 @@ namespace TDSGlobal
 
         void Report(string serverId, string roleId, string roleName);
 
+        void TrackUser(string serverId);
+
         void TrackUser(string serverId, string roleId, string roleName, int level);
 
         void TrackEvent(string eventName);

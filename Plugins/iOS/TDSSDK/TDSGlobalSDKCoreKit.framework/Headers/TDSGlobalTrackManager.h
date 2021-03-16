@@ -4,6 +4,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TDSGlobalTrackManager : NSObject
+/// 跟踪用户
+/// @param userId 用户唯一ID，非角色ID
++ (void)trackUser:(NSString *)userId;
+
 /// 跟踪玩家
 /// @param roleId 角色ID
 /// @param roleName 角色名

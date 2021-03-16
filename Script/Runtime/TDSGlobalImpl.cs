@@ -249,6 +249,16 @@ namespace TDSGlobal
             EngineBridge.GetInstance().CallHandler(command);
         }
 
+        public void TrackUser(string userId)
+        {
+            Command command = new Command.Builder()
+                        .Service(TDSGlobalBridgeName.SERVICE_NAME)
+                        .Method("trackUser")
+                        .Args("trackUser",userId)
+                        .CommandBuilder();
+            EngineBridge.GetInstance().CallHandler(command);
+        }
+
         public void TrackUser(string serverId, string roleId, string roleName, int level)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();

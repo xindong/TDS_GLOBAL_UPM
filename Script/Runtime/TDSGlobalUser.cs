@@ -15,6 +15,10 @@ namespace TDSGlobal
 
         public string name;
 
+        public int loginType;
+
+        public List<string> bindAccounts;
+
         public TDSGlobalAccessToken token;
 
         public TDSGlobalUser(string json)
@@ -23,16 +27,16 @@ namespace TDSGlobal
             this.userId = SafeDictionary.GetValue<long>(dic,"userId");
             this.sub = SafeDictionary.GetValue<string>(dic,"sub");
             this.name = SafeDictionary.GetValue<string>(dic,"name");
+            this.loginType = SafeDictionary.GetValue<int>(dic,"loginType");
+            this.bindAccounts = SafeDictionary.GetValue<List<string>>(dic,"bindAccounts");
             this.token  = new TDSGlobalAccessToken(SafeDictionary.GetValue<Dictionary<string,object>>(dic,"token"));
         }
 
         public TDSGlobalUser(Dictionary<string,object> dic)
         {   
-            Debug.Log("parse TDSGlobalUser before:" + dic);
             this.userId = SafeDictionary.GetValue<long>(dic,"userId");
             this.sub = SafeDictionary.GetValue<string>(dic,"sub");
             this.name = SafeDictionary.GetValue<string>(dic,"name");
-            Debug.Log("parse TDSGlobalUser:" + dic);
             this.token  = new TDSGlobalAccessToken(SafeDictionary.GetValue<Dictionary<string,object>>(dic,"token"));
         }
 
@@ -62,7 +66,6 @@ namespace TDSGlobal
             this.macKey = SafeDictionary.GetValue<string>(dic,"macKey");
             this.macAlgorithm = SafeDictionary.GetValue<string>(dic,"macAlgorithm");
             this.tokenType = SafeDictionary.GetValue<string>(dic,"tokenType");
-            Debug.Log("parse AccessToken:" + dic);
         }
     }
 }

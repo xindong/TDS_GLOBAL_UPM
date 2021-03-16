@@ -75,7 +75,7 @@ public class TDSAndroidPostBuildProcessor : IPostGenerateGradleAndroidProject
                 implementation 'com.google.firebase:firebase-analytics:15.0.1'
                 implementation 'com.google.firebase:firebase-messaging:17.3.4'
     
-                implementation 'com.google.code.gson:gson:2.8.5'
+                implementation 'com.google.code.gson:gson:2.8.6'
 
                 implementation 'com.google.android.gms:play-services-auth:16.0.1'
                 implementation 'com.facebook.android:facebook-login:5.15.3'
