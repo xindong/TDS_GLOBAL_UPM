@@ -27,6 +27,12 @@ namespace TDSGlobal
             this.code = SafeDictionary.GetValue<int>(dic,"code");
         }
 
+        public TDSGlobalError(int code,string error_msg)
+        {
+            this.code = code;
+            this.error_msg = error_msg;
+        }
+
         public string ToJSON(){
             return JsonUtility.ToJson(this);
         }

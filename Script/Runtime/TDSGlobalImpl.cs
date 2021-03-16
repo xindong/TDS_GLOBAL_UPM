@@ -40,13 +40,16 @@ namespace TDSGlobal
             {
                 Debug.Log("initSDK result:" + result.toJSON());
 
-                if(!checkResultSuccess(result)){
+                if (!checkResultSuccess(result))
+                {
+                    callback(false);
                     return;
                 }
-                
+
                 TDSGlobalInitWrapper initWrapper = new TDSGlobalInitWrapper(result.content);
 
-                if(initWrapper!=null){
+                if (initWrapper != null)
+                {
                     callback(initWrapper.success);
                 }
             });
@@ -56,24 +59,26 @@ namespace TDSGlobal
         {
             Command command = new Command(TDSGlobalBridgeName.LOGIN_SERVICE_NAME, "login", true, null);
             EngineBridge.GetInstance().CallHandler(command, (result) =>
-            {   
+            {
                 Debug.Log("login result:" + result.toJSON());
 
-                if(!checkResultSuccess(result)){
+                if (!checkResultSuccess(result))
+                {
+                    errorCallback(new TDSGlobalError(TDSGlobalUnKnowError.UN_KNOW, $"Login Failed:{result.message}"));
                     return;
                 }
 
                 TDSGlobalUserWrapper userWrapper = new TDSGlobalUserWrapper(result.content);
-                if(userWrapper.error!=null)
+                if (userWrapper.error != null)
                 {
                     errorCallback(userWrapper.error);
                     return;
-                }            
-                if(userWrapper.user!=null)
+                }
+                if (userWrapper.user != null)
                 {
                     callback(userWrapper.user);
                 }
-                    
+
             });
         }
 
@@ -83,17 +88,19 @@ namespace TDSGlobal
             EngineBridge.GetInstance().CallHandler(command);
         }
 
-        public void AddUserStatusChangeCallback(Action<int,string> callback)
+        public void AddUserStatusChangeCallback(Action<int, string> callback)
         {
-            Command command = new Command(TDSGlobalBridgeName.LOGIN_SERVICE_NAME, "addUserStatusChangeCallback", true,  null);
+            Command command = new Command(TDSGlobalBridgeName.LOGIN_SERVICE_NAME, "addUserStatusChangeCallback", true, null);
             EngineBridge.GetInstance().CallHandler(command, (result) =>
             {
-                if(!checkResultSuccess(result)){
+                if (!checkResultSuccess(result))
+                {
+                    callback(TDSGlobalUnKnowError.UN_KNOW, $"UserStatus Change Failed:{result.message}");
                     return;
                 }
-                
+
                 TDSGlobalUserStatusChangeWrapper statusChangeWrapper = new TDSGlobalUserStatusChangeWrapper(result.content);
-                callback(statusChangeWrapper.code,statusChangeWrapper.message);
+                callback(statusChangeWrapper.code, statusChangeWrapper.message);
             });
         }
 
@@ -103,17 +110,21 @@ namespace TDSGlobal
             EngineBridge.GetInstance().CallHandler(command, (result) =>
             {
                 Debug.Log("getUser result:" + result.toJSON());
-                
-                if(!checkResultSuccess(result)){
+
+                if (!checkResultSuccess(result))
+                {
+                    errorCallback(new TDSGlobalError(TDSGlobalUnKnowError.UN_KNOW, $"GetUser Failed:{result.message}"));
                     return;
                 }
                 TDSGlobalUserWrapper userWrapper = new TDSGlobalUserWrapper(result.content);
-                if(userWrapper.user!=null){
+                if (userWrapper.user != null)
+                {
                     callback(userWrapper.user);
                 }
-                else if(userWrapper.error!=null){
+                else if (userWrapper.error != null)
+                {
                     errorCallback(userWrapper.error);
-                }                
+                }
             });
         }
 
@@ -132,7 +143,7 @@ namespace TDSGlobal
             Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME, "shareWithUriMessage", true, dic);
             EngineBridge.GetInstance().CallHandler(command, (result) =>
             {
-                handlerShareCallback(result,callback);
+                handlerShareCallback(result, callback);
             });
         }
 
@@ -144,7 +155,7 @@ namespace TDSGlobal
             Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME, "shareWithImage", true, dic);
             EngineBridge.GetInstance().CallHandler(command, (result) =>
             {
-                handlerShareCallback(result,callback);
+                handlerShareCallback(result, callback);
             });
         }
 
@@ -156,7 +167,7 @@ namespace TDSGlobal
             EngineBridge.GetInstance().CallHandler(command);
         }
 
-        public void PayWithProduct(string orderId, string productId, string roleId, string serverId, string ext,Action<TDSGlobalOrderInfo> callback,Action<TDSGlobalError> errorCallback)
+        public void PayWithProduct(string orderId, string productId, string roleId, string serverId, string ext, Action<TDSGlobalOrderInfo> callback, Action<TDSGlobalError> errorCallback)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("payWithOrderId", orderId);
@@ -165,8 +176,9 @@ namespace TDSGlobal
             dic.Add("serverId", serverId);
             dic.Add("ext", ext);
             Command command = new Command(TDSGlobalBridgeName.IAP_SERVICE_NAME, "payWithProduct", true, dic);
-            EngineBridge.GetInstance().CallHandler(command, (result) => { 
-                handlerOrderInfoCallback(result,callback,errorCallback);
+            EngineBridge.GetInstance().CallHandler(command, (result) =>
+            {
+                handlerOrderInfoCallback(result, callback, errorCallback);
             });
         }
 
@@ -175,34 +187,38 @@ namespace TDSGlobal
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("roleId", roleId);
             dic.Add("serverId", serverId);
-            Command command = new Command(TDSGlobalBridgeName.IAP_SERVICE_NAME, "payWithWeb", true,  dic);
-            EngineBridge.GetInstance().CallHandler(command, (result) => {
-                if(!checkResultSuccess(result))
+            Command command = new Command(TDSGlobalBridgeName.IAP_SERVICE_NAME, "payWithWeb", true, dic);
+            EngineBridge.GetInstance().CallHandler(command, (result) =>
+            {
+                if (!checkResultSuccess(result))
                 {
+                    callback(new TDSGlobalError(TDSGlobalUnKnowError.UN_KNOW, $"PayWithWeb Failed:{result.message}"));
                     return;
-                } 
+                }
                 TDSGlobalError error = new TDSGlobalError(result.content);
                 callback(error);
-             });
+            });
         }
 
-        public void QueryWithProductIds(string[] productIds, Action<List<TDSGlobalSkuDetail>> callback,Action<TDSGlobalError> errorCallback)
+        public void QueryWithProductIds(string[] productIds, Action<List<TDSGlobalSkuDetail>> callback, Action<TDSGlobalError> errorCallback)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("queryWithProductIds", productIds);
             Command command = new Command(TDSGlobalBridgeName.IAP_SERVICE_NAME, "querySKUWithProductIds", true, dic);
-            EngineBridge.GetInstance().CallHandler(command, (result) => 
-            { 
-                if(!checkResultSuccess(result))
+            EngineBridge.GetInstance().CallHandler(command, (result) =>
+            {
+                if (!checkResultSuccess(result))
                 {
+                    errorCallback(new TDSGlobalError(TDSGlobalUnKnowError.UN_KNOW, $"QueryWithProductIds Failed:{result.message}"));
                     return;
                 }
                 TDSGlobalSkuDetailWrapper wrapper = new TDSGlobalSkuDetailWrapper(result.content);
-                if(wrapper==null)
+                if (wrapper == null)
                 {
+                    errorCallback(new TDSGlobalError(TDSGlobalUnKnowError.UN_KNOW, $"QueryWithProductIds Parse Result Error:{result.content}"));
                     return;
                 }
-                if(wrapper.error!=null)
+                if (wrapper.error != null)
                 {
                     errorCallback(wrapper.error);
                     return;
@@ -213,10 +229,12 @@ namespace TDSGlobal
 
         public void QueryRestoredPurchases(Action<List<TDSGlobalRestoredPurchases>> callback)
         {
-            Command command = new Command(TDSGlobalBridgeName.IAP_SERVICE_NAME,"queryRestoredPurchases",true,null);
-            EngineBridge.GetInstance().CallHandler(command, (result) => { 
-                if(!checkResultSuccess(result))
+            Command command = new Command(TDSGlobalBridgeName.IAP_SERVICE_NAME, "queryRestoredPurchases", true, null);
+            EngineBridge.GetInstance().CallHandler(command, (result) =>
+            {
+                if (!checkResultSuccess(result))
                 {
+                    callback(null);
                     return;
                 }
                 TDSGlobalRestoredPurchasesWrapper wrapper = new TDSGlobalRestoredPurchasesWrapper(result.content);
@@ -224,7 +242,7 @@ namespace TDSGlobal
             });
         }
 
-        public void RestorePurchase(string tdsTransactionInfo, string orderId, string productId, string roleId, string serverId, string ext, Action<TDSGlobalOrderInfo> callback,Action<TDSGlobalError> errorCallback)
+        public void RestorePurchase(string tdsTransactionInfo, string orderId, string productId, string roleId, string serverId, string ext, Action<TDSGlobalOrderInfo> callback, Action<TDSGlobalError> errorCallback)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("restorePurchase", tdsTransactionInfo);
@@ -234,8 +252,9 @@ namespace TDSGlobal
             dic.Add("ext", ext);
             dic.Add("productId", productId);
             Command command = new Command(TDSGlobalBridgeName.IAP_SERVICE_NAME, "queryRestoredPurchasesWithInfo", true, dic);
-            EngineBridge.GetInstance().CallHandler(command, (result) => { 
-                handlerOrderInfoCallback(result,callback,errorCallback);
+            EngineBridge.GetInstance().CallHandler(command, (result) =>
+            {
+                handlerOrderInfoCallback(result, callback, errorCallback);
             });
         }
 
@@ -254,7 +273,7 @@ namespace TDSGlobal
             Command command = new Command.Builder()
                         .Service(TDSGlobalBridgeName.SERVICE_NAME)
                         .Method("trackUser")
-                        .Args("trackUser",userId)
+                        .Args("trackUser", userId)
                         .CommandBuilder();
             EngineBridge.GetInstance().CallHandler(command);
         }
@@ -295,44 +314,48 @@ namespace TDSGlobal
             Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME, "eventCreateRole", false, null);
             EngineBridge.GetInstance().CallHandler(command);
         }
-        
+
         public void GetVersionName(Action<string> callback)
         {
             Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME, "getTDSGlobalSDKVersion", true, null);
             EngineBridge.GetInstance().CallHandler(command, (result) =>
             {
-                if(!checkResultSuccess(result)){
+                if (!checkResultSuccess(result))
+                {
+                    callback($"GetVersionName Failed:{result.message}");
                     return;
                 }
                 callback(result.content);
             });
         }
-
         public void StoreReview()
         {
-            Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME,"storeReview",false,null);
+            Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME, "storeReview", false, null);
             EngineBridge.GetInstance().CallHandler(command);
         }
 
-        private bool checkResultSuccess(Result result){
+        private bool checkResultSuccess(Result result)
+        {
             return result.code == Result.RESULT_SUCCESS && !string.IsNullOrEmpty(result.content);
         }
 
-        private void handlerShareCallback(Result result,TDSGlobalShareCallback callback)
+        private void handlerShareCallback(Result result, TDSGlobalShareCallback callback)
         {
-            if(!checkResultSuccess(result))
+            if (!checkResultSuccess(result))
             {
+                callback.ShareError($"Share Error:{result.message}");
                 return;
             }
             TDSGlobalShareWrapper shareWrapper = new TDSGlobalShareWrapper(result.content);
-            Debug.Log("shareWrapper:" + shareWrapper.ToJSON());
-            if(shareWrapper.cancel)
+            if (shareWrapper.cancel)
             {
                 callback.ShareCancel();
                 return;
             }
-            if(shareWrapper.error!=null){
-                if(!string.IsNullOrEmpty(shareWrapper.error.error_msg)){
+            if (shareWrapper.error != null)
+            {
+                if (!string.IsNullOrEmpty(shareWrapper.error.error_msg))
+                {
                     callback.ShareError(shareWrapper.error.error_msg);
                     return;
                 }
@@ -340,19 +363,21 @@ namespace TDSGlobal
             callback.ShareSuccess();
         }
 
-        private void handlerOrderInfoCallback(Result result,Action<TDSGlobalOrderInfo> callback,Action<TDSGlobalError> errorCallback)
+        private void handlerOrderInfoCallback(Result result, Action<TDSGlobalOrderInfo> callback, Action<TDSGlobalError> errorCallback)
         {
-            if(!checkResultSuccess(result))
+            if (!checkResultSuccess(result))
             {
+                errorCallback(new TDSGlobalError(TDSGlobalUnKnowError.UN_KNOW, $"Handler OrderInfo Error:{result.message}"));
                 return;
             }
 
             TDSGlobalOrderInfoWrapper infoWrapper = new TDSGlobalOrderInfoWrapper(result.content);
-            if(infoWrapper == null)
+            if (infoWrapper == null)
             {
+                errorCallback(new TDSGlobalError(TDSGlobalUnKnowError.UN_KNOW, $"Parse OrderInfo Error:{result.message}"));
                 return;
             }
-            if(infoWrapper.error != null)
+            if (infoWrapper.error != null)
             {
                 Debug.Log("OrderInfo Error Callback:" + infoWrapper.error);
                 errorCallback(infoWrapper.error);

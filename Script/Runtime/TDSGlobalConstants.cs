@@ -34,6 +34,11 @@ namespace TDSGlobal
         public static int BIND_CHANGE = 0x9003;
     }
 
+    public class TDSGlobalUnKnowError
+    {
+        public static int UN_KNOW = 0x9009;
+    }
+
     public class TDSGlobalBridgeName
     {
         public static string SERVICE_NAME = "TDSGlobalCoreService";
