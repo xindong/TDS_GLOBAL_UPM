@@ -2,11 +2,11 @@
     "name": "com.tds.global",
     "displayName": "TDSGlobal",
     "description": "TapTap develop Service Global",
-    "version": "0.1.2-alpha",
+    "version": "1.0.0",
     "unity": "2020.1",
     "author": "tds-develop",
     "license": "MIT",
     "dependencies": {
-        "com.tds.sdk": "https://github.com/xindong/TAPSDK_UPM.git#1.0.4.3-alpha-rnd"
+        "com.tds.sdk": "https://github.com/xindong/TAPSDK_UPM.git#1.0.6.0-alpha"
     }
 }

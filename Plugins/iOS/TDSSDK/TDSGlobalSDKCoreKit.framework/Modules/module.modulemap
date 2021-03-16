@@ -1,0 +1,6 @@
+framework module TDSGlobalSDKCoreKit {
+  umbrella header "TDSGlobalSDKCoreKit.h"
+
+  export *
+  module * { export * }
+}

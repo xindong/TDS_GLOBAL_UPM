@@ -1,0 +1,6 @@
+framework module TDSGlobalSDKLoginKit {
+  umbrella header "TDSGlobalSDKLoginKit.h"
+
+  export *
+  module * { export * }
+}

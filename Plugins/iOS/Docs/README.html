@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>README</title>
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+}
+</style>
+
+
+</head>
+
+<body>
+
+<h1 id="toc_0">TDSGlobal-iOS</h1>
+
+<h2 id="toc_1">1.接入前准备</h2>
+
+<h3 id="toc_2">1.1 TDSGlobalSDK说明</h3>
+
+<p>TDSGlobalSDK支持登录和支付功能，<strong>最低iOS版本为iOS10</strong>.以下framework为<strong>静态库</strong>。</p>
+
+<div><pre><code class="language-none">TDSGlobalSDKCoreKit.framework   TDSGlobalSDK核心组件
+TDSGlobalSDKLoginKit.framework  TDSGlobalSDK登录组件
+TDSGlobalSDKIAPKit.framework    TDSGlobalSDK支付组件</code></pre></div>
+
+<h3 id="toc_3">1.2 添加TDSGlobalSDK</h3>
+
+<p>将配置文件<strong>TDSGlobalGlobal-Info.plist</strong>加入工程。</p>
+
+<h4 id="toc_4">1.2.1 添加TDSGlobalSDK文件</h4>
+
+<ul>
+<li><p>将<strong>TDSGlobalSDKCoreKit.framework</strong>和<strong>TDSGlobalSDKLoginKit.framework</strong>添加到项目，确保Link Binary With Libraries中已添加。</p></li>
+<li><p>将<strong>TDSGlobalDKResources.bundle</strong>添加到项目，确保Copy Bundler Resources中已添加</p></li>
+<li><p>支付组件<strong>TDSGlobalSDKIAPKit.framework</strong>视游戏需要添加</p></li>
+<li><p>由于第三方组件中有使用Swift开发部分，纯Objective-C项目需要打开Swift编译器，可在项目中添加Swift文件。将<strong>Blank.swift</strong>添加到项目</p></li>
+</ul>
+
+<h4 id="toc_5">1.2.2 添加libs文件</h4>
+
+<ul>
+<li><p>将libs中所有framework文件添加到项目，确保Link Binary With Libraries中已添加。</p></li>
+<li><p>将libs中所有bundle文件添加到项目，确保Copy Bundler Resources中已添加</p></li>
+</ul>
+
+<h3 id="toc_6">1.3 添加系统依赖库</h3>
+
+<p>请检查项目中是否已自动添加以下依赖项：</p>
+
+<div><pre><code class="language-none">AdSupport.framework
+LocalAuthentication.framework
+AuthenticationServices.framework
+SystemConfiguration.framework
+Accelerate.framework
+SafariServices.framework
+Webkit.framework
+CoreTelephony.framework
+Security.framework
+libc++.tdb</code></pre></div>
+
+<h3 id="toc_7">1.4 配置编译选项</h3>
+
+<p><strong>在Build Setting中的Other Link Flag中添加-ObjC</strong></p>
+
+<p><strong>在Build Setting中的Always Embed Swift Standard Libraried设置为YES</strong></p>
+
+<p>在<strong>Capabilities</strong>中打开以下功能</p>
+
+<p><img src="./DocImages/capabilities.jpg"></img></p>
+
+<h3 id="toc_8">1.5 配置URL Types</h3>
+
+<p>选择应用<strong>TARGETS</strong>，点击<strong>Info</strong>标签，展开<strong>URL Types</strong>。添加以下几项 URL Scheme.大括号内为游戏App对应参数，在开发者后台获取。</p>
+
+<div><pre><code class="language-none">TapTap  :   tt{taptap-client-id}
+Facebook:   fb{facebook-app-id}
+Google  :   {google-client-id}
+Line    :   line3rdp.{product_bundle_identify}</code></pre></div>
+
+<h3 id="toc_9">1.6 配置Schemes</h3>
+
+<p>在应用的info.plist中配置以下内容。</p>
+
+<div><pre><code class="language-none">&lt;key&gt;LSApplicationQueriesSchemes&lt;/key&gt;
+&lt;array&gt;
+  &lt;string&gt;tapsdk&lt;/string&gt;
+  &lt;string&gt;tapiosdk&lt;/string&gt;
+  &lt;string&gt;fbapi&lt;/string&gt;
+  &lt;string&gt;fbapi20130214&lt;/string&gt;
+  &lt;string&gt;fbapi20130410&lt;/string&gt;
+  &lt;string&gt;fbapi20130702&lt;/string&gt;
+  &lt;string&gt;fbapi20131010&lt;/string&gt;
+  &lt;string&gt;fbapi20131219&lt;/string&gt;
+  &lt;string&gt;fbapi20140410&lt;/string&gt;
+  &lt;string&gt;fbapi20140116&lt;/string&gt;
+  &lt;string&gt;fbapi20150313&lt;/string&gt;
+  &lt;string&gt;fbapi20150629&lt;/string&gt;
+  &lt;string&gt;fbapi20160328&lt;/string&gt;
+  &lt;string&gt;fbauth&lt;/string&gt;
+  &lt;string&gt;fb-messenger-share-api&lt;/string&gt;
+  &lt;string&gt;fbauth2&lt;/string&gt;
+  &lt;string&gt;fbshareextension&lt;/string&gt;
+  &lt;string&gt;lineauth2&lt;/string&gt;
+&lt;/array&gt;</code></pre></div>
+
+<h2 id="toc_10">2.TDSGlobalSDK使用说明</h2>
+
+<h3 id="toc_11">2.1 TDSGlobalSDK配置</h3>
+
+<h4 id="toc_12">2.1.1 配置与初始化</h4>
+
+<p>在AppDelegate.m中,引入头文件</p>
+
+<div><pre><code class="language-none">#import &lt;TDSGlobalSDKCoreKit/TDSGlobalSDK.h&gt;</code></pre></div>
+
+<p>在以下接口中添加调用,并<strong>初始化SDK</strong>,游戏可调整初始化时机，建议尽早。</p>
+
+<div><pre><code class="language-none">- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    /* 初始化 */
+    [TDSGlobalSDK initTDSGlobalSDK:^(BOOL success) {
+        if (success) {
+            NSLog(@&quot;Init success&quot;);
+        }else {
+            NSLog(@&quot;Init fail&quot;);
+        }
+    }];
+    [TDSGlobalSDK application:application didFinishLaunchingWithOptions:launchOptions];
+    ...
+}
+
+- (BOOL)application:(UIApplication *)application
+        openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication
+     annotation:(id)annotation {
+    [TDSGlobalSDK application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
+    ...
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary&lt;UIApplicationOpenURLOptionsKey, id&gt; *)options{
+    [TDSGlobalSDK application:app openURL:url options:options];
+    ...
+}
+
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray&lt;id&lt;UIUserActivityRestoring&gt;&gt; * _Nullable))restorationHandler {
+    [TDSGlobalSDK application:application continueUserActivity:userActivity restorationHandler:restorationHandler];
+    ...
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    ...
+    [TDSGlobalSDK application:application didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
+}</code></pre></div>
+
+<p>如果您的应用使用Scene管理App生命周期，在以下接口中添加调用</p>
+
+<div><pre><code class="language-none">- (void)scene:(UIScene *)scene openURLContexts:(NSSet&lt;UIOpenURLContext *&gt; *)URLContexts API_AVAILABLE(ios(13.0)){
+    [TDSGlobalSDK scene:scene openURLContexts:URLContexts];
+}
+
+- (void)scene:(UIScene *)scene continueUserActivity:(NSUserActivity *)userActivity  API_AVAILABLE(ios(13.0)){
+    [TDSGlobalSDK scene:scene continueUserActivity:userActivity];
+}</code></pre></div>
+
+<h4 id="toc_13">2.1.2 设置SDK显示语言</h4>
+
+<p>可以调用以下接口设置SDK显示语言</p>
+
+<div><pre><code class="language-none">+ (void)setLanguage:(TDSGlobalLanguageLocale)locale;</code></pre></div>
+
+<p>TDSGlobalLanguageLocale说明</p>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>TDSGlobalLanguageLocaleSimplifiedChinese</td>
+<td>简体中文</td>
+</tr>
+<tr>
+<td>TDSGlobalLanguageLocaleTraditionalChinese</td>
+<td>繁体中文</td>
+</tr>
+<tr>
+<td>TDSGlobalLanguageLocaleEnglish</td>
+<td>英文</td>
+</tr>
+<tr>
+<td>TDSGlobalLanguageLocaleThai</td>
+<td>泰文</td>
+</tr>
+<tr>
+<td>TDSGlobalLanguageLocaleBahasa</td>
+<td>印尼文</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="toc_14">2.1 登录</h3>
+
+<p>TDSGlobalSDK支持使用以下方式进行登录</p>
+
+<table>
+<thead>
+<tr>
+<th>登录方式</th>
+<th>说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>TapTap</td>
+<td></td>
+</tr>
+<tr>
+<td>Apple</td>
+<td>iOS13以上支持</td>
+</tr>
+<tr>
+<td>Google</td>
+<td></td>
+</tr>
+<tr>
+<td>Facebook</td>
+<td></td>
+</tr>
+<tr>
+<td>Guest</td>
+<td>游客登录</td>
+</tr>
+<tr>
+<td>Line</td>
+<td>开发中</td>
+</tr>
+<tr>
+<td>Twitter</td>
+<td>开发中</td>
+</tr>
+</tbody>
+</table>
+
+<p>引入头文件</p>
+
+<div><pre><code class="language-none">#import &lt;TDSGlobalSDKLoginKit/TDSGlobalLoginManager.h&gt;
+#import &lt;TDSGlobalSDKCoreKit/TDSGlobalUser.h&gt;
+#import &lt;TDSGlobalSDKCoreKit/TDSGlobalUserToken.h&gt;</code></pre></div>
+
+<p>调用以下接口</p>
+
+<div><pre><code class="language-none">// 调用登录
+[TDSGlobalLoginManager login:^(TDSGlobalUser * _Nullable result, NSError * _Nullable error) {
+    NSLog(@&quot;result:%@,error:%@&quot;,result,error);
+    if (error) {
+        // login fail;
+    }else {
+        // login success;
+    }
+}];
+
+// 监听用户状态改变
+[TDSGlobalLoginManager addUserStatusChangeCallback:^(TDSGlobalUserStateChangeCode userStateChangeCode) {
+    if (userStateChangeCode == TDSGlobalUserStateChangeCodeBindStateChange) {
+        // user bind state change
+    }else if (userStateChangeCode == TDSGlobalUserStateChangeCodeLogout) {
+        // user logged out
+    }
+}];
+
+// 打开用户中心
+[TDSGlobalLoginManager userCenter];
+
+// 登出当前用户
+[TDSGlobalLoginManager logout];</code></pre></div>
+
+<p><strong>用户数据TDSGlobalUser说明</strong></p>
+
+<div><pre><code class="language-none">@interface TDSGlobalUser : NSObject &lt;NSCoding&gt;
+/**
+The user&#39;s user ID.
+*/
+@property (nonatomic,assign) NSInteger userId;
+
+/**
+The user’s user ID in string.
+*/
+@property (nonatomic,copy) NSString *sub;
+
+/**
+The user&#39;s user name.
+*/
+@property (nonatomic,copy) NSString *name;
+
+/**
+The user&#39;s token.
+*/
+@property (nonatomic,strong) TDSGlobalUserToken *token;
+
+@end</code></pre></div>
+
+<p><strong>用户TDSGlobalUserToken说明</strong></p>
+
+<div><pre><code class="language-none">@interface TDSGlobalUserToken : NSObject
+/// 唯一标志
+@property (nonatomic, copy) NSString *kid;
+
+/// 认证码
+@property (nonatomic, copy) NSString *accessToken;
+
+/// 认证码类型
+@property (nonatomic, copy) NSString *tokenType;
+
+/// mac密钥
+@property (nonatomic, copy) NSString *macKey;
+
+/// mac密钥计算方式
+@property (nonatomic, copy) NSString *macAlgorithm;
+
+/// 用户授权的权限，多个时以逗号隔开（预留字段）
+@property (nonatomic, copy) NSString *scope;
+
+@end</code></pre></div>
+
+<h3 id="toc_15">2.2 支付</h3>
+
+<h4 id="toc_16">2.2.1 支付商品</h4>
+
+<p>引入头文件</p>
+
+<div><pre><code class="language-none">#import &lt;TDSGlobalSDKIAPKit/TDSGlobalInAppPurchaseManager.h&gt;</code></pre></div>
+
+<p>调用以下接口</p>
+
+<div><pre><code class="language-none">[TDSGlobalInAppPurchaseManager payWithOrderId:@&quot;orderId&quot; productId:@&quot;productId&quot; roleId:@&quot;roleId&quot; serverId:@&quot;serverId&quot; ext:@&quot;ext&quot; completionHandler:^(NSDictionary * _Nonnull orderInfo, NSError * _Nonnull error) {
+    if (error) {
+        // pay fail, handler error
+    }else {
+        // pay success
+    }
+}];</code></pre></div>
+
+<p>支付接口参数说明</p>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>orderId</td>
+<td>订单ID。游戏侧订单号，服务端支付回调会包含该字段</td>
+</tr>
+<tr>
+<td>productId</td>
+<td>商品ID。到AppStore购买的商品ID</td>
+</tr>
+<tr>
+<td>roleId</td>
+<td>角色ID。支付角色ID，服务端支付回调会包含该字段</td>
+</tr>
+<tr>
+<td>serverId</td>
+<td>服务器ID。所在服务器ID，不能有特殊字符，服务端支付回调会包含该字段</td>
+</tr>
+<tr>
+<td>ext</td>
+<td>透传参数。服务端支付回调会包含该字段。可用于标记区分充值回调地址，如需使用该功能，请联系平台进行配置。</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="toc_17">2.2.2 查询商品信息</h4>
+
+<p>引入头文件</p>
+
+<div><pre><code class="language-none">#import &lt;TDSGlobalSDKIAPKit/TDSGlobalProductInfo.h&gt;</code></pre></div>
+
+<p>可以调用以下接口,<strong>传入需要查询的商品ID数组</strong>，查询商品信息</p>
+
+<div><pre><code class="language-none">[TDSGlobalInAppPurchaseManager queryWithProductIds:@[@&quot;productId1&quot;,@&quot;productId2&quot;] completionHandler:^(NSArray&lt;TDSGlobalProductInfo *&gt; * _Nullable result, NSError * _Nullable error) {
+    // handle result
+}];</code></pre></div>
+
+<p>商品信息TDSGlobalProductInfo包含的信息和SKProduct一致。</p>
+
+<div><pre><code class="language-none">@interface TDSGlobalProductInfo : NSObject
+    @property(nonatomic,strong,readonly) NSString *localizedDescription;
+
+    @property(nonatomic,strong,readonly) NSString *localizedTitle;
+
+    @property(nonatomic,strong,readonly) NSDecimalNumber *price;
+
+    @property(nonatomic,strong,readonly) NSLocale *priceLocale;
+
+    @property(nonatomic,strong,readonly) NSString *productIdentifier;
+
+@end</code></pre></div>
+
+<h4 id="toc_18">2.2.3 查询礼包码</h4>
+
+<p>引入以下头文件</p>
+
+<div><pre><code class="language-none">#import &lt;TDSGlobalSDKIAPKit/TDSGlobalTransactionInfo.h&gt;</code></pre></div>
+
+<p>可以调用以下接口查询用户是否兑换了商品礼包码，<strong>某些特殊情况的掉单也会在该接口返回</strong></p>
+
+<div><pre><code class="language-none">[TDSGlobalInAppPurchaseManager queryRestoredPurchases:^(NSArray&lt;TDSGlobalTransactionInfo *&gt; * _Nonnull result) {
+    // handle result
+}];</code></pre></div>
+
+<p>TDSGlobalTransactionInfo 包含了部分 SKPaymentTransaction 信息</p>
+
+<div><pre><code class="language-none">@interface TDSGlobalTransactionInfo : NSObject
+    // The unique server-provided identifier
+    @property (nonatomic,strong,readonly) NSString *transactionIdentifier;
+
+    @property (nonatomic,strong,readonly) NSString *productIdentifier;
+
+@end</code></pre></div>
+
+<p>在查询到结果后，可以调用以下接口，传入必要参数完成交易，<strong>参数说明同2.2.1节</strong>支付。</p>
+
+<div><pre><code class="language-none">[TDSGlobalInAppPurchaseManager restorePurchase:transactionInfo orderId:@&quot;orderId&quot; roleId:@&quot;roleId&quot; serverId:@&quot;serverId&quot; ext:@&quot;ext&quot; completionHandler:^(NSDictionary * _Nonnull orderInfo, NSError * _Nonnull error) {
+    // handle result
+}];</code></pre></div>
+
+<h3 id="toc_19">2.3 客服反馈</h3>
+
+<p>引入头文件</p>
+
+<div><pre><code class="language-none">#import &lt;TDSGlobalSDKCoreKit/TDSGlobalSDK.h&gt;</code></pre></div>
+
+<p>用户<strong>登录成功以后</strong>，可以使用客服反馈功能.</p>
+
+<div><pre><code class="language-none">[TDSGlobalSDK reportWithServerId:@&quot;serverId&quot; roleId:@&quot;roleId&quot; roleName:@&quot;roleName&quot;];</code></pre></div>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>serverId</td>
+<td>服务器ID，可为空</td>
+</tr>
+<tr>
+<td>roleId</td>
+<td>角色ID，可为空</td>
+</tr>
+<tr>
+<td>roleName</td>
+<td>角色名，可为空</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_20">3.可选功能</h2>
+
+<p>以下功能游戏根据需要进行调用</p>
+
+<h3 id="toc_21">3.1 分享</h3>
+
+<div><pre><code class="language-none">#import &lt;TDSGlobalSDKCoreKit/TDSGlobalShareManager.h&gt;</code></pre></div>
+
+<p><strong>支持分享图片与URL</strong>，调用接口：</p>
+
+<div><pre><code class="language-none">// URL分享
+[TDSGlobalShareManager shareWithType:TDSGlobalShareTypeFacebook url:@&quot;https://www.taptap.com/&quot; message:@&quot;taptap&quot; completeHandler:^(NSError * _Nullable error, BOOL cancel) {
+    if (error) {
+        // fail
+    }else {
+        // success
+    }
+}];
+
+// 图片分享
+[TDSGlobalShareManager shareWithType:TDSGlobalShareTypeFacebook image:shareImage completeHandler:^(NSError * _Nullable error, BOOL cancel) {
+        if (error) {
+            // fail
+        }else {
+            // success
+        }
+ }];</code></pre></div>
+
+<p>分享平台类型TDSGlobalShareType说明</p>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>TDSGlobalShareTypeFacebook</td>
+<td>分享到Facebook</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="toc_22">3.2 数据跟踪</h3>
+
+<div><pre><code class="language-none">#import &lt;TDSGlobalSDKCoreKit/TDSGlobalTrackManager.h&gt;</code></pre></div>
+
+<p>支持简单数据追踪，调用接口：</p>
+
+<div><pre><code class="language-none">/// 跟踪玩家
+/// @param roleId 角色ID
+/// @param roleName 角色名
+/// @param serverId 服务器ID
+/// @param level 玩家等级
+[TDSGlobalTrackManager trackUser:@&quot;roleId&quot; roleName:@&quot;roleName&quot; serverId:@&quot;serverId&quot; level:0];
+
+/// 跟踪自定义事件
+/// @param eventName 事件名
+[TDSGlobalTrackManager trackEvent:@&quot;eventName&quot;];
+
+/// 跟踪完成成就
+[TDSGlobalTrackManager trackAchievement];
+
+/// 跟踪完成新手引导接口
+[TDSGlobalTrackManager eventCompletedTutorial];
+
+/// 跟踪完成创角
+[TDSGlobalTrackManager eventCreateRole];</code></pre></div>
+
+
+
+
+</body>
+
+</html>

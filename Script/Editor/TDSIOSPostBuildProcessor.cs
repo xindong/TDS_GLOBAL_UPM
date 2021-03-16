@@ -48,47 +48,9 @@ namespace TDSEditor
                 }
                 //获取bundleId
                 var bundleId = proj.GetBuildPropertyForAnyConfig(target, "PRODUCT_BUNDLE_IDENTIFIER");
-                // 编译配置
-                proj.AddBuildProperty(target, "OTHER_LDFLAGS", "-ObjC");
-                proj.AddBuildProperty(unityFrameworkTarget, "OTHER_LDFLAGS", "-ObjC");
-
-                // Swift编译选项
-                proj.SetBuildProperty(target, "ENABLE_BITCODE", "NO"); //bitcode  NO
-                proj.SetBuildProperty(target,"ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES","YES");
-                proj.SetBuildProperty(target, "SWIFT_VERSION", "5.0");
-                proj.SetBuildProperty(target, "CLANG_ENABLE_MODULES", "YES");
-                proj.SetBuildProperty(unityFrameworkTarget, "ENABLE_BITCODE", "NO"); //bitcode  NO
-                proj.SetBuildProperty(unityFrameworkTarget,"ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES","YES");
-                proj.SetBuildProperty(unityFrameworkTarget, "SWIFT_VERSION", "5.0");
-                proj.SetBuildProperty(unityFrameworkTarget, "CLANG_ENABLE_MODULES", "YES");
-                
-                // add extra framework(s)
-                // 参数: 目标targetGUID, framework,是否required:fasle->required,true->optional
-                proj.AddFrameworkToProject(unityFrameworkTarget, "CoreTelephony.framework", false);
-                proj.AddFrameworkToProject(unityFrameworkTarget, "QuartzCore.framework", false);
-                proj.AddFrameworkToProject(unityFrameworkTarget, "Security.framework", false);
-                proj.AddFrameworkToProject(unityFrameworkTarget, "WebKit.framework", false);
-                proj.AddFrameworkToProject(unityFrameworkTarget, "AdSupport.framework", false);
-                proj.AddFrameworkToProject(unityFrameworkTarget, "AssetsLibrary.framework", false);
-                proj.AddFrameworkToProject(unityFrameworkTarget, "AVKit.framework", false);
-                proj.AddFrameworkToProject(unityFrameworkTarget, "AuthenticationServices.framework", false);
-                proj.AddFrameworkToProject(unityFrameworkTarget, "LocalAuthentication.framework", false);
-                proj.AddFrameworkToProject(unityFrameworkTarget, "SystemConfiguration.framework", false);
-                proj.AddFrameworkToProject(unityFrameworkTarget, "Accelerate.framework", false);
-                proj.AddFrameworkToProject(unityFrameworkTarget, "SafariServices.framework", false);
-                // 动态库
-                // AddFramework("TapFriends.framework", proj, target);
-                Debug.Log("添加framework成功");
-
-                // 添加 tbd
-                // 参数: 目标targetGUID, tdbGUID
-                proj.AddFileToBuild(unityFrameworkTarget, proj.AddFile("usr/lib/libc++.tbd", "libc++.tbd",PBXSourceTree.Sdk));
-                
-                Debug.Log("添加tbd成功");
-
-
                 // 添加资源文件，注意文件路径
                 var resourcePath = Path.Combine(path, "TDSGlobalResource");
+                
                 string parentFolder = Directory.GetParent(Application.dataPath).FullName;
                 if (Directory.Exists(resourcePath))
                 {
@@ -101,17 +63,17 @@ namespace TDSEditor
 
                 string localPacckagePath = TDSFileHelper.FilterFile(parentFolder,"TDSGlobal");
                 
-                string tdsResourcePath = remotePackagePath !=null? remotePackagePath + "/Plugins/IOS/Resource" : localPacckagePath + "/Plugins/IOS/Resource";
+                string tdsResourcePath = remotePackagePath !=null? remotePackagePath + "/Plugins/iOS/Resource" : localPacckagePath + "/Plugins/iOS/Resource";
 
                 Debug.Log("tdsGlobalResource:" + tdsResourcePath);
 
                 if(Directory.Exists(tdsResourcePath)){
                     //使用UPM接入
-                    CopyAndReplaceDirectory(tdsResourcePath, resourcePath);
+                    TDSFileHelper.CopyAndReplaceDirectory(tdsResourcePath, resourcePath);
                 }
                 // 复制资源文件夹到工程目录
                 // 复制Assets的plist到工程目录
-                File.Copy(parentFolder + "/Assets/Plugins/IOS/Resource/TDSGlobal-Info.plist",resourcePath + "/TDSGlobal-Info.plist");
+                File.Copy(parentFolder + "/Assets/Plugins/iOS/Resource/TDSGlobal-Info.plist",resourcePath + "/TDSGlobal-Info.plist");
 
                 List<string> names = new List<string>();    
                 names.Add("TDSGlobalSDKResources.bundle");
@@ -133,40 +95,6 @@ namespace TDSEditor
                 return;
             }
 
-        }
-
-        // 添加动态库 注意路径
-        public static void AddFramework(string coreFrameworkName, UnityEditor.iOS.Xcode.PBXProject proj, string target)
-        {
-            const string defaultLocationInProj = "Library/";
-            string framework = Path.Combine(defaultLocationInProj, coreFrameworkName);
-            string fileGuid = proj.AddFile(framework, "Frameworks/" + framework, PBXSourceTree.Sdk);
-            PBXProjectExtensions.AddFileToEmbedFrameworks(proj, target, fileGuid);
-            proj.SetBuildProperty(target, "LD_RUNPATH_SEARCH_PATHS", "$(inherited) @executable_path/Frameworks");
-        }
-
-        // 修改Build版本号，使用时间 『年月日时分秒』
-        public static string AddBuildNumber()
-        {
-            string buildNumber = DateTime.Now.ToString("yyyyMMdd") + DateTime.Now.Hour.ToString() +
-            DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString();
-            return buildNumber;
-        }
-
-        public static void CopyAndReplaceDirectory(string srcPath, string dstPath)
-        {
-            if (Directory.Exists(dstPath))
-                Directory.Delete(dstPath,true);
-            if (File.Exists(dstPath))
-                File.Delete(dstPath);
-
-            Directory.CreateDirectory(dstPath);
-
-            foreach (var file in Directory.GetFiles(srcPath))
-                File.Copy(file, Path.Combine(dstPath, Path.GetFileName(file)));
-
-            foreach (var dir in Directory.GetDirectories(srcPath))
-                CopyAndReplaceDirectory(dir, Path.Combine(dstPath, Path.GetFileName(dir)));
         }
 
         // 修改pilist
@@ -288,11 +216,10 @@ namespace TDSEditor
         // 添加appdelegate处理
         private static void SetScriptClass(string pathToBuildProject)
         {
-//             //插入代码
-//             //读取UnityAppController.mm文件
+            //读取UnityAppController.mm文件
             string unityAppControllerPath = pathToBuildProject + "/Classes/UnityAppController.mm";
             TDSEditor.TDSScriptStreamWriterHelper UnityAppController = new TDSEditor.TDSScriptStreamWriterHelper(unityAppControllerPath);
-//             //在指定代码后面增加一行代码
+            //在指定代码后面增加一行代码
             UnityAppController.WriteBelow(@"#import <OpenGLES/ES2/glext.h>", @"#import <TDSGlobalSDKCoreKit/TDSGlobalSDK.h>");
             UnityAppController.WriteBelow(@"[KeyboardDelegate Initialize];",@"[TDSGlobalSDK application:application didFinishLaunchingWithOptions:launchOptions];");
             UnityAppController.WriteBelow(@"AppController_SendNotificationWithArg(kUnityOnOpenURL, notifData);",@"[TDSGlobalSDK application:app openURL:url options:options];");
