@@ -17,7 +17,7 @@ namespace TDSGlobal
 
         public int loginType;
 
-        public List<string> bindAccounts;
+        public List<string> boundAccounts;
 
         public TDSGlobalAccessToken token;
 
@@ -28,7 +28,7 @@ namespace TDSGlobal
             this.sub = SafeDictionary.GetValue<string>(dic,"sub");
             this.name = SafeDictionary.GetValue<string>(dic,"name");
             this.loginType = SafeDictionary.GetValue<int>(dic,"loginType");
-            this.bindAccounts = SafeDictionary.GetValue<List<string>>(dic,"bindAccounts");
+            this.boundAccounts = SafeDictionary.GetValue<List<string>>(dic,"boundAccounts");
             this.token  = new TDSGlobalAccessToken(SafeDictionary.GetValue<Dictionary<string,object>>(dic,"token"));
         }
 
