@@ -46,11 +46,15 @@ namespace TDSEditor
                     Debug.Log("target is null ?");
                     return;
                 }
+
+                proj.AddFrameworkToProject(unityFrameworkTarget, "AdServices.framework", true);
+                proj.AddFrameworkToProject(unityFrameworkTarget, "iAd.framework", false);
+
                 //获取bundleId
                 var bundleId = proj.GetBuildPropertyForAnyConfig(target, "PRODUCT_BUNDLE_IDENTIFIER");
                 // 添加资源文件，注意文件路径
                 var resourcePath = Path.Combine(path, "TDSGlobalResource");
-                
+
                 string parentFolder = Directory.GetParent(Application.dataPath).FullName;
                 if (Directory.Exists(resourcePath))
                 {

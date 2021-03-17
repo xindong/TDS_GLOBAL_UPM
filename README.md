@@ -6,7 +6,7 @@
 
 * IOS **10**或更高版本
 
-* Android 目标为**API19**或更高版本
+* Android 目标为**API21**或更高版本
 
 ### 权限声明
 #### Android
@@ -24,7 +24,7 @@ NSMicrophoneUsageDescription 麦克风，用于内嵌动态
 * 使用Unity Package Manager 添加SDK到项目中。
 
 ```json
-//在Packages/manifest.json 中添加TDSGlobalUnity SDK
+//在Packages/manifest.json 中添加TDSGlobal SDK
 {
     "dependencies":{
         "com.tds.sdk":"https://github.com/xindong/TAPSDK_UPM.git#1.0.6",
