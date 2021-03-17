@@ -130,7 +130,7 @@ android:value="{facebook-cliendId}" />
 ### 4.1 初始化
 
 ```c#
-TDSGlobal.TDSGlobalSDK.Init((success)=
+TDSGlobal.TDSGlobalSDK.Init((success)=>
 {
     // 是否初始化成功
 });
