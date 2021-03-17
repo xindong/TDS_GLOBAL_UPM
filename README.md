@@ -436,3 +436,17 @@ UnityAppController.WriteBelow(@"NSURL* url = userActivity.webpageURL;",@"[TDSGlo
 UnityAppController.WriteBelow(@"handler(UIBackgroundFetchResultNoData);",@"[TDSGlobalSDK application:application didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];");
 Debug.Log("修改代码成功");
 ```
+
+### 5.SDK权限使用声明
+
+#### 1.Android
+
+android.permission.WRITE_EXTERNAL_STORAG 允许应用读取外部储存，用于内嵌动态、TapDB
+android.permission.READ_EXTERNAL_STORAGE 允许应用写入外部储存，用于内嵌动态、TapDB
+
+#### 2.iOS
+
+NSUserTrackingUsageDescription iOS14以上获取IDFA需要配置改权限，用TapDB
+NSPhotoLibraryUsageDescription 相册权限，用于内嵌动态
+NSCameraUsageDescription 相机，用于内嵌动态
+NSMicrophoneUsageDescription 麦克风，用于内嵌动态
