@@ -50,8 +50,7 @@ namespace TDSEditor
                 proj.AddFrameworkToProject(unityFrameworkTarget, "AdServices.framework", true);
                 proj.AddFrameworkToProject(unityFrameworkTarget, "iAd.framework", false);
 
-                //获取bundleId
-                var bundleId = proj.GetBuildPropertyForAnyConfig(target, "PRODUCT_BUNDLE_IDENTIFIER");
+                
                 // 添加资源文件，注意文件路径
                 var resourcePath = Path.Combine(path, "TDSGlobalResource");
 
@@ -79,6 +78,9 @@ namespace TDSEditor
                 // 复制Assets的plist到工程目录
                 File.Copy(parentFolder + "/Assets/Plugins/iOS/Resource/TDSGlobal-Info.plist",resourcePath + "/TDSGlobal-Info.plist");
 
+                //获取bundleId
+                var bundleId = GetValueFromPlist(resourcePath + "/TDSGlobal-Info.plist","bundle_id");
+                
                 List<string> names = new List<string>();    
                 names.Add("TDSGlobalSDKResources.bundle");
                 names.Add("LineSDKResource.bundle");
@@ -230,6 +232,23 @@ namespace TDSEditor
             UnityAppController.WriteBelow(@"NSURL* url = userActivity.webpageURL;",@"[TDSGlobalSDK application:application continueUserActivity:userActivity restorationHandler:restorationHandler];");
             UnityAppController.WriteBelow(@"handler(UIBackgroundFetchResultNoData);",@"[TDSGlobalSDK application:application didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];");
             Debug.Log("修改代码成功");
+        }
+
+        private static string GetValueFromPlist(string infoPlistPath,string key)
+        {
+            if(infoPlistPath==null)
+            {
+                return null;
+            }
+            Dictionary<string, object> dic = (Dictionary<string, object>)Plist.readPlist(infoPlistPath);
+            foreach (var item in dic)
+            {
+                if(item.Key.Equals(key))
+                {
+                    return (string)item.Value;
+                }
+            }
+            return null;
         }
     }
 }

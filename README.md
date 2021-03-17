@@ -102,19 +102,19 @@ android:name="com.facebook.sdk.ApplicationId"
 android:value="{facebook-cliendId}" />
 
      <activity
-android:name="com.facebook.FacebookActivity"
-android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-android:label="@string/app_name" />
+        android:name="com.facebook.FacebookActivity"
+        android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+        android:label="@string/app_name" />
 
     <activity
         android:name="com.facebook.CustomTabActivity"
         android:exported="true">
         <intent-filter>
-<action android:name="android.intent.action.VIEW" />
-    <category android:name="android.intent.category.DEFAULT" />
-    <category android:name="android.intent.category.BROWSABLE" />
-    <data android:scheme="{facebook-scheme}" />
-</intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="{facebook-scheme}" />
+        </intent-filter>
     </activity>
 
     <!-- Facebook 分享图片使用 -->
@@ -163,7 +163,7 @@ public class TDSGlobalLanguage
 
 #### 4.3.1 登陆
 ```c#
-TDSGlobal.TDSGlobalSDK.Login((tdsUser)=
+TDSGlobal.TDSGlobalSDK.Login((tdsUser)=>
 {
     //返回用户信息
 },(tdsError)=>
@@ -174,7 +174,7 @@ TDSGlobal.TDSGlobalSDK.Login((tdsUser)=
 
 #### 4.3.2 获取用户信息
 ```c#
-TDSGlobal.TDSGlobalSDK.GetUser((tdsUser)=
+TDSGlobal.TDSGlobalSDK.GetUser((tdsUser)=>
 {
     //返回用户信息
 },(tdsError)=>
@@ -184,7 +184,7 @@ TDSGlobal.TDSGlobalSDK.GetUser((tdsUser)=
 ```
 #### 4.3.3 添加用户状态回调
 ```c#
-TDSGlobal.TDSGlobalSDK.AddUserStatusChangeCallback((code)=
+TDSGlobal.TDSGlobalSDK.AddUserStatusChangeCallback((code,message)=>
 {
     if(code == TDSGlobalUserStatusCode.LOGOUT)
     {
@@ -357,7 +357,7 @@ writerHelper.WriteBelow(@"task clean(type: Delete) {
 }",@"allprojects {
     buildscript {
         dependencies {
-classpath 'com.google.gms:google-services:4.0.2'
+            classpath 'com.google.gms:google-services:4.0.2'
         }
     }
 }");
@@ -383,7 +383,6 @@ writerHelper.WriteBelow(@"implementation fileTree(dir: 'libs', include: ['*.jar'
         implementation 'com.android.support:appcompat-v7:28.0.0'
         implementation 'com.android.support:recyclerview-v7:28.0.0'
     ");
-
 ```
 
 #### 4.2 IOS
