@@ -1,18 +1,30 @@
-# TDSGlobalUnity
+# TDSGlobal-Unity
 
-### 前提条件
-
+## 1.基本要求
+### 环境要求
 * 安装Unity **2018.3**或更高版本
 
-* iOS **10**或更高版本
+* IOS **10**或更高版本，xcode 12.3+
 
 * Android 目标为**API21**或更高版本
 
-### 1.添加TDSGlobal Unity SDK
+### 权限声明
+#### Android
+android.permission.WRITE_EXTERNAL_STORAG 允许应用读取外部储存，用于内嵌动态、TapDB  
+android.permission.READ_EXTERNAL_STORAGE 允许应用写入外部储存，用于内嵌动态、TapDB
+
+#### iOS
+NSUserTrackingUsageDescription iOS14以上获取IDFA需要配置改权限，用TapDB  
+NSPhotoLibraryUsageDescription 相册权限，用于内嵌动态  
+NSCameraUsageDescription 相机，用于内嵌动态  
+NSMicrophoneUsageDescription 麦克风，用于内嵌动态  
+
+## 2.导入SDK
 
 * 使用Unity Package Manager 添加SDK到项目中。
+
 ```json
-//在Packages/manifest.json 中添加TDSGlobal和TapSDK
+//在Packages/manifest.json 中添加TDSGlobal SDK
 {
     "dependencies":{
         "com.tds.sdk":"https://github.com/xindong/TAPSDK_UPM.git#1.0.6",
@@ -21,53 +33,73 @@
 }
 ```
 
-* 在使用到TDSGlobal的脚本目录中新建.asmdef文件，添加以下代码
-```json
-{
-    "references": [
-        "TDSGlobal"
-    ],
-    "includePlatforms": [
-        "Android",
-        "Editor",
-        "iOS"
-    ],
-}
-```
+## 3.配置SDK
 
-### 2.配置TDSGlobal Unity SDK
+获取针对当前平台的TDSGlobal配置文件 ，请联系平台获取以下四个文件 
 
-* 配置TDSGlobal Unity SDK 首先需要配置 [TapSDK接入文档](https://developer.taptap.com/v2-doc/sdk/tap-unity)
-
-获取针对当前平台的TDSGlobal配置文件
-* iOS 将**TDSGlobal-Info.plist**配置文件复制到**Assets/Plugins/iOS**中
-* Android 将**TDSGlobal_info.json**、**google-Service.json** 文件复制到**Assets/Plugins/Android/assets**中
+- IOS 将**TDSGlobal-Info.plist**、**TDS-Info.plist**配置文件复制到**Assets/Plugins/iOS/Resource**中  
+- Android 将**TDSGlobal_info.json**、**google-Service.json** 文件复制到**Assets/Plugins/Android/assets**中
 
 自动配置脚本参考 [注意事项](#tips)
 
-#### 2.1 [iOS](https://git.gametaptap.com/tds-public/tdsglobal/-/blob/master/doc/iOS/ios_doc.md)
+### 3.1 [IOS](https://git.gametaptap.com/tds-public/tdsglobal/-/blob/master/doc/iOS/ios_doc.md)
 
-##### 2.1.1 配置编译选项
+TDSGlobal Unity SDK会自动配置iOS相关依赖，但需要开发者确认是否配置正确。
+
+#### 3.1.1 配置编译选项
 
 在**Capabilities**中打开In-App Purchase、Push Notifications、Sign In With Apple功能。
 
-#### 2.2 [Android](https://git.gametaptap.com/tds-public/tdsglobal/-/blob/master/doc/Android/android_doc.md)
+#### 3.1.2 检查系统依赖
 
-##### 2.2.1 配置AndroidManifest.xml文件
+请检查项目中是否已自动添加以下依赖项：
 
-需要打开Project Settings/Player/Publishing Settings/Build/Custom Main Manifest 配置，编辑Manifest.xml文件。
-如果需要Facebook相关功能，替换其中的 **facebook-clientId**、**facebook-scheme**等。
+	AdSupport.framework
+	LocalAuthentication.framework
+	AuthenticationServices.framework
+	SystemConfiguration.framework
+	Accelerate.framework
+	SafariServices.framework
+	Webkit.framework
+	CoreTelephony.framework
+	Security.framework
+	libc++.tdb
+	AppTrackingTransparency.framework
+	AdServices.framework
+	iAd.framework
+	
+若运行时遇到相关依赖库加载报错，可改为 Optional 尝试。
+
+#### 3.1.3 检查配置的URL Types
+
+选择应用 **TARGETS**，点击 **Info** 标签，展开 **URL Types** 。检查是否添加以下几项 URL Scheme.大括号内为游戏App对应参数，在开发者后台获取。
+
+	TapTap	:	tt{taptap-client-id}	
+	Facebook:	fb{facebook-app-id}
+	Google	:	{reversed-google-client-id}
+	Line	: 	line3rdp.{product_bundle_identify}
+
+### 3.2 [Android](https://git.gametaptap.com/tds-public/tdsglobal/-/blob/master/doc/Android/android_doc.md)
+
+#### 配置AndroidManifest.xml文件
+
+打开Project Settings/Player/Publishing Settings/Build/Custom Main Manifest 配置，编辑Manifest.xml文件
+
+添加SDK权限
+
+```xml
+    <!-- 添加权限 -->
+    <uses-permission android:name="com.android.vending.BILLING" />
+    <!-- 获取用户设备信息用 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+```
+
+facebook相关配置，如未使用到可以不配
 
 ```xml
  <meta-data
 android:name="com.facebook.sdk.ApplicationId"
-android:value="{facebook-clientId}" />
-
-    <activity
-        android:name="com.taptap.sdk.TapTapActivity"
-        android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-        android:exported="false"
-        android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+android:value="{facebook-cliendId}" />
 
      <activity
 android:name="com.facebook.FacebookActivity"
@@ -88,20 +120,14 @@ android:label="@string/app_name" />
     <!-- Facebook 分享图片使用 -->
     <provider
         android:name="com.facebook.FacebookContentProvider"
-        android:authorities="com.facebook.app.FacebookContentProvider{facebook-clientId}"
+        android:authorities="com.facebook.app.FacebookContentProvider{facebook-cliendId}"
         android:exported="true" />
-
-    
-    <!-- 添加权限 -->
-    <uses-permission android:name="com.android.vending.BILLING" />
-    <!-- 获取用户设备信息用 -->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-
 ```
 
-### 3.接口使用
+##4 4.接口使用
+引入命名空间`using TDSGlobal;`
 
-#### 3.1 初始化
+### 4.1 初始化
 
 ```c#
 TDSGlobal.TDSGlobalSDK.Init((success)=
@@ -110,7 +136,7 @@ TDSGlobal.TDSGlobalSDK.Init((success)=
 });
 ```
 
-#### 3.2 设置SDK语言
+### 4.2 设置SDK语言
 
 ```c#
 TDSGlobal.TDSGlobalSDK.SetLanguage(TDSGlobal.TDSGlobalLanguage.ZH_CN);
@@ -133,9 +159,9 @@ public class TDSGlobalLanguage
 }
 ```
 
-#### 3.3 用户
+### 4.3 用户
 
-##### 3.3.1 登陆
+#### 4.3.1 登陆
 ```c#
 TDSGlobal.TDSGlobalSDK.Login((tdsUser)=
 {
@@ -146,7 +172,7 @@ TDSGlobal.TDSGlobalSDK.Login((tdsUser)=
 });
 ```
 
-##### 3.3.2 获取用户信息
+#### 4.3.2 获取用户信息
 ```c#
 TDSGlobal.TDSGlobalSDK.GetUser((tdsUser)=
 {
@@ -156,9 +182,9 @@ TDSGlobal.TDSGlobalSDK.GetUser((tdsUser)=
     //获取失败
 });
 ```
-##### 3.3.3 添加用户状态回调
+#### 4.3.3 添加用户状态回调
 ```c#
-TDSGlobal.TDSGlobalSDK.AddUserStatusChangeCallback((code,message)=
+TDSGlobal.TDSGlobalSDK.AddUserStatusChangeCallback((code)=
 {
     if(code == TDSGlobalUserStatusCode.LOGOUT)
     {
@@ -172,7 +198,7 @@ TDSGlobal.TDSGlobalSDK.AddUserStatusChangeCallback((code,message)=
     }
 });
 ```
-##### 3.3.4用户中心
+#### 4.3.4 用户中心
 ```c#
 TDSGlobal.TDSGlobalSDK.UserCenter();
 ```
@@ -191,10 +217,6 @@ public class TDSGlobalUser
         public string sub;
         // use Name
         public string name;
-        // 登陆类型
-        public int loginType;
-        // 绑定类型
-        public List<string> boundAccounts;
         // Token
         public TDSGlobalAccessToken token;
     
@@ -218,9 +240,9 @@ public class TDSGlobalUser
 }
 ```
 
-#### 3.4 支付
+#### 4.4 支付
 
-##### 3.4.1 购买商品
+##### 4.4.1 购买商品
 ```c#
 /*
  * orderId 订单ID。游戏侧订单号，服务端支付回调会包含该字段
@@ -238,7 +260,7 @@ TDSGlobal.TDSGlobalSDK.PayWithProduct(orderId,productId,roleId,serverId,ext,(ord
 });
 ```
 
-##### 3.4.2 查询商品信息
+##### 4.4.2 查询商品信息
 ```c#
 /**
  * productIds 查询的商品Id数组
@@ -252,7 +274,7 @@ TDSGlobal.TDSGlobalSDK.QueryWithProductIds(productIds,(skuList)=>
 });
 ```
 
-##### 3.4.3 查询未完成的订单
+##### 4.4.3 查询未完成的订单
 ```c#
 TDSGlobal.TDSGlobalSDK.QueryRestoredPurchases((transactions)=>
 {
@@ -260,20 +282,20 @@ TDSGlobal.TDSGlobalSDK.QueryRestoredPurchases((transactions)=>
 });
 ```
 
-##### 3.4.4 网页支付(Android)
+##### 4.4.4 网页支付(Android)
 ```c#
 TDSGlobal.TDSGlobalSDK.PayWithWeb(serverId,roleId,(tdsError)=>{
     // 返回结果
 });
 ```
 
-#### 3.5 客服反馈
+#### 4.5 客服反馈
 
 ```c#
 TDSGlobal.TDSGlobalSDK.Report(serverId,roleId,roleName);
 ```
 
-#### 3.6 分享
+#### 4.6 分享
 
 ```c#
 //分享回调
@@ -295,7 +317,7 @@ TDSGlobal.TDSGlobalSDK.Share(shareType,url,message,tdsShareCallback);
 TDSGlobal.TDSGlobalSDK.Share(shareType,imagePath,tdsShareCallback);
 ```
 
-#### 3.7 日志上报
+#### 4.7 日志上报
 
 ```c#
 //用户信息上报
@@ -308,13 +330,13 @@ TDSGlobal.TDSGlobalSDK.EventCreateRole();
 TDSGlobal.TDSGlobalSDK.EventCompletedTutorial();
 ```
 
-#### 3.8 跳转到应用商店
+#### 4.8 跳转到应用商店
 
 ```c#
 TDSGlobal.TDSGlobalSDK.StoreReview();
 ```
 
-### 4.注意事项<a id="tips"></a>
+### 5.注意事项<a id="tips"></a>
 
 TDSGlobal/Script/Editor目录下的脚本，会帮助游戏自动配置。
 
@@ -364,34 +386,13 @@ writerHelper.WriteBelow(@"implementation fileTree(dir: 'libs', include: ['*.jar'
 
 ```
 
-#### 4.2 iOS
+#### 4.2 IOS
 
-确保TDSGlobal-Info.plist 拷贝到 Assets/Plugins/iOS目录中，同时检查项目的Xcode工程中自否自动添加以下依赖:
-
-```
-AdSupport.framework
-LocalAuthentication.framework
-AuthenticationServices.framework
-SystemConfiguration.framework
-Accelerate.framework
-SafariServices.framework
-Webkit.framework
-CoreTelephony.framework
-Security.framework
-libc++.tdb
-AppTrackingTransparency.framework
-AdService.framework
-iAd.framework
-```
-
-TDSGlobal/Plugins/Editor/TDSIOSPostBuildProcessor.cs 会自动配置所需依赖。
+确保TDSGlobal-Info.plist 拷贝到 Assets/Plugins/IOS目录中，脚本会自动配置依赖项。
 
 ```c#
-//自动添加需要依赖的framework
-proj.AddFrameworkToProject(unityFrameworkTarget, "AdServices.framework", true);
-proj.AddFrameworkToProject(unityFrameworkTarget, "iAd.framework", false);
 
-//脚本拷贝 TDSGlobal/Plugins/iOS/Resource 下的资源文件并且添加到framework的依赖中
+//脚本拷贝 TDSGlobal/Plugins/IOS/Resource 下的资源文件并且添加到framework的依赖中
 List<string> names = new List<string>();    
 names.Add("TDSGlobalSDKResources.bundle");
 names.Add("LineSDKResource.bundle");
@@ -424,7 +425,7 @@ List<string> items = new List<string>()
     "lineauth2"
 };
 
-//自动添加 Global-Info.plist 中的facebook、Google、TapTap等第三方SDK的ClientId
+//自动添加 Global-Info.plist 中的facebook、Google、TapTap、Line等第三方SDK的ClientId
 if(taptapId!=null)
 {
     dict2.SetString("CFBundleURLName", "TapTap");
@@ -446,7 +447,7 @@ if(facebookId!=null)
     PlistElementArray array2 = dict2.CreateArray("CFBundleURLSchemes");
     array2 = dict2.CreateArray("CFBundleURLSchemes");
     array2.AddString(facebookId);
-}          
+}
 File.WriteAllText(_plistPath, _plist.WriteToString());
 
 //自动修改UnityAppController.mm文件，进行TDSGlobalSDK的配置
@@ -458,18 +459,5 @@ UnityAppController.WriteBelow(@"[KeyboardDelegate Initialize];",@"[TDSGlobalSDK 
 UnityAppController.WriteBelow(@"AppController_SendNotificationWithArg(kUnityOnOpenURL, notifData);",@"[TDSGlobalSDK application:app openURL:url options:options];");
 UnityAppController.WriteBelow(@"NSURL* url = userActivity.webpageURL;",@"[TDSGlobalSDK application:application continueUserActivity:userActivity restorationHandler:restorationHandler];");
 UnityAppController.WriteBelow(@"handler(UIBackgroundFetchResultNoData);",@"[TDSGlobalSDK application:application didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];");
+Debug.Log("修改代码成功");
 ```
-
-### 5.SDK权限使用声明
-
-#### 1.Android
-
-android.permission.WRITE_EXTERNAL_STORAG 允许应用读取外部储存，用于内嵌动态、TapDB
-android.permission.READ_EXTERNAL_STORAGE 允许应用写入外部储存，用于内嵌动态、TapDB
-
-#### 2.iOS
-
-NSUserTrackingUsageDescription iOS14以上获取IDFA需要配置改权限，用TapDB
-NSPhotoLibraryUsageDescription 相册权限，用于内嵌动态
-NSCameraUsageDescription 相机，用于内嵌动态
-NSMicrophoneUsageDescription 麦克风，用于内嵌动态
