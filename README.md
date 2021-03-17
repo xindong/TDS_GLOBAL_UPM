@@ -6,17 +6,17 @@
 
 * iOS **10**或更高版本
 
-* Android 目标为**API19**或更高版本
+* Android 目标为**API21**或更高版本
 
 ### 1.添加TDSGlobal Unity SDK
 
 * 使用Unity Package Manager 添加SDK到项目中。
 ```json
-//在Packages/manifest.json 中添加TDSGlobalUnity SDK
+//在Packages/manifest.json 中添加TDSGlobal和TapSDK
 {
     "dependencies":{
-        "com.tds.sdk":"https://github.com/xindong/TAPSDK_UPM.git#{version}",
-        "com.tds.global":"https://github.com/xindong/TDS_GLOBAL_UPM.git#{verison}",
+        "com.tds.sdk":"https://github.com/xindong/TAPSDK_UPM.git#1.0.6",
+        "com.tds.global":"https://github.com/xindong/TDS_GLOBAL_UPM.git#1.0.0",
     }
 }
 ```
@@ -36,6 +36,8 @@
 ```
 
 ### 2.配置TDSGlobal Unity SDK
+
+* 配置TDSGlobal Unity SDK 首先需要配置 [TapSDK接入文档](https://developer.taptap.com/v2-doc/sdk/tap-unity)
 
 获取针对当前平台的TDSGlobal配置文件
 * iOS 将**TDSGlobal-Info.plist**配置文件复制到**Assets/Plugins/iOS**中
@@ -363,9 +365,31 @@ writerHelper.WriteBelow(@"implementation fileTree(dir: 'libs', include: ['*.jar'
 ```
 
 #### 4.2 iOS
-确保TDSGlobal-Info.plist 拷贝到 Assets/Plugins/iOS目录中
+
+确保TDSGlobal-Info.plist 拷贝到 Assets/Plugins/iOS目录中，同时检查项目的Xcode工程中自否自动添加以下依赖:
+
+```
+AdSupport.framework
+LocalAuthentication.framework
+AuthenticationServices.framework
+SystemConfiguration.framework
+Accelerate.framework
+SafariServices.framework
+Webkit.framework
+CoreTelephony.framework
+Security.framework
+libc++.tdb
+AppTrackingTransparency.framework
+AdService.framework
+iAd.framework
+```
+
+TDSGlobal/Plugins/Editor/TDSIOSPostBuildProcessor.cs 会自动配置所需依赖。
 
 ```c#
+//自动添加需要依赖的framework
+proj.AddFrameworkToProject(unityFrameworkTarget, "AdServices.framework", true);
+proj.AddFrameworkToProject(unityFrameworkTarget, "iAd.framework", false);
 
 //脚本拷贝 TDSGlobal/Plugins/iOS/Resource 下的资源文件并且添加到framework的依赖中
 List<string> names = new List<string>();    
@@ -434,7 +458,6 @@ UnityAppController.WriteBelow(@"[KeyboardDelegate Initialize];",@"[TDSGlobalSDK 
 UnityAppController.WriteBelow(@"AppController_SendNotificationWithArg(kUnityOnOpenURL, notifData);",@"[TDSGlobalSDK application:app openURL:url options:options];");
 UnityAppController.WriteBelow(@"NSURL* url = userActivity.webpageURL;",@"[TDSGlobalSDK application:application continueUserActivity:userActivity restorationHandler:restorationHandler];");
 UnityAppController.WriteBelow(@"handler(UIBackgroundFetchResultNoData);",@"[TDSGlobalSDK application:application didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];");
-Debug.Log("修改代码成功");
 ```
 
 ### 5.SDK权限使用声明
