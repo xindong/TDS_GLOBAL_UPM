@@ -124,7 +124,7 @@ android:value="{facebook-cliendId}" />
         android:exported="true" />
 ```
 
-##4 4.接口使用
+## 4 4.接口使用
 引入命名空间`using TDSGlobal;`
 
 ### 4.1 初始化
