@@ -1,7 +1,7 @@
 {
     "name": "TDSGlobal",
     "references": [
-        "GUID:c3aa43f4a24be4ccd88d8393d31461cc"
+        "TDSCommon"
     ],
     "includePlatforms": [
         "Android",
