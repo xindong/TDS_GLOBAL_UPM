@@ -229,9 +229,25 @@ namespace TDSEditor
             UnityAppController.WriteBelow(@"#import <OpenGLES/ES2/glext.h>", @"#import <TDSGlobalSDKCoreKit/TDSGlobalSDK.h>");
             UnityAppController.WriteBelow(@"[KeyboardDelegate Initialize];",@"[TDSGlobalSDK application:application didFinishLaunchingWithOptions:launchOptions];");
             UnityAppController.WriteBelow(@"AppController_SendNotificationWithArg(kUnityOnOpenURL, notifData);",@"[TDSGlobalSDK application:app openURL:url options:options];");
-            UnityAppController.WriteBelow(@"NSURL* url = userActivity.webpageURL;",@"[TDSGlobalSDK application:application continueUserActivity:userActivity restorationHandler:restorationHandler];");
+            if(CheckoutUniversalLinkHolder(unityAppControllerPath,@"NSURL* url = userActivity.webpageURL;"))
+            {
+                UnityAppController.WriteBelow(@"NSURL* url = userActivity.webpageURL;",@"[TDSGlobalSDK application:application continueUserActivity:userActivity restorationHandler:restorationHandler];");
+            }
+            else
+            {
+                UnityAppController.WriteBelow(@"- (void)preStartUnity               {}",@"-(BOOL) application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler{[TDSGlobalSDK application:application continueUserActivity:userActivity restorationHandler:restorationHandler];return YES;}");
+            }
             UnityAppController.WriteBelow(@"handler(UIBackgroundFetchResultNoData);",@"[TDSGlobalSDK application:application didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];");
             Debug.Log("修改代码成功");
+        }
+
+        private static bool CheckoutUniversalLinkHolder(string filePath,string below)
+        {
+            StreamReader streamReader = new StreamReader(filePath);
+            string all = streamReader.ReadToEnd();
+            streamReader.Close();
+            int beginIndex = all.IndexOf(below, StringComparison.Ordinal);
+            return beginIndex != -1;
         }
 
         private static string GetValueFromPlist(string infoPlistPath,string key)
