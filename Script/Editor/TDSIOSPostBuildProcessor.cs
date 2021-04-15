@@ -172,7 +172,7 @@ namespace TDSEditor
                             googleId = (string)googleItem.Value;
                         }
                     }
-                }else if(item.key.Equals("twitter")){
+                }else if(item.Key.Equals("twitter")){
                     Dictionary<string,object> twitterDic = (Dictionary<string,object>) item.Value;
                     foreach(var twitterItem in twitterDic)
                     {
