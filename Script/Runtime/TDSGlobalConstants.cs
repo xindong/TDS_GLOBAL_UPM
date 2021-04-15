@@ -12,11 +12,32 @@ namespace TDSGlobal
         public static int TH = 3;
 
         public static int ID = 4;
+        // 韩语
+        public static int KR = 5;
+        // 日语
+        public static int JP = 6;
+        // 德语
+        public static int DE = 7;
+        // 法语
+        public static int FR = 8;
+        // 葡萄牙语
+        public static int PT = 9;
+        // 西班牙语
+        public static int ES = 10;
+        // 土耳其语
+        public static int TR = 11;
+        // 俄罗斯语
+        public static int RU = 12;
     }
 
     public class TDSGlobalShareFlavors
     {
         public static int FACEBOOK = 0;
+
+        public static int LINE = 1;
+
+        public static int TWITTER = 2;
+
     }
 
     public class TDSGlobalPaymentResultCode

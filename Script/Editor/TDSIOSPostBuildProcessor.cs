@@ -144,6 +144,7 @@ namespace TDSEditor
             string facebookId = null;
             string taptapId = null;
             string googleId = null;
+            string twitterId = null;
 
             foreach (var item in dic)
             {
@@ -169,6 +170,14 @@ namespace TDSEditor
                     {
                         if(googleItem.Key.Equals("REVERSED_CLIENT_ID")){
                             googleId = (string)googleItem.Value;
+                        }
+                    }
+                }else if(item.key.Equals("twitter")){
+                    Dictionary<string,object> twitterDic = (Dictionary<string,object>) item.Value;
+                    foreach(var twitterItem in twitterDic)
+                    {
+                        if(twitterItem.Key.Equals("consumer_key")){
+                            twitterId = (string)twitterItem.Value;
                         }
                     }
                 }
@@ -212,6 +221,15 @@ namespace TDSEditor
                 PlistElementArray array2 = dict2.CreateArray("CFBundleURLSchemes");
                 array2 = dict2.CreateArray("CFBundleURLSchemes");
                 array2.AddString("line3rdp." + bundleId);
+            }
+
+            if(twitterId!=null)
+            {
+                dict2 = array.AddDict();
+                dict2.SetString("CFBundleURLName", "Twitter");
+                PlistElementArray array2 = dict2.CreateArray("CFBundleURLSchemes");
+                array2 = dict2.CreateArray("CFBundleURLSchemes");
+                array2.AddString("tdsg.twitter." + twitterId);
             }
            
             File.WriteAllText(_plistPath, _plist.WriteToString());

@@ -1,0 +1,420 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
+// swift-module-flags: -target armv7-apple-ios10.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name SwifteriOS
+import Accounts
+import AuthenticationServices
+import CoreFoundation
+import Dispatch
+import Foundation
+import SafariServices
+import Social
+import Swift
+import UIKit
+infix operator ??= : AssignmentPrecedence
+extension Swifter {
+  public func getRecentlyFavoritedTweets(count: Swift.Int? = nil, sinceID: Swift.String? = nil, maxID: Swift.String? = nil, tweetMode: SwifteriOS.TweetMode = .default, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func getRecentlyFavoritedTweets(for userTag: SwifteriOS.UserTag, count: Swift.Int? = nil, sinceID: Swift.String? = nil, maxID: Swift.String? = nil, tweetMode: SwifteriOS.TweetMode = .default, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func unfavoriteTweet(forID id: Swift.String, includeEntities: Swift.Bool? = nil, tweetMode: SwifteriOS.TweetMode = .default, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func favoriteTweet(forID id: Swift.String, includeEntities: Swift.Bool? = nil, tweetMode: SwifteriOS.TweetMode = .default, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+}
+extension Swifter {
+  public func getUserSuggestions(slug: Swift.String, lang: Swift.String? = nil, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func getUsersSuggestions(lang: Swift.String? = nil, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func getUsersSuggestions(for slug: Swift.String, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+}
+public enum UserTag {
+  case id(Swift.String)
+  case screenName(Swift.String)
+}
+public enum UsersTag {
+  case id([Swift.String])
+  case screenName([Swift.String])
+}
+public enum ListTag {
+  case id(Swift.String)
+  case slug(Swift.String, owner: SwifteriOS.UserTag)
+}
+public enum HTTPMethodType : Swift.String {
+  case OPTIONS
+  case GET
+  case HEAD
+  case POST
+  case PUT
+  case DELETE
+  case TRACE
+  case CONNECT
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@objc public class HTTPRequest : ObjectiveC.NSObject, Foundation.URLSessionDataDelegate {
+  public typealias UploadProgressHandler = (Swift.Int, Swift.Int, Swift.Int) -> Swift.Void
+  public typealias DownloadProgressHandler = (Foundation.Data, Swift.Int, Swift.Int, Foundation.HTTPURLResponse) -> Swift.Void
+  public typealias SuccessHandler = (Foundation.Data, Foundation.HTTPURLResponse) -> Swift.Void
+  public typealias FailureHandler = (Swift.Error) -> Swift.Void
+  public init(url: Foundation.URL, method: SwifteriOS.HTTPMethodType = .GET, parameters: [Swift.String : Any] = [:])
+  public init(request: Foundation.URLRequest)
+  public func start()
+  public func stop()
+  public func add(multipartData data: Foundation.Data, parameterName: Swift.String, mimeType: Swift.String?, fileName: Swift.String?)
+  public func add(body: [Swift.String : Any])
+  @objc public func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didCompleteWithError error: Swift.Error?)
+  @objc public func urlSession(_ session: Foundation.URLSession, dataTask: Foundation.URLSessionDataTask, didReceive data: Foundation.Data)
+  @objc public func urlSession(_ session: Foundation.URLSession, dataTask: Foundation.URLSessionDataTask, didReceive response: Foundation.URLResponse, completionHandler: @escaping (Foundation.URLSession.ResponseDisposition) -> Swift.Void)
+  @objc public func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didSendBodyData bytesSent: Swift.Int64, totalBytesSent: Swift.Int64, totalBytesExpectedToSend: Swift.Int64)
+  @objc deinit
+  @objc override dynamic public init()
+}
+extension Int {
+  public func bytes(_ totalBytes: Swift.Int = MemoryLayout<Int>.size) -> [Swift.UInt8]
+}
+public enum TwitterURL {
+  case api
+  case upload
+  case stream
+  case publish
+  case userStream
+  case siteStream
+  case oauth
+  public static func == (a: SwifteriOS.TwitterURL, b: SwifteriOS.TwitterURL) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public enum TweetMode {
+  case `default`
+  case extended
+  case compat
+  case other(Swift.String)
+}
+@objc @objcMembers public class Swifter : ObjectiveC.NSObject {
+  public typealias PostTweetSuccessHandler = (Swift.String) -> Swift.Void
+  public typealias SuccessHandler = (SwifteriOS.JSON) -> Swift.Void
+  public typealias CursorSuccessHandler = (SwifteriOS.JSON, Swift.String?, Swift.String?) -> Swift.Void
+  public typealias JSONSuccessHandler = (SwifteriOS.JSON, Foundation.HTTPURLResponse) -> Swift.Void
+  public typealias SearchResultHandler = (SwifteriOS.JSON, SwifteriOS.JSON) -> Swift.Void
+  public typealias FailureHandler = (Swift.Error) -> Swift.Void
+  @objc public var webAuthCallback: Swift.String
+  @objc public var clientAuthCallback: Swift.String
+  @objc public class func shareInstance() -> SwifteriOS.Swifter?
+  @objc public class func updateInstance(_ newInstance: SwifteriOS.Swifter?)
+  @objc public class func authed() -> Swift.Bool
+  public var client: SwifteriOS.SwifterClientProtocol
+  @objc public init(consumerKey: Swift.String, consumerSecret: Swift.String, appOnly: Swift.Bool = false)
+  @objc public init(consumerKey: Swift.String, consumerSecret: Swift.String, oauthToken: Swift.String, oauthTokenSecret: Swift.String)
+  @objc @available(iOS, deprecated: 11.0, message: "Using ACAccount for Twitter is no longer supported as of iOS 11.")
+  public init(account: Accounts.ACAccount)
+  @objc deinit
+  @objc override dynamic public init()
+}
+extension Scanner {
+}
+extension Swifter {
+  public func getSavedSearchesList(success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func showSavedSearch(for id: Swift.String, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func createSavedSearch(for query: Swift.String, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func deleteSavedSearch(for id: Swift.String, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+}
+public struct HMAC {
+}
+extension Swifter {
+  public func getRetweets(forTweetID id: Swift.String, count: Swift.Int? = nil, trimUser: Swift.Bool? = nil, tweetMode: SwifteriOS.TweetMode = .default, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func getTweet(for id: Swift.String, trimUser: Swift.Bool? = nil, includeMyRetweet: Swift.Bool? = nil, includeEntities: Swift.Bool? = nil, includeExtAltText: Swift.Bool? = nil, tweetMode: SwifteriOS.TweetMode = TweetMode.default, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func destroyTweet(forID id: Swift.String, trimUser: Swift.Bool? = nil, tweetMode: SwifteriOS.TweetMode = .default, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  @objc dynamic public func postTextTweet(status: Swift.String, mediaIDs: [Swift.String] = [], postSuccess: SwifteriOS.Swifter.PostTweetSuccessHandler? = nil, postFailure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func postTweet(status: Swift.String, inReplyToStatusID: Swift.String? = nil, coordinate: (lat: Swift.Double, long: Swift.Double)? = nil, autoPopulateReplyMetadata: Swift.Bool? = nil, excludeReplyUserIds: Swift.Bool? = nil, placeID: Swift.Double? = nil, displayCoordinates: Swift.Bool? = nil, trimUser: Swift.Bool? = nil, mediaIDs: [Swift.String] = [], attachmentURL: Foundation.URL? = nil, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  @objc dynamic public func postMediaTwitter(status: Swift.String, _ media: Foundation.Data, postSuccess: SwifteriOS.Swifter.PostTweetSuccessHandler? = nil, postFailure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func postTweet(status: Swift.String, media: Foundation.Data, inReplyToStatusID: Swift.String? = nil, autoPopulateReplyMetadata: Swift.Bool? = nil, excludeReplyUserIds: Swift.Bool? = nil, coordinate: (lat: Swift.Double, long: Swift.Double)? = nil, placeID: Swift.Double? = nil, displayCoordinates: Swift.Bool? = nil, trimUser: Swift.Bool? = nil, tweetMode: SwifteriOS.TweetMode = TweetMode.default, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func postTweetWithGif(attachmentUrl: Foundation.URL, text: Swift.String, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  @objc dynamic public func postImageMedia(_ media: Foundation.Data, success: SwifteriOS.Swifter.PostTweetSuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func postMedia(_ media: Foundation.Data, additionalOwners: SwifteriOS.UsersTag? = nil, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func postMultipartMedia(_ media: Foundation.Data, name: Swift.String? = nil, type: SwifteriOS.MediaType, category: SwifteriOS.MediaCategory, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func retweetTweet(forID id: Swift.String, trimUser: Swift.Bool? = nil, tweetMode: SwifteriOS.TweetMode = .default, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func unretweetTweet(forID id: Swift.String, trimUser: Swift.Bool? = nil, tweetMode: SwifteriOS.TweetMode = .default, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func oembedInfo(for url: Foundation.URL, maxWidth: Swift.Int? = nil, hideMedia: Swift.Bool? = nil, hideThread: Swift.Bool? = nil, omitScript: Swift.Bool? = nil, align: Swift.String? = nil, related: Swift.String? = nil, lang: Swift.String? = nil, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func tweetRetweeters(for id: Swift.String, count: Swift.Int? = nil, cursor: Swift.String? = nil, stringifyIDs: Swift.Bool? = nil, success: SwifteriOS.Swifter.CursorSuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func lookupTweets(for tweetIDs: [Swift.String], includeEntities: Swift.Bool? = nil, trimUser: Swift.Bool? = nil, map: Swift.Bool? = nil, includeExtAltText: Swift.Bool? = nil, tweetMode: SwifteriOS.TweetMode = .default, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+}
+public enum MediaType : Swift.String {
+  case png
+  case jpeg
+  case gif
+  case mov
+  case mp4
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum MediaCategory : Swift.String {
+  case gif
+  case video
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+extension Swifter {
+  public typealias TokenSuccessHandler = (SwifteriOS.Credential.OAuthAccessToken?, Foundation.URLResponse) -> Swift.Void
+  public typealias SSOTokenSuccessHandler = (SwifteriOS.Credential.OAuthAccessToken) -> Swift.Void
+  @available(OSX 10.15, iOS 13.0, *)
+  @objc dynamic public func twitterAuthorize(withProvider provider: AuthenticationServices.ASWebAuthenticationPresentationContextProviding, success: SwifteriOS.Swifter.TokenSuccessHandler?, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  @available(OSX 10.15, iOS 13.0, *)
+  @objc dynamic public func authorize(withProvider provider: AuthenticationServices.ASWebAuthenticationPresentationContextProviding, ephemeralSession: Swift.Bool = false, forceLogin: Swift.Bool = false, success: SwifteriOS.Swifter.TokenSuccessHandler?, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  @available(iOS, deprecated: 13.0)
+  @objc dynamic public func twitterWebAuthorize(presentingFrom presenting: UIKit.UIViewController?, success: SwifteriOS.Swifter.TokenSuccessHandler?, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  @available(iOS, deprecated: 13.0)
+  @objc dynamic public func authorize(presentingFrom presenting: UIKit.UIViewController?, forceLogin: Swift.Bool = false, safariDelegate: SafariServices.SFSafariViewControllerDelegate? = nil, success: SwifteriOS.Swifter.TokenSuccessHandler?, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  @objc dynamic public func authorizeSSO(success: SwifteriOS.Swifter.SSOTokenSuccessHandler?, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  @objc dynamic public func makeQueryURL(tokenKey: Swift.String, forceLogin: Swift.Bool) -> Foundation.URL
+  @objc @discardableResult
+  dynamic public class func handleOpenURL(_ url: Foundation.URL) -> Swift.Bool
+  @objc dynamic public func authorizeAppOnly(success: SwifteriOS.Swifter.TokenSuccessHandler?, failure: SwifteriOS.Swifter.FailureHandler?)
+  public func postOAuth2BearerToken(success: SwifteriOS.Swifter.JSONSuccessHandler?, failure: SwifteriOS.Swifter.FailureHandler?)
+  @objc dynamic public func invalidateOAuth2BearerToken(success: SwifteriOS.Swifter.TokenSuccessHandler?, failure: SwifteriOS.Swifter.FailureHandler?)
+  @objc dynamic public func postOAuthRequestToken(with callbackURL: Foundation.URL, success: @escaping SwifteriOS.Swifter.TokenSuccessHandler, failure: SwifteriOS.Swifter.FailureHandler?)
+  @objc dynamic public func postOAuthAccessToken(with requestToken: SwifteriOS.Credential.OAuthAccessToken, success: @escaping SwifteriOS.Swifter.TokenSuccessHandler, failure: SwifteriOS.Swifter.FailureHandler?)
+}
+extension Swifter {
+  public func getDirectMessage(for messageId: Swift.String, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func getDirectMessages(count: Swift.Int? = nil, cursor: Swift.String? = nil, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func destroyDirectMessage(for messageId: Swift.String, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func postDirectMessage(to recipientUserId: Swift.String, message: Swift.String, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+}
+extension Swifter {
+  public func reportSpam(for userTag: SwifteriOS.UserTag, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+}
+extension Swifter {
+  public func searchTweet(using query: Swift.String, geocode: Swift.String? = nil, lang: Swift.String? = nil, locale: Swift.String? = nil, resultType: Swift.String? = nil, count: Swift.Int? = nil, until: Swift.String? = nil, sinceID: Swift.String? = nil, maxID: Swift.String? = nil, includeEntities: Swift.Bool? = nil, callback: Swift.String? = nil, tweetMode: SwifteriOS.TweetMode = TweetMode.default, success: SwifteriOS.Swifter.SearchResultHandler? = nil, failure: @escaping SwifteriOS.Swifter.FailureHandler)
+}
+public enum JSON : Swift.Equatable, Swift.CustomStringConvertible {
+  case string(Swift.String)
+  case number(Swift.Double)
+  case object(Swift.Dictionary<Swift.String, SwifteriOS.JSON>)
+  case array(Swift.Array<SwifteriOS.JSON>)
+  case bool(Swift.Bool)
+  case null
+  case invalid
+  public init(_ rawValue: Any)
+  public var string: Swift.String? {
+    get
+  }
+  public var integer: Swift.Int? {
+    get
+  }
+  public var double: Swift.Double? {
+    get
+  }
+  public var object: [Swift.String : SwifteriOS.JSON]? {
+    get
+  }
+  public var array: [SwifteriOS.JSON]? {
+    get
+  }
+  public var bool: Swift.Bool? {
+    get
+  }
+  public subscript(key: Swift.String) -> SwifteriOS.JSON {
+    get
+  }
+  public subscript(index: Swift.Int) -> SwifteriOS.JSON {
+    get
+  }
+  public var description: Swift.String {
+    get
+  }
+}
+public func == (lhs: SwifteriOS.JSON, rhs: SwifteriOS.JSON) -> Swift.Bool
+extension JSON : Swift.ExpressibleByStringLiteral, Swift.ExpressibleByIntegerLiteral, Swift.ExpressibleByBooleanLiteral, Swift.ExpressibleByFloatLiteral, Swift.ExpressibleByArrayLiteral, Swift.ExpressibleByDictionaryLiteral, Swift.ExpressibleByNilLiteral {
+  public init(stringLiteral value: Swift.StringLiteralType)
+  public init(extendedGraphemeClusterLiteral value: Swift.StringLiteralType)
+  public init(unicodeScalarLiteral value: Swift.StringLiteralType)
+  public init(integerLiteral value: Swift.IntegerLiteralType)
+  public init(booleanLiteral value: Swift.BooleanLiteralType)
+  public init(floatLiteral value: Swift.FloatLiteralType)
+  public init(dictionaryLiteral elements: (Swift.String, Any)...)
+  public init(arrayLiteral elements: Swift.AnyObject...)
+  public init(nilLiteral: ())
+  public typealias StringLiteralType = Swift.StringLiteralType
+  public typealias ExtendedGraphemeClusterLiteralType = Swift.StringLiteralType
+  public typealias UnicodeScalarLiteralType = Swift.StringLiteralType
+  public typealias Key = Swift.String
+  public typealias Value = Any
+  public typealias ArrayLiteralElement = Swift.AnyObject
+  public typealias FloatLiteralType = Swift.FloatLiteralType
+  public typealias BooleanLiteralType = Swift.BooleanLiteralType
+  public typealias IntegerLiteralType = Swift.IntegerLiteralType
+}
+extension Swifter {
+  public func getSubscribedLists(for userTag: SwifteriOS.UserTag? = nil, reverse: Swift.Bool? = nil, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func listTweets(for listTag: SwifteriOS.ListTag, sinceID: Swift.String? = nil, maxID: Swift.String? = nil, count: Swift.Int? = nil, includeEntities: Swift.Bool? = nil, includeRTs: Swift.Bool? = nil, tweetMode: SwifteriOS.TweetMode = .default, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func removeMemberFromList(for listTag: SwifteriOS.ListTag, user userTag: SwifteriOS.UserTag, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func getListMemberships(for userTag: SwifteriOS.UserTag, count: Swift.Int? = nil, cursor: Swift.String? = nil, filterToOwnedLists: Swift.Bool? = nil, success: SwifteriOS.Swifter.CursorSuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func getListSubscribers(for listTag: SwifteriOS.ListTag, cursor: Swift.String? = nil, includeEntities: Swift.Bool? = nil, skipStatus: Swift.Bool? = nil, success: SwifteriOS.Swifter.CursorSuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func subscribeToList(for listTag: SwifteriOS.ListTag, owner ownerTag: SwifteriOS.UserTag, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func checkListSubcription(of userTag: SwifteriOS.UserTag, for listTag: SwifteriOS.ListTag, includeEntities: Swift.Bool? = nil, skipStatus: Swift.Bool? = nil, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func unsubscribeFromList(for listTag: SwifteriOS.ListTag, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func subscribeUsersToList(for listTag: SwifteriOS.ListTag, users usersTag: SwifteriOS.UsersTag, includeEntities: Swift.Bool? = nil, skipStatus: Swift.Bool? = nil, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func checkListMembership(of userTag: SwifteriOS.UserTag, for listTag: SwifteriOS.ListTag, includeEntities: Swift.Bool? = nil, skipStatus: Swift.Bool? = nil, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func getListMembers(for listTag: SwifteriOS.ListTag, cursor: Swift.String? = nil, includeEntities: Swift.Bool? = nil, skipStatus: Swift.Bool? = nil, success: SwifteriOS.Swifter.CursorSuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func addListMember(_ userTag: SwifteriOS.UserTag, to listTag: SwifteriOS.ListTag, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func deleteList(for listTag: SwifteriOS.ListTag, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func updateList(for listTag: SwifteriOS.ListTag, name: Swift.String? = nil, isPublic: Swift.Bool = true, description: Swift.String? = nil, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func createList(named name: Swift.String, asPublicList: Swift.Bool = true, description: Swift.String? = nil, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func showList(for listTag: SwifteriOS.ListTag, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func getSubscribedList(of userTag: SwifteriOS.UserTag, count: Swift.String? = nil, cursor: Swift.String? = nil, success: SwifteriOS.Swifter.CursorSuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func removeListMembers(_ usersTag: SwifteriOS.UsersTag, from listTag: SwifteriOS.ListTag, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func getOwnedLists(for userTag: SwifteriOS.UserTag, count: Swift.String? = nil, cursor: Swift.String? = nil, success: SwifteriOS.Swifter.CursorSuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+}
+@objc public class Credential : ObjectiveC.NSObject {
+  @objc public class OAuthAccessToken : ObjectiveC.NSObject {
+    @objc public var key: Swift.String {
+      get
+    }
+    @objc public var secret: Swift.String {
+      get
+    }
+    public var verifier: Swift.String? {
+      get
+    }
+    public var screenName: Swift.String? {
+      get
+    }
+    public var userID: Swift.String? {
+      get
+    }
+    public init(key: Swift.String, secret: Swift.String)
+    public init(queryString: Swift.String)
+    @objc override dynamic public init()
+    @objc deinit
+  }
+  @objc public var accessToken: SwifteriOS.Credential.OAuthAccessToken? {
+    get
+  }
+  @available(iOS, deprecated: 11.0, message: "Using ACAccount for Twitter is no longer supported as of iOS 11.")
+  public var account: Accounts.ACAccount? {
+    get
+  }
+  @available(iOS, deprecated: 11.0, message: "Using ACAccount for Twitter is no longer supported as of iOS 11.")
+  public init(account: Accounts.ACAccount)
+  public init(accessToken: SwifteriOS.Credential.OAuthAccessToken)
+  @objc public func getAccessToken() -> Swift.String?
+  @objc public func getSecret() -> Swift.String?
+  @objc override dynamic public init()
+  @objc deinit
+}
+public struct SwifterError : Foundation.LocalizedError {
+  public enum ErrorKind : Swift.CustomStringConvertible {
+    case invalidAppOnlyBearerToken
+    case responseError(code: Swift.Int)
+    case invalidJSONResponse
+    case badOAuthResponse
+    case urlResponseError(status: Swift.Int, headers: [Swift.AnyHashable : Any], errorCode: Swift.Int)
+    case jsonParseError
+    case invalidGifData
+    case invalidGifResponse
+    case invalidMultipartMediaResponse
+    case noTwitterApp
+    case cancelled
+    case invalidClient
+    public var description: Swift.String {
+      get
+    }
+  }
+  public var message: Swift.String
+  public var kind: SwifteriOS.SwifterError.ErrorKind
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+extension Swifter {
+  public func getGeoID(for placeID: Swift.String, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func getReverseGeocode(for coordinate: (lat: Swift.Double, long: Swift.Double), accuracy: Swift.String? = nil, granularity: Swift.String? = nil, maxResults: Swift.Int? = nil, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func searchGeo(coordinate: (lat: Swift.Double, long: Swift.Double)? = nil, query: Swift.String? = nil, ipAddress: Swift.String? = nil, accuracy: Swift.String? = nil, granularity: Swift.String? = nil, maxResults: Swift.Int? = nil, containedWithin: Swift.String? = nil, attributeStreetAddress: Swift.String? = nil, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func getSimilarPlaces(for coordinate: (lat: Swift.Double, long: Swift.Double), name: Swift.String, containedWithin: Swift.String? = nil, attributeStreetAddress: Swift.String? = nil, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+}
+extension Swifter {
+  public func getTrendsPlace(with woeid: Swift.String, excludeHashtags: Swift.Bool = false, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func getAvailableTrends(success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func getClosestTrends(for coordinate: (lat: Swift.Double, long: Swift.Double), success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+}
+extension Swifter {
+  public func getAccountSettings(success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func verifyAccountCredentials(includeEntities: Swift.Bool? = nil, skipStatus: Swift.Bool? = nil, includeEmail: Swift.Bool? = nil, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func updateAccountSettings(trendLocationWOEID: Swift.String? = nil, sleepTimeEnabled: Swift.Bool? = nil, startSleepTime: Swift.Int? = nil, endSleepTime: Swift.Int? = nil, timeZone: Swift.String? = nil, lang: Swift.String? = nil, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func updateUserProfile(name: Swift.String? = nil, url: Swift.String? = nil, location: Swift.String? = nil, description: Swift.String? = nil, includeEntities: Swift.Bool? = nil, skipStatus: Swift.Bool? = nil, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func updateProfileBackground(using imageData: Foundation.Data, title: Swift.String? = nil, includeEntities: Swift.Bool? = nil, use: Swift.Bool? = nil, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func updateProfileColors(backgroundColor: Swift.String? = nil, linkColor: Swift.String? = nil, sidebarBorderColor: Swift.String? = nil, sidebarFillColor: Swift.String? = nil, textColor: Swift.String? = nil, includeEntities: Swift.Bool? = nil, skipStatus: Swift.Bool? = nil, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func updateProfileImage(using imageData: Foundation.Data, includeEntities: Swift.Bool? = nil, skipStatus: Swift.Bool? = nil, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func getBlockedUsers(includeEntities: Swift.Bool? = nil, skipStatus: Swift.Bool? = nil, cursor: Swift.String? = nil, success: SwifteriOS.Swifter.CursorSuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func getBlockedUsersIDs(stringifyIDs: Swift.String? = nil, cursor: Swift.String? = nil, success: SwifteriOS.Swifter.CursorSuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func blockUser(_ userTag: SwifteriOS.UserTag, includeEntities: Swift.Bool? = nil, skipStatus: Swift.Bool? = nil, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func unblockUser(for userTag: SwifteriOS.UserTag, includeEntities: Swift.Bool? = nil, skipStatus: Swift.Bool? = nil, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func lookupUsers(for usersTag: SwifteriOS.UsersTag, includeEntities: Swift.Bool? = nil, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func showUser(_ userTag: SwifteriOS.UserTag, includeEntities: Swift.Bool? = nil, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func searchUsers(using query: Swift.String, page: Swift.Int? = nil, count: Swift.Int? = nil, includeEntities: Swift.Bool? = nil, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func removeProfileBanner(success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func updateProfileBanner(using imageData: Foundation.Data, width: Swift.Int? = nil, height: Swift.Int? = nil, offsetLeft: Swift.Int? = nil, offsetTop: Swift.Int? = nil, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func getProfileBanner(for userTag: SwifteriOS.UserTag, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func muteUser(_ userTag: SwifteriOS.UserTag, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func unmuteUser(for userTag: SwifteriOS.UserTag, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func getMuteUsersIDs(cursor: Swift.String? = nil, success: SwifteriOS.Swifter.CursorSuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func getMutedUsers(cursor: Swift.String? = nil, includeEntities: Swift.Bool? = nil, skipStatus: Swift.Bool? = nil, success: SwifteriOS.Swifter.CursorSuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+}
+infix operator +| : DefaultPrecedence
+extension Swifter {
+  public func listOfNoRetweetsFriends(success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func getUserFollowingIDs(for userTag: SwifteriOS.UserTag, cursor: Swift.String? = nil, count: Swift.Int? = nil, success: SwifteriOS.Swifter.CursorSuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func getUserFollowersIDs(for userTag: SwifteriOS.UserTag, cursor: Swift.String? = nil, count: Swift.Int? = nil, success: SwifteriOS.Swifter.CursorSuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func getIncomingPendingFollowRequests(cursor: Swift.String? = nil, success: SwifteriOS.Swifter.CursorSuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func getOutgoingPendingFollowRequests(cursor: Swift.String? = nil, success: SwifteriOS.Swifter.CursorSuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func followUser(_ userTag: SwifteriOS.UserTag, follow: Swift.Bool? = nil, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func unfollowUser(_ userTag: SwifteriOS.UserTag, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func updateFriendship(with userTag: SwifteriOS.UserTag, device: Swift.Bool? = nil, retweets: Swift.Bool? = nil, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func showFriendship(between sourceTag: SwifteriOS.UserTag, and targetTag: SwifteriOS.UserTag, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func getUserFollowing(for userTag: SwifteriOS.UserTag, cursor: Swift.String? = nil, count: Swift.Int? = nil, skipStatus: Swift.Bool? = nil, includeUserEntities: Swift.Bool? = nil, success: SwifteriOS.Swifter.CursorSuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func getUserFollowers(for userTag: SwifteriOS.UserTag, cursor: Swift.String? = nil, count: Swift.Int? = nil, skipStatus: Swift.Bool? = nil, includeUserEntities: Swift.Bool? = nil, success: SwifteriOS.Swifter.CursorSuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func lookupFriendship(with usersTag: SwifteriOS.UsersTag, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+}
+extension Swifter {
+  public func getMentionsTimelineTweets(count: Swift.Int? = nil, sinceID: Swift.String? = nil, maxID: Swift.String? = nil, trimUser: Swift.Bool? = nil, contributorDetails: Swift.Bool? = nil, includeEntities: Swift.Bool? = nil, tweetMode: SwifteriOS.TweetMode = TweetMode.default, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler?)
+  public func getTimeline(for userTag: SwifteriOS.UserTag, customParam: [Swift.String : Any] = [:], count: Swift.Int? = nil, sinceID: Swift.String? = nil, maxID: Swift.String? = nil, trimUser: Swift.Bool? = nil, excludeReplies: Swift.Bool? = nil, includeRetweets: Swift.Bool? = nil, contributorDetails: Swift.Bool? = nil, includeEntities: Swift.Bool? = nil, tweetMode: SwifteriOS.TweetMode = .default, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func getHomeTimeline(count: Swift.Int? = nil, sinceID: Swift.String? = nil, maxID: Swift.String? = nil, trimUser: Swift.Bool? = nil, contributorDetails: Swift.Bool? = nil, includeEntities: Swift.Bool? = nil, tweetMode: SwifteriOS.TweetMode = TweetMode.default, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func getRetweetsOfMe(count: Swift.Int? = nil, sinceID: Swift.String? = nil, maxID: Swift.String? = nil, trimUser: Swift.Bool? = nil, contributorDetails: Swift.Bool? = nil, includeEntities: Swift.Bool? = nil, tweetMode: SwifteriOS.TweetMode = .default, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+}
+public protocol SwifterAppProtocol {
+  var consumerKey: Swift.String { get }
+  var consumerSecret: Swift.String { get }
+}
+public protocol SwifterClientProtocol {
+  var credential: SwifteriOS.Credential? { get set }
+  @discardableResult
+  func get(_ path: Swift.String, baseURL: SwifteriOS.TwitterURL, parameters: [Swift.String : Any], uploadProgress: SwifteriOS.HTTPRequest.UploadProgressHandler?, downloadProgress: SwifteriOS.HTTPRequest.DownloadProgressHandler?, success: SwifteriOS.HTTPRequest.SuccessHandler?, failure: SwifteriOS.HTTPRequest.FailureHandler?) -> SwifteriOS.HTTPRequest
+  @discardableResult
+  func post(_ path: Swift.String, baseURL: SwifteriOS.TwitterURL, parameters: [Swift.String : Any], uploadProgress: SwifteriOS.HTTPRequest.UploadProgressHandler?, downloadProgress: SwifteriOS.HTTPRequest.DownloadProgressHandler?, success: SwifteriOS.HTTPRequest.SuccessHandler?, failure: SwifteriOS.HTTPRequest.FailureHandler?) -> SwifteriOS.HTTPRequest
+  @discardableResult
+  func delete(_ path: Swift.String, baseURL: SwifteriOS.TwitterURL, parameters: [Swift.String : Any], success: SwifteriOS.HTTPRequest.SuccessHandler?, failure: SwifteriOS.HTTPRequest.FailureHandler?) -> SwifteriOS.HTTPRequest
+}
+extension Swifter {
+  public func getHelpConfiguration(success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func getHelpLanguages(success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func getHelpPrivacy(success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func getHelpTermsOfService(success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+  public func getRateLimits(for resources: [Swift.String]? = nil, success: SwifteriOS.Swifter.SuccessHandler? = nil, failure: SwifteriOS.Swifter.FailureHandler? = nil)
+}
+extension SwifteriOS.HTTPMethodType : Swift.Equatable {}
+extension SwifteriOS.HTTPMethodType : Swift.Hashable {}
+extension SwifteriOS.HTTPMethodType : Swift.RawRepresentable {}
+extension SwifteriOS.TwitterURL : Swift.Equatable {}
+extension SwifteriOS.TwitterURL : Swift.Hashable {}
+extension SwifteriOS.MediaType : Swift.Equatable {}
+extension SwifteriOS.MediaType : Swift.Hashable {}
+extension SwifteriOS.MediaType : Swift.RawRepresentable {}
+extension SwifteriOS.MediaCategory : Swift.Equatable {}
+extension SwifteriOS.MediaCategory : Swift.Hashable {}
+extension SwifteriOS.MediaCategory : Swift.RawRepresentable {}
