@@ -1,5 +1,6 @@
 
 #import <Foundation/Foundation.h>
+#import <TDSGlobalSDKCoreKit/TDSGlobalLoginType.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -7,6 +8,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 跟踪用户
 /// @param userId 用户唯一ID，非角色ID
 + (void)trackUser:(NSString *)userId;
+
++ (void)trackUser:(NSString *)userId
+        loginType:(TDSGlobalSDKLoginType)loginType
+       properties:(NSDictionary *)properties;
 
 /// 跟踪玩家
 /// @param roleId 角色ID

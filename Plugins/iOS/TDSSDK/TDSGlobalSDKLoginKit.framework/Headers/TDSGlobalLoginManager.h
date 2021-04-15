@@ -21,7 +21,7 @@ typedef void (^TDSGlobalLoginManagerRequestHandler)(TDSGlobalUser * _Nullable re
   Describes the call back of state of current user
  @param userStateChangeCode user state change type code.
  */
-typedef void (^TDSGlobalUserStateChangeHandler)(TDSGlobalUserStateChangeCode userStateChangeCode,NSString *message);
+typedef void (^TDSGlobalUserStateChangeHandler)(TDSGlobalUserStateChangeCode userStateChangeCode,NSString *_Nullable message);
 
 @interface TDSGlobalLoginManager : NSObject
 + (void)login:(TDSGlobalLoginManagerRequestHandler)handler;

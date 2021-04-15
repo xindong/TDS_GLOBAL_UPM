@@ -30,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (BOOL)googleEnable;
 + (BOOL)facebookEnable;
++ (BOOL)twitterEnable;
 + (BOOL)taptapEnable;
 + (BOOL)adjustEnable;
 + (BOOL)appsflyersEnable;

@@ -6,6 +6,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger,TDSGlobalShareType) {
     TDSGlobalShareTypeFacebook = 0,
+    TDSGlobalShareTypeLine,
+    TDSGlobalShareTypeTwitter,
+};
+
+typedef NS_ENUM(NSInteger,TDSGlobalShareErrorCode) {
+    TDSGlobalShareErrorCodeNone         = 0,
+    TDSGlobalShareErrorCodeFail         = 0x5001,
+    TDSGlobalShareErrorCodeNotSupport   = 0x5002
 };
 
 typedef void(^TDSGlobalShareResultHandler)(NSError * _Nullable error, BOOL cancel);
@@ -34,7 +42,7 @@ typedef void(^TDSGlobalShareResultHandler)(NSError * _Nullable error, BOOL cance
 /// @param url 待分享URL
 /// @param message 文字说明
 /// @param completeHandler 分享结果回调
-+ (void)shareWithType:(TDSGlobalShareType)type url:(NSString *)url message:(NSString *)message completeHandler:(TDSGlobalShareResultHandler)completeHandler;
++ (void)shareWithType:(TDSGlobalShareType)type url:(NSString *)url message:(nullable NSString *)message completeHandler:(TDSGlobalShareResultHandler)completeHandler;
 
 
 @end
