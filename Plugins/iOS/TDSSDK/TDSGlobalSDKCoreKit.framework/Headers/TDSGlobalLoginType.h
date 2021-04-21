@@ -4,7 +4,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger,TDSGlobalSDKLoginType) {
-    TDSGlobalSDKLoginTypeNone = 0,
+    TDSGlobalSDKLoginTypeDefault = 0,
     TDSGlobalSDKLoginTypeTapTap,
     TDSGlobalSDKLoginTypeApple,
     TDSGlobalSDKLoginTypeGoogle,

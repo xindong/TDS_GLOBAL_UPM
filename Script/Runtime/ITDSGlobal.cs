@@ -10,6 +10,8 @@ namespace TDSGlobal
 
         void Login(Action<TDSGlobalUser> callback, Action<TDSGlobalError> errorCallback);
 
+        void LoginByType(LoginType loginType,Action<TDSGlobalUser> callback, Action<TDSGlobalError> errorCallback);
+
         void Logout();
 
         void AddUserStatusChangeCallback(Action<int,string> callback);

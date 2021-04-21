@@ -82,6 +82,39 @@ namespace TDSGlobal
             });
         }
 
+        public void LoginByType(LoginType type, Action<TDSGlobalUser> callback, Action<TDSGlobalError> errorCallback)
+        {
+            var command = new Command.Builder()
+                        .Args("loginByType", (int)type)
+                        .Service(TDSGlobalBridgeName.LOGIN_SERVICE_NAME)
+                        .Method("loginByType")
+                        .Callback(true)
+                        .OnceTime(false)
+                        .CommandBuilder();
+
+            EngineBridge.GetInstance().CallHandler(command, (result) =>
+            {
+                Debug.Log("login result:" + result.toJSON());
+
+                if (!checkResultSuccess(result))
+                {
+                    errorCallback(new TDSGlobalError(TDSGlobalUnKnowError.UN_KNOW, $"Login Failed:{result.message}"));
+                    return;
+                }
+
+                TDSGlobalUserWrapper userWrapper = new TDSGlobalUserWrapper(result.content);
+                if (userWrapper.error != null)
+                {
+                    errorCallback(userWrapper.error);
+                    return;
+                }
+                if (userWrapper.user != null)
+                {
+                    callback(userWrapper.user);
+                }
+            });
+        }
+
         public void Logout()
         {
             Command command = new Command(TDSGlobalBridgeName.LOGIN_SERVICE_NAME, "logout", false, null);

@@ -1,13 +1,14 @@
 
 #import <Foundation/Foundation.h>
+#import <TDSGlobalSDKCoreKit/TDSGlobalLoginType.h>
 
 NS_ASSUME_NONNULL_BEGIN
 @class TDSGlobalUser;
 
 typedef NS_ENUM(NSInteger,TDSGlobalUserStateChangeCode) {
-    TDSGlobalUserStateChangeCodeLogout          = 0x9001,      // user logout
-    TDSGlobalUserStateChangeCodeBindSuccess     = 0x1001,      // user bind other OAuth account,msg = entry type in string,eg: @"TAPTAP"
-    TDSGlobalUserStateChangeCodeUnBindSuccess   = 0x1002,      // user unbind other OAuth account,msg = entry type in string
+    TDSGlobalUserStateChangeCodeLogout          = 0x9001,   // user logout
+    TDSGlobalUserStateChangeCodeBindSuccess     = 0x1001,   // user bind success,msg = entry type in string,eg: @"TAPTAP"
+    TDSGlobalUserStateChangeCodeUnBindSuccess   = 0x1002,   // user unbind success,msg = entry type in string
 };
 
 /**
@@ -28,13 +29,21 @@ typedef void (^TDSGlobalUserStateChangeHandler)(TDSGlobalUserStateChangeCode use
 
 + (void)addUserStatusChangeCallback:(TDSGlobalUserStateChangeHandler)handler;
 
-/// logout current user
+/// Logout current user
 + (void)logout;
 
-/// get current user
+/// Get current user
 + (void)getUser:(TDSGlobalLoginManagerRequestHandler)handler;
 
 + (void)userCenter;
+
+/**
+ You can customize login buttons in your own ways,and call these methods to login an user.
+ Steps:
+    1. use TDSGlobalSDKLoginTypeDefault ,check if there was an user logged last time,you will get a result.
+    2. if step 1 failed, show login buttons ,and call with corresponding type when user tapped.
+ */
++ (void)loginByType:(TDSGlobalSDKLoginType)loginType loginHandler:(TDSGlobalLoginManagerRequestHandler)handler;
 @end
 
 NS_ASSUME_NONNULL_END

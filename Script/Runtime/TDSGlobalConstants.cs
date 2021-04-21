@@ -30,6 +30,25 @@ namespace TDSGlobal
         public static int RU = 12;
     }
 
+    public enum LoginType
+    {
+        DEFAULT = 0,
+
+        TAPTAP_SIGN_IN = 1,
+
+        APPLE_SIGN_IN = 2,
+
+        GOOGLE_SIGN_IN = 3,
+
+        FACEBOOK_SIGN_IN = 4,
+
+        LINE_SIGN_IN = 5,
+
+        TWITTER_SIGN_IN = 6,
+
+        GUEST_SIGN_IN = 7
+    }
+
     public class TDSGlobalShareFlavors
     {
         public static int FACEBOOK = 0;
