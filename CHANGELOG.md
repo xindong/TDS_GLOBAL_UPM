@@ -4,13 +4,17 @@
 
 ### Feature
 
-- 域名从 tds 切换到 xd
+- 新增自定义登陆接口
+- tds 域名切换 
 - 支持海外域名动态切换
 - 网络稳定性日志上报
 - 登陆新增 twitter、Line
 - 分享新增 twitter、Line
-- 项目目录规范修改
+
+### BugFix
+
+- 修复 TapDB 数据上报错误
 
 ### Dependencies
 
-- TapSDK 1.1.1
+- TapSDK 1.1.2

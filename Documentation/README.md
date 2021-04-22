@@ -27,7 +27,7 @@ NSMicrophoneUsageDescription 麦克风，用于内嵌动态
 //在Packages/manifest.json 中添加TDSGlobal SDK
 {
     "dependencies":{
-        "com.tds.sdk":"https://github.com/xindong/TAPSDK_UPM.git#1.1.1",
+        "com.tds.sdk":"https://github.com/xindong/TAPSDK_UPM.git#1.1.2",
         "com.tds.global":"https://github.com/xindong/TDS_GLOBAL_UPM.git#1.1.0",
     }
 }
@@ -44,11 +44,11 @@ NSMicrophoneUsageDescription 麦克风，用于内嵌动态
 
 ### 3.1 [IOS](https://git.gametaptap.com/tds-public/tdsglobal/-/blob/master/doc/iOS/ios_doc.md)
 
-TDSGlobal Unity SDK会自动配置iOS相关依赖，但需要开发者确认是否配置正确。
+TDSGlobal Unity SDK会自动配置 iOS 相关依赖，但需要开发者确认是否配置正确。
 
 #### 3.1.1 配置编译选项
 
-在**Capabilities**中打开In-App Purchase、Push Notifications、Sign In With Apple功能。
+在**Capabilities**中打开 In-App Purchase、Push Notifications、Sign In With Apple 功能。
 
 #### 3.1.2 检查系统依赖
 
@@ -84,7 +84,7 @@ TDSGlobal Unity SDK会自动配置iOS相关依赖，但需要开发者确认是�
 
 #### 配置AndroidManifest.xml文件
 
-打开Project Settings/Player/Publishing Settings/Build/Custom Main Manifest 配置，编辑Manifest.xml文件
+打开 Project Settings/Player/Publishing Settings/Build/Custom Main Manifest 配置，编辑 Manifest.xml 文件
 
 添加SDK权限
 
@@ -111,10 +111,10 @@ android:value="{facebook-cliendId}" />
         android:name="com.facebook.CustomTabActivity"
         android:exported="true">
         <intent-filter>
-            <action android:name="android.intent.action.VIEW" />
-            <category android:name="android.intent.category.DEFAULT" />
-            <category android:name="android.intent.category.BROWSABLE" />
-            <data android:scheme="{facebook-scheme}" />
+<action android:name="android.intent.action.VIEW" />
+<category android:name="android.intent.category.DEFAULT" />
+<category android:name="android.intent.category.BROWSABLE" />
+<data android:scheme="{facebook-scheme}" />
         </intent-filter>
     </activity>
 
@@ -178,6 +178,7 @@ public class TDSGlobalLanguage
 
 #### 4.3.1 登陆
 ```c#
+// 唤起 TDSG 登陆界面
 TDSGlobal.TDSGlobalSDK.Login((tdsUser)=>
 {
     //返回用户信息
@@ -185,7 +186,16 @@ TDSGlobal.TDSGlobalSDK.Login((tdsUser)=>
 {
     //登陆失败
 });
+
+// 根据登陆 Type 进行登陆
+TDSGlobal.TDSGlobalSDK.LoginByType(loginType,(tdsUser)=>{
+    //登陆成功
+},(tdsError)=>{
+    //登陆失败
+});
 ```
+
+
 
 #### 4.3.2 获取用户信息
 ```c#
@@ -372,7 +382,7 @@ writerHelper.WriteBelow(@"task clean(type: Delete) {
 }",@"allprojects {
     buildscript {
         dependencies {
-            classpath 'com.google.gms:google-services:4.0.2'
+classpath 'com.google.gms:google-services:4.0.2'
         }
     }
 }");
@@ -397,6 +407,10 @@ writerHelper.WriteBelow(@"implementation fileTree(dir: 'libs', include: ['*.jar'
         implementation 'com.android.support:support-annotations:28.0.0'
         implementation 'com.android.support:appcompat-v7:28.0.0'
         implementation 'com.android.support:recyclerview-v7:28.0.0'
+
+        implementation 'com.twitter.sdk.android:twitter:3.3.0'
+        implementation 'com.twitter.sdk.android:tweet-composer:3.3.0'
+        implementation 'com.linecorp:linesdk:5.0.1'
     ");
 ```
 
@@ -462,6 +476,24 @@ if(facebookId!=null)
     array2 = dict2.CreateArray("CFBundleURLSchemes");
     array2.AddString(facebookId);
 }
+if(bundleId!=null)
+{
+    dict2 = array.AddDict();
+    dict2.SetString("CFBundleURLName", "Line");
+    PlistElementArray array2 = dict2.CreateArray("CFBundleURLSchemes");
+    array2 = dict2.CreateArray("CFBundleURLSchemes");
+    array2.AddString("line3rdp." + bundleId);
+}
+
+if(twitterId!=null)
+{
+    dict2 = array.AddDict();
+    dict2.SetString("CFBundleURLName", "Twitter");
+    PlistElementArray array2 = dict2.CreateArray("CFBundleURLSchemes");
+    array2 = dict2.CreateArray("CFBundleURLSchemes");
+    array2.AddString("tdsg.twitter." + twitterId);
+}
+
 File.WriteAllText(_plistPath, _plist.WriteToString());
 
 //自动修改UnityAppController.mm文件，进行TDSGlobalSDK的配置
