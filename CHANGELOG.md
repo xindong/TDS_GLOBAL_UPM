@@ -1,5 +1,11 @@
 # ChangeLog
 
+## 1.1.1
+
+### Feature
+
+- 更新iOS AppsFlyer 
+
 ## 1.1.0
 
 ### Feature
