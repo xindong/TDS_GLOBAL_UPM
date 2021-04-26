@@ -28,7 +28,7 @@ NSMicrophoneUsageDescription 麦克风，用于内嵌动态
 {
     "dependencies":{
         "com.tds.sdk":"https://github.com/xindong/TAPSDK_UPM.git#1.1.2",
-        "com.tds.global":"https://github.com/xindong/TDS_GLOBAL_UPM.git#1.1.0",
+        "com.tds.global":"https://github.com/xindong/TDS_GLOBAL_UPM.git#1.1.2",
     }
 }
 ```

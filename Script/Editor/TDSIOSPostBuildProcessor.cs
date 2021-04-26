@@ -98,7 +98,6 @@ namespace TDSEditor
                 SetPlist(path,resourcePath + "/TDSGlobal-Info.plist",bundleId);
                 SetScriptClass(path);
                 Debug.Log("测试打包成功");
-                return;
             }
 
         }

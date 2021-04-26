@@ -1,10 +1,16 @@
 # ChangeLog
 
+## 1.1.2
+
+### Feature
+
+- 更新 iOS Twitter 
+
 ## 1.1.1
 
 ### Feature
 
-- 更新iOS AppsFlyer 
+- 更新 iOS AppsFlyer 
 
 ## 1.1.0
 
