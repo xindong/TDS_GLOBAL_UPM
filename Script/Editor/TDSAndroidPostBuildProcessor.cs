@@ -79,7 +79,7 @@ public class TDSAndroidPostBuildProcessor : IPostGenerateGradleAndroidProject
 
     void IPostGenerateGradleAndroidProject.OnPostGenerateGradleAndroidProject(string path)
     {
-        string projectPath = null;
+        string projectPath = path;
 
         if (path.Contains("unityLibrary"))
         {
