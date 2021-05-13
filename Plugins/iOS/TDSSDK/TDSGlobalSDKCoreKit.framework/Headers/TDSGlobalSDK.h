@@ -26,24 +26,28 @@ typedef NS_ENUM(NSInteger,TDSGlobalLanguageLocale) {
 typedef void(^TDSGlobalInitResultHandler)(BOOL success);
 
 @interface TDSGlobalSDK : NSObject
-/// 设置调试模式，debug会输出SDK日志
-/// @param debug 是否debug模式,默认no
+/// 是否开启收集广告标识符 IDFA,将会开启和关闭所有第三方 SDK 收集。 请在最早调用（任何 SDK 调用之前）
+/// @param enable YES: 开启 NO: 关闭。 默认 NO
++ (void)setAdvertiserIDCollectionEnable:(BOOL)enable;
+
+/// 设置调试模式，debug 会输出SDK日志
+/// @param debug 是否 debug 模式。默认 NO
 + (void)setDebugMode:(BOOL)debug;
 
-/// 获取当前SDK版本
+/// 获取当前 SDK 版本
 + (NSString *)getTDSGlobalSDKVersion;
 
 /// 设置SDK显示语言
-/// @param locale 语言，在TDSGlobalLanguageLocale 枚举中查看
+/// @param locale 语言，在 TDSGlobalLanguageLocale 枚举中查看
 + (void)setLanguage:(TDSGlobalLanguageLocale)locale;
 
-/// 初始化SDK
+/// 初始化 SDK
 /// @param handler 初始化结果回调
 + (void)initTDSGlobalSDK:(TDSGlobalInitResultHandler)handler;
 
 /// 当前登录用户，打开客服中心
-/// @param serverId 服务器ID，可为空
-/// @param roleId 角色ID，可为空
+/// @param serverId 服务器 ID，可为空
+/// @param roleId 角色 ID，可为空
 /// @param roleName 角色名，可为空
 + (void)reportWithServerId:(NSString *)serverId roleId:(NSString *)roleId roleName:(NSString *)roleName;
 

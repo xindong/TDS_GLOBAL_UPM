@@ -13,7 +13,7 @@
 #import <TDSGlobalSDKCoreKit/TDSGlobalUserDataManager.h>
 #import <TDSGlobalSDKCoreKit/TDSGlobalUserToken.h>
 
-#define TDSGLOBALSDK_VERSION @"1.1.1"
+#define TDSGLOBALSDK_VERSION @"1.1.3"
 #define TDSGLOBALSDK_NAME @"TDSGlobalSDK"
 
 

@@ -13,15 +13,15 @@ NS_ASSUME_NONNULL_BEGIN
         loginType:(TDSGlobalSDKLoginType)loginType
        properties:(NSDictionary *)properties;
 
-/// 跟踪玩家
+/// 跟踪角色
 /// @param roleId 角色ID
 /// @param roleName 角色名
 /// @param serverId 服务器ID
-/// @param level 玩家等级
-+ (void)trackUser:(NSString *)roleId
-         roleName:(NSString *)roleName
-         serverId:(NSString *)serverId
-            level:(NSInteger)level;
+/// @param level 角色等级
++ (void)trackRoleWithRoleId:(NSString *)roleId
+                   roleName:(NSString *)roleName
+                   serverId:(NSString *)serverId
+                      level:(NSInteger)level;
 
 /// 跟踪自定义事件
 /// @param eventName 事件名

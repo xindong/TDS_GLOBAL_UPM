@@ -2,6 +2,14 @@
 
 ## 1.1.3
 
+### Feature 
+
+* 新增 Firebase Crashlytics
+* 新增 IDFA 开关
+* Android support library migrate to AndroidX
+* 多语言 日语部分更新
+
+
 ## 1.1.2
 
 ### Feature

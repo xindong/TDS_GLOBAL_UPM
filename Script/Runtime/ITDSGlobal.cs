@@ -54,6 +54,8 @@ namespace TDSGlobal
 
         void StoreReview();
 
+        void AdvertiserIDCollectionEnable(bool enable);
+
     }
 
     public interface TDSGlobalShareCallback
