@@ -1,6 +1,6 @@
 # ChangeLog
 
-## 1.1.3
+## v1.1.3
 
 ### Feature 
 
@@ -9,20 +9,23 @@
 * Android support library migrate to AndroidX
 * 多语言 日语部分更新
 
+### Dependencies
 
-## 1.1.2
+* TapSDK v1.1.5
+
+## v1.1.2
 
 ### Feature
 
 - 更新 iOS Twitter 
 
-## 1.1.1
+## v1.1.1
 
 ### Feature
 
 - 更新 iOS AppsFlyer 
 
-## 1.1.0
+## v1.1.0
 
 ### Feature
 

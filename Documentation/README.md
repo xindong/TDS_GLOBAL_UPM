@@ -27,8 +27,8 @@ NSMicrophoneUsageDescription 麦克风，用于内嵌动态
 //在Packages/manifest.json 中添加TDSGlobal SDK
 {
     "dependencies":{
-        "com.tds.sdk":"https://github.com/xindong/TAPSDK_UPM.git#1.1.2",
-        "com.tds.global":"https://github.com/xindong/TDS_GLOBAL_UPM.git#1.1.2",
+        "com.tds.sdk":"https://github.com/xindong/TAPSDK_UPM.git#1.1.5",
+        "com.tds.global":"https://github.com/xindong/TDS_GLOBAL_UPM.git#1.1.3",
     }
 }
 ```
@@ -382,19 +382,19 @@ writerHelper.WriteBelow(@"task clean(type: Delete) {
 }",@"allprojects {
     buildscript {
         dependencies {
-classpath 'com.google.gms:google-services:4.0.2'
+            classpath 'com.google.gms:google-services:4.0.2'
+            classpath 'com.google.firebase:firebase-crashlytics-gradle:2.2.1'
         }
     }
 }");
 
 //添加 firebase和GMS插件。如果项目使用GMS或者firebase，请酌情修改。
 writerHelper.WriteBelow(@"apply plugin: 'com.android.application'",@"apply plugin: 'com.google.gms.google-services'");
-
+writerHelper.WriteBelow(@"apply plugin: 'com.android.application'",@"apply plugin: 'com.google.firebase.crashlytics'");
 //添加项目所需要的依赖
 writerHelper.WriteBelow(@"implementation fileTree(dir: 'libs', include: ['*.jar'])",@"
-        implementation 'com.google.firebase:firebase-core:16.0.1'
-        implementation 'com.google.firebase:firebase-analytics:15.0.1'
-        implementation 'com.google.firebase:firebase-messaging:17.3.4'
+        implementation 'com.google.firebase:firebase-core:17.2.2'
+        implementation 'com.google.firebase:firebase-messaging:21.1.0'
 
         implementation 'com.google.android.gms:play-services-auth:16.0.1'
         implementation 'com.facebook.android:facebook-login:5.15.3'
