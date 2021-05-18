@@ -14,7 +14,7 @@ namespace TDSGlobal
 
         public string localizedTitle;
 
-        public float price;
+        public double price;
 
         public string productIdentifier;
 
@@ -27,7 +27,7 @@ namespace TDSGlobal
             Dictionary<string,object> dic = Json.Deserialize(json) as Dictionary<string,object>;
             this.localeIdentifier = SafeDictionary.GetValue<string>(dic,"localeIdentifier");
             this.localizedTitle = SafeDictionary.GetValue<string>(dic,"localizedTitle") ;
-            this.price = float.Parse(SafeDictionary.GetValue<string>(dic,"price"));
+            this.price = SafeDictionary.GetValue<double>(dic, "price");
             this.productIdentifier = SafeDictionary.GetValue<string>(dic,"productIdentifier");
             Dictionary<string,object> priceLocaleDic = SafeDictionary.GetValue<Dictionary<string,object>>(dic,"priceLocale") as Dictionary<string,object>;
             this.priceLocale = new PriceLocale(priceLocaleDic);
@@ -37,7 +37,7 @@ namespace TDSGlobal
         {
             this.localeIdentifier = SafeDictionary.GetValue<string>(dic,"localeIdentifier");
             this.localizedTitle = SafeDictionary.GetValue<string>(dic,"localizedTitle") ;
-            this.price = float.Parse(SafeDictionary.GetValue<string>(dic,"price"));
+            this.price =SafeDictionary.GetValue<double>(dic,"price");
             this.productIdentifier = SafeDictionary.GetValue<string>(dic,"productIdentifier");
             Dictionary<string,object> priceLocaleDic = SafeDictionary.GetValue<Dictionary<string,object>>(dic,"priceLocale") as Dictionary<string,object>;
             this.priceLocale = new PriceLocale(priceLocaleDic);
