@@ -1,6 +1,6 @@
 
 #import <Foundation/Foundation.h>
-#import <TDSGlobalSDKCoreKit/TDSGlobalLoginType.h>
+#import <TDSGlobalSDKCoreKit/TDSGlobalEntryType.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -10,7 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)trackUser:(NSString *)userId;
 
 + (void)trackUser:(NSString *)userId
-        loginType:(TDSGlobalSDKLoginType)loginType
+        loginType:(TDSGlobalSDKEntryType)loginType
        properties:(NSDictionary *)properties;
 
 /// 跟踪角色

@@ -1,6 +1,6 @@
 
 #import <Foundation/Foundation.h>
-#import <TDSGlobalSDKCoreKit/TDSGlobalLoginType.h>
+#import <TDSGlobalSDKCoreKit/TDSGlobalEntryType.h>
 
 NS_ASSUME_NONNULL_BEGIN
 @class TDSGlobalUser;
@@ -13,7 +13,7 @@ typedef NS_ENUM(NSInteger,TDSGlobalUserStateChangeCode) {
 
 /**
   Describes the call back to the TDSGlobalLoginManager
- @param result the result user date of the Request
+ @param result the result of the login request
  @param error error, if any.
  */
 typedef void (^TDSGlobalLoginManagerRequestHandler)(TDSGlobalUser * _Nullable result, NSError * _Nullable error);
@@ -25,8 +25,12 @@ typedef void (^TDSGlobalLoginManagerRequestHandler)(TDSGlobalUser * _Nullable re
 typedef void (^TDSGlobalUserStateChangeHandler)(TDSGlobalUserStateChangeCode userStateChangeCode,NSString *_Nullable message);
 
 @interface TDSGlobalLoginManager : NSObject
+/// Open login view
+/// @param handler login result handler
 + (void)login:(TDSGlobalLoginManagerRequestHandler)handler;
 
+/// Get callback when user state changed
+/// @param handler handler
 + (void)addUserStatusChangeCallback:(TDSGlobalUserStateChangeHandler)handler;
 
 /// Logout current user
@@ -35,15 +39,16 @@ typedef void (^TDSGlobalUserStateChangeHandler)(TDSGlobalUserStateChangeCode use
 /// Get current user
 + (void)getUser:(TDSGlobalLoginManagerRequestHandler)handler;
 
+/// Open usercenter view
 + (void)userCenter;
 
 /**
- You can customize login buttons in your own ways,and call these methods to login an user.
+ You can customize login buttons in your own ways,and call this methods to login an user.
  Steps:
-    1. use TDSGlobalSDKLoginTypeDefault ,check if there was an user logged last time,you will get a result.
+    1. use TDSGlobalSDKEntryTypeDefault ,check if there was an user logged last time,you will get a result.
     2. if step 1 failed, show login buttons ,and call with corresponding type when user tapped.
  */
-+ (void)loginByType:(TDSGlobalSDKLoginType)loginType loginHandler:(TDSGlobalLoginManagerRequestHandler)handler;
++ (void)loginByType:(TDSGlobalSDKEntryType)loginType loginHandler:(TDSGlobalLoginManagerRequestHandler)handler;
 @end
 
 NS_ASSUME_NONNULL_END

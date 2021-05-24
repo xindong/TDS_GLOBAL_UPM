@@ -7,27 +7,30 @@
 @class TDSGlobalOrderInfo;
 NS_ASSUME_NONNULL_BEGIN
 /**
- 
+  Describes the call back to the query of products
+ @param result the result contains info of the products
+ @param error error, if any.
  */
 typedef void(^TDSGlobalQueryProductsResultHandler)(NSArray<TDSGlobalProductInfo *> *_Nullable result,NSError *_Nullable error);
 
 /**
- 
+ Describes the call back to the query of unfinished transactions
+@param result the result contains unfinished transactions
  */
 typedef void(^TDSGlobalQueryRestoreProductsResultHandler)(NSArray<TDSGlobalTransactionInfo *> *result);
 
 /**
- 
+ Describes the call back to the transaction
+@param orderInfo info of the transaction
+@param error error, if any.
  */
 typedef void(^TDSGlobalInAppPurchaseResultHandler)(TDSGlobalOrderInfo *orderInfo,NSError *error);
 
 @interface TDSGlobalInAppPurchaseManager : NSObject
-
 /// 查询商品价格,请等待回调之后再做下一次查询，否则可能造成数据错乱
 /// @param productIds 商品ID集合
 /// @param completionHandler 查询结果处理
 + (void)queryWithProductIds:(NSArray *)productIds completionHandler:(TDSGlobalQueryProductsResultHandler)completionHandler;
-
 
 /// 支付商品
 /// @param orderId 商品ID
@@ -43,11 +46,9 @@ typedef void(^TDSGlobalInAppPurchaseResultHandler)(TDSGlobalOrderInfo *orderInfo
                    ext:(NSString *)ext
      completionHandler:(TDSGlobalInAppPurchaseResultHandler)completionHandler;
 
-
 /// 查询当前是否有未处理订单或者礼包码
 /// @param completionHandler 查询结果处理
 + (void)queryRestoredPurchases:(TDSGlobalQueryRestoreProductsResultHandler)completionHandler;
-
 
 /// 恢复一笔订单/礼包码
 /// @param restoreTransaction 需要回复的订单信息，queryRestoredProducts回调中返回
@@ -62,7 +63,6 @@ typedef void(^TDSGlobalInAppPurchaseResultHandler)(TDSGlobalOrderInfo *orderInfo
                serverId:(NSString *)serverId
                     ext:(NSString *)ext
       completionHandler:(TDSGlobalInAppPurchaseResultHandler)completionHandler;
-
 @end
 
 NS_ASSUME_NONNULL_END

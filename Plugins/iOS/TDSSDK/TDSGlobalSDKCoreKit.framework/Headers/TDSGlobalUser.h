@@ -1,7 +1,7 @@
 
 #import <Foundation/Foundation.h>
 #import <TDSGlobalSDKCoreKit/TDSGlobalUserToken.h>
-#import <TDSGlobalSDKCoreKit/TDSGlobalLoginType.h>
+#import <TDSGlobalSDKCoreKit/TDSGlobalEntryType.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -24,7 +24,7 @@ The user's user name.
 /**
 The user's current loginType.
 */
-@property (nonatomic,assign,readonly) TDSGlobalSDKLoginType loginType;
+@property (nonatomic,assign,readonly) TDSGlobalSDKEntryType loginType;
 
 /**
 The user's bound accounts. eg.@[@"TAPTAP",@"GOOGLE",@"FACEBOOK"]
@@ -37,9 +37,9 @@ The user's token.
 @property (nonatomic,strong,readonly) TDSGlobalUserToken *token;
 
 - (instancetype)initWithUserID:(NSInteger)userID
-                           sub:(NSString *)sub
-                          name:(NSString *)name
-                     loginType:(TDSGlobalSDKLoginType)loginType
+                           sub:(nullable NSString *)sub
+                          name:(nullable NSString *)name
+                     loginType:(TDSGlobalSDKEntryType)loginType
                boundAccounts:(NSArray *)boundAccounts
                          token:(TDSGlobalUserToken *)token;
 

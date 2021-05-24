@@ -1,7 +1,7 @@
 
 #import <Foundation/Foundation.h>
 #import <TDSGlobalSDKCoreKit/TDSGlobalUser.h>
-#import <TDSGlobalSDKCoreKit/TDSGlobalLoginType.h>
+#import <TDSGlobalSDKCoreKit/TDSGlobalEntryType.h>
 
 NS_ASSUME_NONNULL_BEGIN
 @interface TDSGlobalUserDataManager : NSObject
@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (BOOL)isUserLoggedIn;
 + (BOOL)isUserTokenValid;
 
-+ (TDSGlobalSDKLoginType)getCurLoginType;
++ (TDSGlobalSDKEntryType)getCurLoginType;
 
 + (void)userLoginSuccess;
 + (void)userLogout;
