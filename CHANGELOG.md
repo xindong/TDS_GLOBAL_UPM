@@ -1,5 +1,26 @@
 # ChangeLog
 
+## v1.1.5
+
+### Feature
+
+*  部分日文翻译更改
+*  登录界面默认展开所有登录方式
+*  可配置账号中心解绑绑定开关（是否显示解绑按钮）
+*  账号安全中心的解绑/绑定/删除账号功能由后端字段控制
+* iOS Appsflyer 升级
+
+### Dependencies
+* TapSDK v1.1.6
+
+## v1.1.4
+
+### BugFix
+* 修复 iOS 查询商品时 JSON 解析错误导致的崩溃
+* 修复 iOS ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES 设置问题可能导致的 AppStore 审核无法通过
+### Dependencies
+* TapSDK v1.1.6
+
 ## v1.1.3
 
 ### Feature 
