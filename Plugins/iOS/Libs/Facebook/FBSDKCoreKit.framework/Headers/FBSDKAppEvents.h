@@ -365,9 +365,6 @@ FOUNDATION_EXPORT FBSDKAppEventUserDataType FBSDKAppEventZip;
 /** Parameter key used to specify user's country. */
 FOUNDATION_EXPORT FBSDKAppEventUserDataType FBSDKAppEventCountry;
 
-/** Parameter key used to specify user's external id. */
-FOUNDATION_EXPORT FBSDKAppEventUserDataType FBSDKAppEventExternalId;
-
 /**
 
 

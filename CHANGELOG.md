@@ -9,10 +9,18 @@
 * iOS libs 更新，FacebookSDK 更新为 9.3.0 ； TwitterLoginKit 更新
 * iOS 新增 TDSGlobalSDKSettings 类，SDK 相关配置调用类方法
 * iOS 支持 Bitcode
+* 登录弹窗LOGO放大
+* Android TapDB初始化参数更换
+* 补款流程订单新增 UserId
+* 上报角色名称修改
 
 ### BugFix
 
 * iOS 修复 IDFA 开关无效 bug
+
+### Dependencies
+
+* TapSDk v1.1.6
 
 ## v1.1.6
 
