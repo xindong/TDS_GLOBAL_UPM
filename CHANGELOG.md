@@ -1,5 +1,15 @@
 # ChangeLog
 
+## v1.1.6
+
+### BugFix
+
+* 修复 Android Bridge 方法匹配错误
+
+### Dependencies
+
+* TapSDK v1.1.6
+
 ## v1.1.5
 
 ### Feature

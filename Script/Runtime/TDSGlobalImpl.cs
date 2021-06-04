@@ -321,11 +321,11 @@ namespace TDSGlobal
         public void TrackUser(string serverId, string roleId, string roleName, int level)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic.Add("trackRoleWithRoleId", roleId);
             dic.Add("serverId", serverId);
-            dic.Add("trackUser", roleId);
             dic.Add("roleName", roleName);
             dic.Add("level", level);
-            Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME, "trackUser", false, dic);
+            Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME, "trackRoleWithRoleId", false, dic);
             EngineBridge.GetInstance().CallHandler(command);
         }
 
