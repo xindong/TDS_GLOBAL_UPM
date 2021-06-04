@@ -14,7 +14,7 @@ typedef NS_ENUM(NSInteger,TDSGlobalSDKEntryType) {
     TDSGlobalSDKEntryTypeGuest
 };
 
-/*
+/**
  enum of entryType in string
  */
 extern NSString *const TDSGLOBAL_TAPTAP_ENTRY;              // @"TAPTAP"

@@ -1,5 +1,19 @@
 # ChangeLog
 
+## v1.1.7
+
+### Feature
+
+* iOS 登录界面底部 Logo 尺寸改为 62*14,建议用 3x 图保证清晰度
+* iOS 韩国地区协议界面推送通知开关默认改为 关闭
+* iOS libs 更新，FacebookSDK 更新为 9.3.0 ； TwitterLoginKit 更新
+* iOS 新增 TDSGlobalSDKSettings 类，SDK 相关配置调用类方法
+* iOS 支持 Bitcode
+
+### BugFix
+
+* iOS 修复 IDFA 开关无效 bug
+
 ## v1.1.6
 
 ### BugFix

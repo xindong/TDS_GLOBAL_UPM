@@ -162,7 +162,7 @@
       "tds_ios_restricted_payment_title": "Платеж ограничен",
       "tds_ios_restricted_payment_description": "Снимите ограничение \"Товары для покупок в прилож.\" в \"Настр.->Огран. конфиденциальности и контента\""
     },
-    "ku_TR": {
+    "tr_TR": {
       "tds_account_safe_info": "Hesap Güvenlik Merkezi",
       "tds_account_info": "Hesap Bilgisi",
       "tds_account_bind_info": "Bağlama bilgisi",
@@ -243,7 +243,7 @@
       "tds_ios_restricted_payment_title": "Ödeme kısıtlandı",
       "tds_ios_restricted_payment_description": "Lütfen “Ayarlar -> İçerik ve Gizlilik ulaşım kısıtlamaları”'na giderek “Uygulama içi ödeme malzemeleri”kısıtlamasını kaldırınız"
     },
-    "an_ES": {
+    "es_ES": {
       "tds_account_safe_info": "Centro de seguridad de cuenta",
       "tds_account_info": "Información de cuenta",
       "tds_account_bind_info": "Información de vinculación",
@@ -422,7 +422,7 @@
       "tds_delete_content": "Une fois supprimé, le compte invité sera réinitialisé. Les données des comptes peuvent être perdues. Veuillez agir avec prudence",
       "tds_unbind_content": "Une fois délié, vous ne pourrez plus vous connecter via votre compte  %s. Veuillez agir avec prudence",
       "tds_unbind_delete_content": "Une fois que votre compte %s est délié, toutes les données du compte sont supprimées. Veuillez agir avec prudence",
-      "tds_unbind_confirm_Content": "Veuillez saisir “Confirm” et cliquez pour confirmer l’annulation de la liaison du compte",
+      "tds_unbind_confirm_Content": "Saisissez “Confirm” et cliquez pour annuler le lien du compte",
       "tds_delete_confirm_content": "Veuillez saisir “Delete” et cliquez pour confirmer la suppression du compte",
       "tds_input_error": "Mauvaise saisie. Veuillez réessayer",
       "tds_cancel": "Annuler",
@@ -484,7 +484,7 @@
       "tds_custom_service": "Centre Service à la Clientèle",
       "tds_product_not_exists":"Le produit n'existe pas",
       "tds_ios_restricted_payment_title": "Paiement restreint",
-      "tds_ios_restricted_payment_description": "Veuillez vous rendre dans \"Paramètres -> Restrictions d'accès au contenu et à la confidentialité\" pour supprimer les restrictions concernant les \"Achats intégrés d'articles\""
+      "tds_ios_restricted_payment_description": "Rendez dans \"Paramètres -> Restrictions d’accès au contenu et à la confidentialité\" pour supprimer les restrictions concernant les \"Achats intégrés d’articles\""
     },
     "de_DE": {
       "tds_account_safe_info": "Sicherheitszentrum des Accounts",
@@ -592,7 +592,7 @@
       "tds_confirm": "Confirm",
       "tds_delete": "Delete",
       "tds_loading": "로딩 중…",
-      "tds_current_account_prefix": "当현재 로그인",
+      "tds_current_account_prefix": "현재 로그인",
       "tds_account_format": "%s 계정",
       "tds_current_id": "ID：%s",
       "tds_copy_success": "복사 성공",
@@ -638,7 +638,7 @@
       "tds_purchase_processing": "이 주문건은 처리 중에 있습니다. 잠시만 기다려 주세요",
       "tds_terms_agreement": "약관 조항",
       "tds_service_terms_agreement": "약관 내용을 확인했으며, 이에 동의합니다",
-      "tds_push_agreement": "약관을 확인했으며 모두 동의합니다",
+      "tds_push_agreement": "이벤트 푸시 알림과 수신에 동의합니다",
       "tds_confirm_agreement": "동의하기",
       "tds_is_adult_agreement": "만 16세 이상입니다.",
       "tds_california_agreement": "《Privacy Notice for California Residents》",
@@ -683,13 +683,13 @@
     "tds_bind_error": "連携失敗",
     "tds_bind_success": "連携成功",
     "tds_unbind_success": "アカウントの連携を解除成功",
-    "tds_unbind_success_return_sign": "账号已解除绑定，正在返回登录…",
-    "tds_unbind_delete_success_return_sign": "アカウント連携が解除されました。ログイン画面に戻ります…",
+    "tds_unbind_success_return_sign": "アカウント連携が解除されました。ログイン画面に戻ります…",
+    "tds_unbind_delete_success_return_sign": "アカウントが削除されました。ログイン画面に戻ります…",
     "tds_unbind_guest_return": "ゲストアカウントがリセットされました。ログイン画面に戻ります…",
     "tds_loading_error_retry": "読み込みに失敗しました。画面をタップして再度お試しください",
     "tds_network_error_retry": "ネットワークエラーが発生しました。画面をタップして再度お試しください",
     "tds_login_success": "ログインに成功しました",
-    "tds_login_cancel": "権限のキャンセル",
+    "tds_login_cancel": "キャンセルしました",
     "tds_login_failed": "ログイン失敗、再度お試しください",
     "tds_login_button_title":"%s でサインイン",
     "tds_logout": "既にログアウトしました",
@@ -717,8 +717,8 @@
     "tds_pay_net_fail": "ネットワークエラーによりチャージに失敗しました",
     "tds_refund_net_fail": "ネット枠エラーにより残額の決済に失敗しました",
     "tds_purchase_processing": "購入処理を行っております。しばらくお待ちください",
-    "tds_terms_agreement": "利用規約条約",
-    "tds_service_terms_agreement": "使用許諾契約に同意する",
+    "tds_terms_agreement": "利用規約",
+    "tds_service_terms_agreement": "同意する",
     "tds_push_agreement": "このアプリのプッシュ通知を受け取ります",
     "tds_confirm_agreement": "同意する",
     "tds_is_adult_agreement": "16歳以上",
@@ -882,7 +882,7 @@
     "tds_purchase_processing": "The order is being processed. Please wait",
     "tds_terms_agreement": "Terms and conditions",
     "tds_service_terms_agreement": "I have read and agree to the terms",
-    "tds_push_agreement": "I agree to receive push notifications from the APP",
+    "tds_push_agreement": "I agree to receive push notifications.",
     "tds_confirm_agreement": "Accept",
     "tds_is_adult_agreement": "I am over 16 years old",
     "tds_california_agreement": "《Privacy Notice for California Residents》",

@@ -27,6 +27,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param eventName 事件名
 + (void)trackEvent:(NSString *)eventName;
 
+/// 跟踪自定义事件
+/// @param eventName 事件名
+/// @param properties 属性
++ (void)trackEvent:(NSString *)eventName properties:(nullable NSDictionary *)properties;
+
+
 /// 跟踪完成成就
 + (void)trackAchievement;
 
