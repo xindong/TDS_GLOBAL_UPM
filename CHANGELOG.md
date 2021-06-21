@@ -1,6 +1,6 @@
 # ChangeLog
 
-## v1.1.7
+## v1.2.0
 
 ### Feature
 
@@ -13,6 +13,9 @@
 * Android TapDB初始化参数更换
 * 补款流程订单新增 UserId
 * 上报角色名称修改
+* 韩国法务合规逻辑变更
+* 新增支付成功事件打点
+* 添加 Firebase Performance Monitoring 监控
 
 ### BugFix
 
@@ -36,26 +39,30 @@
 
 ### Feature
 
-*  部分日文翻译更改
-*  登录界面默认展开所有登录方式
-*  可配置账号中心解绑绑定开关（是否显示解绑按钮）
-*  账号安全中心的解绑/绑定/删除账号功能由后端字段控制
+* 部分日文翻译更改
+* 登录界面默认展开所有登录方式
+* 可配置账号中心解绑绑定开关（是否显示解绑按钮）
+* 账号安全中心的解绑/绑定/删除账号功能由后端字段控制
 * iOS Appsflyer 升级
 
 ### Dependencies
+
 * TapSDK v1.1.6
 
 ## v1.1.4
 
 ### BugFix
+
 * 修复 iOS 查询商品时 JSON 解析错误导致的崩溃
 * 修复 iOS ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES 设置问题可能导致的 AppStore 审核无法通过
+
 ### Dependencies
+
 * TapSDK v1.1.6
 
 ## v1.1.3
 
-### Feature 
+### Feature
 
 * 新增 Firebase Crashlytics
 * 新增 IDFA 开关
@@ -70,20 +77,20 @@
 
 ### Feature
 
-- 更新 iOS Twitter 
+- 更新 iOS Twitter
 
 ## v1.1.1
 
 ### Feature
 
-- 更新 iOS AppsFlyer 
+- 更新 iOS AppsFlyer
 
 ## v1.1.0
 
 ### Feature
 
 - 新增自定义登陆接口
-- tds 域名切换 
+- tds 域名切换
 - 支持海外域名动态切换
 - 网络稳定性日志上报
 - 登陆新增 twitter、Line
