@@ -1,4 +1,4 @@
-using TDSCommon;
+using TapTap.Common;
 using System.Collections;
 using System;
 using System.Collections.Generic;
@@ -40,7 +40,7 @@ namespace TDSGlobal
             Command command = new Command(TDSGlobalBridgeName.SERVICE_NAME, "initTDSGlobalSDK", true, null);
             EngineBridge.GetInstance().CallHandler(command, (result) =>
             {
-                Debug.Log("initSDK result:" + result.toJSON());
+                Debug.Log("initSDK result:" + result.ToJSON());
 
                 if (!checkResultSuccess(result))
                 {
@@ -62,7 +62,7 @@ namespace TDSGlobal
             Command command = new Command(TDSGlobalBridgeName.LOGIN_SERVICE_NAME, "login", true, null);
             EngineBridge.GetInstance().CallHandler(command, (result) =>
             {
-                Debug.Log("login result:" + result.toJSON());
+                Debug.Log("login result:" + result.ToJSON());
 
                 if (!checkResultSuccess(result))
                 {
@@ -96,7 +96,7 @@ namespace TDSGlobal
 
             EngineBridge.GetInstance().CallHandler(command, (result) =>
             {
-                Debug.Log("login result:" + result.toJSON());
+                Debug.Log("login result:" + result.ToJSON());
 
                 if (!checkResultSuccess(result))
                 {
@@ -147,7 +147,7 @@ namespace TDSGlobal
             Command command = new Command(TDSGlobalBridgeName.LOGIN_SERVICE_NAME, "getUser", true, null);
             EngineBridge.GetInstance().CallHandler(command, (result) =>
             {
-                Debug.Log("getUser result:" + result.toJSON());
+                Debug.Log("getUser result:" + result.ToJSON());
 
                 if (!checkResultSuccess(result))
                 {
@@ -378,7 +378,7 @@ namespace TDSGlobal
 
         public void AdvertiserIDCollectionEnable(bool enable)
         {
-            if (Platform.isIOS())
+            if (Platform.IsIOS())
             {
                 EngineBridge.GetInstance().CallHandler(new Command.Builder()
                     .Service(TDSGlobalBridgeName.SERVICE_NAME)

@@ -7,6 +7,8 @@
     "author": "tds-develop",
     "license": "MIT",
     "dependencies": {
-        "com.tds.sdk": "https://github.com/xindong/TAPSDK_UPM.git#1.1.6"
+        "com.taptap.tds.login": "https://github.com/TapTap/TapLogin-Unity.git#2.1.4",
+        "com.taptap.tds.common": "https://github.com/TapTap/TapCommon-Unity.git#2.1.4",
+        "com.taptap.tds.bootstrap": "https://github.com/TapTap/TapBootstrap-Unity.git#2.1.4"
     }
 }

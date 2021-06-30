@@ -2,7 +2,7 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using TDSCommon;
+using TapTap.Common;
 
 namespace TDSGlobal
 {
