@@ -1,5 +1,22 @@
 # ChangeLog
 
+## v1.2.0
+
+### Feature
+
+- 客服中心新增支持选择视频类型文件
+- TDSGlobalUser 新增 tdsId, 使用 taptap 登录时可获取，其他情况为空
+
+### BreakingChanges
+
+- Remove TapSDk v1.1.6
+
+### Dependencies
+
+- TapTap.Bootstrap v2.1.6
+- TapTap.Login v2.1.6
+- TapTap.Common v2.1.6
+
 ## v1.1.7
 
 ### Feature

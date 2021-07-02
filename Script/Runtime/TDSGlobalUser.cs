@@ -11,6 +11,8 @@ namespace TDSGlobal
     {
         public long userId;
 
+        public string tdsId;
+
         public string sub;
 
         public string name;
@@ -23,24 +25,27 @@ namespace TDSGlobal
 
         public TDSGlobalUser(string json)
         {
-            Dictionary<string,object> dic = Json.Deserialize(json) as Dictionary<string,object>;
-            this.userId = SafeDictionary.GetValue<long>(dic,"userId");
-            this.sub = SafeDictionary.GetValue<string>(dic,"sub");
-            this.name = SafeDictionary.GetValue<string>(dic,"name");
-            this.loginType = SafeDictionary.GetValue<int>(dic,"loginType");
-            this.boundAccounts = SafeDictionary.GetValue<List<string>>(dic,"boundAccounts");
-            this.token  = new TDSGlobalAccessToken(SafeDictionary.GetValue<Dictionary<string,object>>(dic,"token"));
+            Dictionary<string, object> dic = Json.Deserialize(json) as Dictionary<string, object>;
+            this.userId = SafeDictionary.GetValue<long>(dic, "userId");
+            this.sub = SafeDictionary.GetValue<string>(dic, "sub");
+            this.name = SafeDictionary.GetValue<string>(dic, "name");
+            this.loginType = SafeDictionary.GetValue<int>(dic, "loginType");
+            tdsId = SafeDictionary.GetValue<string>(dic, "tdsId");
+            this.boundAccounts = SafeDictionary.GetValue<List<string>>(dic, "boundAccounts");
+            this.token = new TDSGlobalAccessToken(SafeDictionary.GetValue<Dictionary<string, object>>(dic, "token"));
         }
 
-        public TDSGlobalUser(Dictionary<string,object> dic)
-        {   
-            this.userId = SafeDictionary.GetValue<long>(dic,"userId");
-            this.sub = SafeDictionary.GetValue<string>(dic,"sub");
-            this.name = SafeDictionary.GetValue<string>(dic,"name");
-            this.token  = new TDSGlobalAccessToken(SafeDictionary.GetValue<Dictionary<string,object>>(dic,"token"));
+        public TDSGlobalUser(Dictionary<string, object> dic)
+        {
+            this.userId = SafeDictionary.GetValue<long>(dic, "userId");
+            this.sub = SafeDictionary.GetValue<string>(dic, "sub");
+            this.name = SafeDictionary.GetValue<string>(dic, "name");
+            tdsId = SafeDictionary.GetValue<string>(dic, "tdsId");
+            this.token = new TDSGlobalAccessToken(SafeDictionary.GetValue<Dictionary<string, object>>(dic, "token"));
         }
 
-        public string ToJSON(){
+        public string ToJSON()
+        {
             return JsonUtility.ToJson(this);
         }
     }
@@ -48,7 +53,6 @@ namespace TDSGlobal
     [Serializable]
     public class TDSGlobalAccessToken
     {
-
         public string accessToken;
 
         public string kid;
@@ -58,14 +62,14 @@ namespace TDSGlobal
         public string macAlgorithm;
 
         public string tokenType;
-            
-        public TDSGlobalAccessToken(Dictionary<string,object> dic)
-        {   
-            this.accessToken = SafeDictionary.GetValue<string>(dic,"accessToken");
-            this.kid = SafeDictionary.GetValue<string>(dic,"kid");
-            this.macKey = SafeDictionary.GetValue<string>(dic,"macKey");
-            this.macAlgorithm = SafeDictionary.GetValue<string>(dic,"macAlgorithm");
-            this.tokenType = SafeDictionary.GetValue<string>(dic,"tokenType");
+
+        public TDSGlobalAccessToken(Dictionary<string, object> dic)
+        {
+            this.accessToken = SafeDictionary.GetValue<string>(dic, "accessToken");
+            this.kid = SafeDictionary.GetValue<string>(dic, "kid");
+            this.macKey = SafeDictionary.GetValue<string>(dic, "macKey");
+            this.macAlgorithm = SafeDictionary.GetValue<string>(dic, "macAlgorithm");
+            this.tokenType = SafeDictionary.GetValue<string>(dic, "tokenType");
         }
     }
 }
