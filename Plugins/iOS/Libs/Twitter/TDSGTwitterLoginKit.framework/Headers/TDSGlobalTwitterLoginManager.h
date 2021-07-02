@@ -14,6 +14,10 @@ typedef void(^TDSGlobalTwitterLoginHandler)(TDSGlobalTwitterAuthToken * _Nullabl
 
 + (void)enableWithConsumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret;
 
++ (NSString *)getConsumerKey;
+
++ (NSString *)getConsumerSecret;
+
 + (BOOL)isAuthed;
 
 +(void)twitterAuthWithProvider:(id <ASWebAuthenticationPresentationContextProviding> _Nonnull)provider handler:(TDSGlobalTwitterLoginHandler)handler API_AVAILABLE(ios(13.0));
