@@ -16,6 +16,9 @@
 - TapTap.Bootstrap v2.1.6
 - TapTap.Login v2.1.6
 - TapTap.Common v2.1.6
+- TapTap.TapDB v2.1.6
+- TapTap.Friends v2.1.6
+- TapTap.FriendUI v2.1.6
 
 ## v1.1.7
 

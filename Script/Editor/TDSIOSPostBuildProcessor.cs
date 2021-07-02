@@ -49,7 +49,9 @@ namespace TDSEditor
 
                 proj.AddFrameworkToProject(unityFrameworkTarget, "AdServices.framework", true);
                 proj.AddFrameworkToProject(unityFrameworkTarget, "iAd.framework", false);
-
+                
+                proj.AddBuildProperty(target, "OTHER_LDFLAGS", "-ObjC -lc++ -lstdc++ -lz -weak_framework Accelerate");
+                proj.AddBuildProperty(unityFrameworkTarget, "OTHER_LDFLAGS", "-ObjC -lc++ -lstdc++ -lz -weak_framework Accelerate");
                 
                 // 添加资源文件，注意文件路径
                 var resourcePath = Path.Combine(path, "TDSGlobalResource");
