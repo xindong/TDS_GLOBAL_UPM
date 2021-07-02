@@ -1,8 +1,8 @@
 # ChangeLog
 
-## v1.2.0
+## v1.3.0
 
-### Feature
+### New Feature
 
 - 客服中心新增支持选择视频类型文件
 - TDSGlobalUser 新增 tdsId, 使用 taptap 登录时可获取，其他情况为空
@@ -13,7 +13,7 @@
 
 ### BreakingChanges
 
-- Remove TapSDk v1.1.6
+- Remove TapSDK v1.1.6
 
 ### Dependencies
 
@@ -22,7 +22,7 @@
 - TapTap.Common v2.1.6
 - TapTap.TapDB v2.1.6
 
-## v1.1.7
+## v1.2.0
 
 ### Feature
 
@@ -35,6 +35,9 @@
 * Android TapDB初始化参数更换
 * 补款流程订单新增 UserId
 * 上报角色名称修改
+* 韩国法务合规逻辑变更
+* 新增支付成功事件打点
+* 添加 Firebase Performance Monitoring 监控
 
 ### BugFix
 
