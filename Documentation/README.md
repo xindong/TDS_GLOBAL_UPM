@@ -27,8 +27,12 @@ NSMicrophoneUsageDescription 麦克风，用于内嵌动态
 //在Packages/manifest.json 中添加TDSGlobal SDK
 {
     "dependencies":{
-        "com.tds.sdk":"https://github.com/xindong/TAPSDK_UPM.git#1.1.5",
-        "com.tds.global":"https://github.com/xindong/TDS_GLOBAL_UPM.git#1.1.3",
+    	"com.taptap.tds.bootstrap": "https://github.com/TapTap/TapBootstrap-Unity.git#2.1.6",
+    	"com.taptap.tds.common": "https://github.com/TapTap/TapCommon-Unity.git#2.1.6",
+    	"com.taptap.tds.login": "https://github.com/TapTap/TapLogin-Unity.git#2.1.6",
+    	"com.taptap.tds.tapdb": "https://github.com/TapTap/TapDB-Unity.git#2.1.6",
+    	"com.taptap.tds.moment": "https://github.com/TapTap/TapMoment-Unity.git#2.1.6",
+    	"com.tds.global":"https://github.com/xindong/TDS_GLOBAL_UPM.git#1.3.0",
     }
 }
 ```
