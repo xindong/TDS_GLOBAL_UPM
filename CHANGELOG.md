@@ -1,6 +1,21 @@
 # ChangeLog
 
-## v1.1.7
+## v1.2.1
+
+### Feature
+
+* Android WebView 支持唤起外部应用
+* Android 游客数据可保存至外部存储空间
+
+### BugFix
+
+* Android 修复因初始化之前调用单点登录可能导致崩溃的问题
+
+### Dependencies
+
+* TapSDk v1.1.6
+
+## v1.2.0
 
 ### Feature
 
