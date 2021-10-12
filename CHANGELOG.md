@@ -1,5 +1,16 @@
 # ChangeLog
 
+## v1.2.2
+
+### Feature
+
+* WebView 支持 LocalStorage、SessionStorage、DatabaseStorage
+* 客服系统支持上传视频文件类型
+
+### Dependencies
+
+* TapSDk v1.1.6
+
 ## v1.2.1
 
 ### Feature
