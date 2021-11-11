@@ -28,7 +28,7 @@ NSMicrophoneUsageDescription 麦克风，用于内嵌动态
 {
     "dependencies":{
         "com.tds.sdk":"https://github.com/xindong/TAPSDK_UPM.git#1.1.6",
-        "com.tds.global":"https://github.com/xindong/TDS_GLOBAL_UPM.git#1.2.2",
+        "com.tds.global":"https://github.com/xindong/TDS_GLOBAL_UPM.git#1.2.3",
     }
 }
 ```
@@ -124,6 +124,13 @@ android:value="{facebook-cliendId}" />
         android:authorities="com.facebook.app.FacebookContentProvider{facebook-cliendId}"
         android:exported="true" />
 ```
+
+***NOTE:*** 如果游戏需要游客登录在 Android 11及以上的版本上卸载重装之后保留游客账号信息，或访问非游戏的其他文件目录，则需要添加以下权限:
+```xml
+<uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+```
+PS: 该权限涉及用户敏感权限，在 Google Play 上提交应用审核是需要对此权限进行权限说明申请，否则可能无法通过审核，谨慎使用！！！
+
 
 ## 4 4.接口使用
 引入命名空间`using TDSGlobal;`
@@ -361,11 +368,35 @@ TDSGlobal.TDSGlobalSDK.EventCompletedTutorial();
 TDSGlobal.TDSGlobalSDK.StoreReview();
 ```
 
+#### 4.9 版本判断
+```c#
+// 当前手机版本是否是 Android 11 及以上
+TDSGlobal.TDSGlobalSDK.IsBuildVersionAboveAndroid11()
+```
+
+#### 4.10 是否有外部存储管理权限
+```c#
+// 当前是否有外部存储管理权限(在 Android 11及以上调用此方法才生效，否则都是 false)
+TDSGlobal.TDSGlobalSDK.IsBuildVersionAboveAndroid11()
+```
+
+#### 4.11 请求获取外部存储管理权限
+```c#
+/*
+ * 方法中的 requestCode 作为跳转到外部的一个请求码,
+ * 在从设置页面回来时 Android 原生会走到 #onActivityResult(int requestCode, int resultCode, Intent data) 的方法
+ * 可通过这个请求码的匹配，再次确认是否拥有权限之后来走后续的登录流程
+ */
+ 
+//调用系统设置请求获取外部存储管理权限(在 Android 11及以上，且没有此权限调用此方法才生效，否则无反应)
+TDSGlobal.TDSGlobalSDK.RequestExternalStorageManagerPermission(int requestCode)
+```
+
 ### 5.注意事项<a id="tips"></a>
 
 **TDSGlobal/Script/Editor** 目录下的脚本，会帮助游戏自动配置。
 
-#### 4.1 Android
+#### 5.1 Android
 确保 **TDSGlobal_info.json**、**google-Service.json** 拷贝到 **Asssets/Plugins/Android/Assets** 目录中。
 
 ```c#
@@ -414,7 +445,7 @@ writerHelper.WriteBelow(@"implementation fileTree(dir: 'libs', include: ['*.jar'
     ");
 ```
 
-#### 4.2 IOS
+#### 5.2 IOS
 
 确保 **TDSGlobal-Info.plist** 拷贝到 **Assets/Plugins/IOS** 目录中，脚本会自动配置依赖项。
 

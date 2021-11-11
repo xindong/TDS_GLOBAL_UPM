@@ -32,6 +32,7 @@ public class TDSAndroidPostBuildProcessor : IPostGenerateGradleAndroidProject
         writer.WriteLine("org.gradle.jvmargs=-Xmx4096M");
         writer.WriteLine("android.useAndroidX=true");
         writer.WriteLine("android.enableJetifier=true");
+        writer.WriteLine("unityStreamingAssets=.unity3d, google-services-desktop.json, google-services.json, GoogleService-Info.plist");
         writer.Flush();
         writer.Close();
     }

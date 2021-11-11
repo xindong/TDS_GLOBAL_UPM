@@ -136,5 +136,20 @@ namespace TDSGlobal
         {
             TDSGlobalImpl.GetInstance().StoreReview();
         }
+
+        public static void IsBuildVersionAboveAndroid11(Action<bool> callback)
+        {
+            TDSGlobalImpl.GetInstance().IsBuildVersionAboveAndroid11(callback);
+        }
+
+        public static void IsExternalStorageManager(Action<bool> callback)
+        {
+            TDSGlobalImpl.GetInstance().IsExternalStorageManager(callback);
+        }
+
+        public static void RequestExternalStorageManagerPermission(int requestCode)
+        {
+            TDSGlobalImpl.GetInstance().RequestExternalStorageManagerPermission(requestCode);
+        }
     }
 }

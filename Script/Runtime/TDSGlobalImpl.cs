@@ -87,7 +87,7 @@ namespace TDSGlobal
         public void LoginByType(LoginType type, Action<TDSGlobalUser> callback, Action<TDSGlobalError> errorCallback)
         {
             var command = new Command.Builder()
-                .Args("loginByType", (int) type)
+                .Args("loginByType", (int)type)
                 .Service(TDSGlobalBridgeName.LOGIN_SERVICE_NAME)
                 .Method("loginByType")
                 .Callback(true)
@@ -386,6 +386,57 @@ namespace TDSGlobal
                     .Args("setAdvertiserIDCollectionEnable", enable)
                     .CommandBuilder());
             }
+        }
+
+        public void IsBuildVersionAboveAndroid11(Action<bool> callback)
+        {
+            if (!Platform.isAndroid()) return;
+            var command = new Command.Builder()
+                .Service(TDSGlobalBridgeName.SERVICE_NAME)
+                .Method("isBuildVersionAboveAndroid11")
+                .Callback(true)
+                .CommandBuilder();
+            EngineBridge.GetInstance().CallHandler(command, result =>
+            {
+                if (!checkResultSuccess(result))
+                {
+                    callback(false);
+                    return;
+                }
+
+                callback("true".Equals(result.content));
+            });
+        }
+
+        public void IsExternalStorageManager(Action<bool> callback)
+        {
+            if (!Platform.isAndroid()) return;
+            var command = new Command.Builder()
+                .Service(TDSGlobalBridgeName.SERVICE_NAME)
+                .Method("isExternalStorageManager")
+                .Callback(true)
+                .CommandBuilder();
+            EngineBridge.GetInstance().CallHandler(command, result =>
+            {
+                if (!checkResultSuccess(result))
+                {
+                    callback(false);
+                    return;
+                }
+
+                callback("true".Equals(result.content));
+            });
+        }
+
+        public void RequestExternalStorageManagerPermission(int requestCode)
+        {
+            if (!Platform.isAndroid()) return;
+            EngineBridge.GetInstance().CallHandler(new Command.Builder()
+                .Service(TDSGlobalBridgeName.SERVICE_NAME)
+                .Method("requestExternalStorageManagerPermission")
+                .Args("requestCode", requestCode)
+                .Callback(true)
+                .CommandBuilder());
         }
 
         private bool checkResultSuccess(Result result)

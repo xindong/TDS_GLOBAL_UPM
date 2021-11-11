@@ -10,11 +10,11 @@ namespace TDSGlobal
 
         void Login(Action<TDSGlobalUser> callback, Action<TDSGlobalError> errorCallback);
 
-        void LoginByType(LoginType loginType,Action<TDSGlobalUser> callback, Action<TDSGlobalError> errorCallback);
+        void LoginByType(LoginType loginType, Action<TDSGlobalUser> callback, Action<TDSGlobalError> errorCallback);
 
         void Logout();
 
-        void AddUserStatusChangeCallback(Action<int,string> callback);
+        void AddUserStatusChangeCallback(Action<int, string> callback);
 
         void GetUser(Action<TDSGlobalUser> callback, Action<TDSGlobalError> errorCallback);
 
@@ -26,15 +26,18 @@ namespace TDSGlobal
 
         void SetLanguage(int languageType);
 
-        void PayWithProduct(string orderId, string productId, string roleId, string serverId, string ext, Action<TDSGlobalOrderInfo> callback , Action<TDSGlobalError> errorCallback);
+        void PayWithProduct(string orderId, string productId, string roleId, string serverId, string ext,
+            Action<TDSGlobalOrderInfo> callback, Action<TDSGlobalError> errorCallback);
 
-        void PayWithWeb(string serverId, string roleId,Action<TDSGlobalError> callback);
+        void PayWithWeb(string serverId, string roleId, Action<TDSGlobalError> callback);
 
-        void QueryWithProductIds(string[] productIds, Action<List<TDSGlobalSkuDetail>> callback,Action<TDSGlobalError> errorCallback);
+        void QueryWithProductIds(string[] productIds, Action<List<TDSGlobalSkuDetail>> callback,
+            Action<TDSGlobalError> errorCallback);
 
         void QueryRestoredPurchases(Action<List<TDSGlobalRestoredPurchases>> callback);
 
-        void RestorePurchase(string tdsTransactionInfo, string orderId, string productId, string roleId, string serverId, string ext, Action<TDSGlobalOrderInfo> callback,Action<TDSGlobalError> errorCallback);
+        void RestorePurchase(string tdsTransactionInfo, string orderId, string productId, string roleId,
+            string serverId, string ext, Action<TDSGlobalOrderInfo> callback, Action<TDSGlobalError> errorCallback);
 
         void Report(string serverId, string roleId, string roleName);
 
@@ -56,6 +59,20 @@ namespace TDSGlobal
 
         void AdvertiserIDCollectionEnable(bool enable);
 
+        /**
+         * 当前手机版本是否是 Android 11 及以上
+         */
+        void IsBuildVersionAboveAndroid11(Action<bool> callback);
+
+        /**
+         * 当前是否有外部存储管理权限(在 Android 11及以上调用此方法才生效，否则都是 false)
+         */
+        void IsExternalStorageManager(Action<bool> callback);
+
+        /**
+         * 调用系统设置请求获取外部存储管理权限(在 Android 11及以上，且没有此权限调用此方法才生效，否则无反应)
+         */
+        void RequestExternalStorageManagerPermission(int requestCode);
     }
 
     public interface TDSGlobalShareCallback
@@ -66,6 +83,4 @@ namespace TDSGlobal
 
         void ShareError(string error);
     }
-
-
 }
