@@ -531,7 +531,7 @@ File.WriteAllText(_plistPath, _plist.WriteToString());
 string unityAppControllerPath = pathToBuildProject + "/Classes/UnityAppController.mm";
 TDSGlobalEditor.TDSGlobalScriptStreamWriterHelper UnityAppController = new TDSGlobalEditor.TDSGlobalScriptStreamWriterHelper(unityAppControllerPath);
 //在指定代码后面增加一行代码
-UnityAppController.WriteBelow(@"#import <OpenGLES/ES2/glext.h>", @"#import <TDSGlobalSDKCoreKit/TDSGlobalSDK.h>");
+UnityAppController.WriteBelow(@"#import <AVFoundation/AVFoundation.h>", @"#import <TDSGlobalSDKCoreKit/TDSGlobalSDK.h>");
 UnityAppController.WriteBelow(@"[KeyboardDelegate Initialize];",@"[TDSGlobalSDK application:application didFinishLaunchingWithOptions:launchOptions];");
 UnityAppController.WriteBelow(@"AppController_SendNotificationWithArg(kUnityOnOpenURL, notifData);",@"[TDSGlobalSDK application:app openURL:url options:options];");
 UnityAppController.WriteBelow(@"NSURL* url = userActivity.webpageURL;",@"[TDSGlobalSDK application:application continueUserActivity:userActivity restorationHandler:restorationHandler];");
