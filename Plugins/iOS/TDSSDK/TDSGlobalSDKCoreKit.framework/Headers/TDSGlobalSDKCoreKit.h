@@ -10,12 +10,13 @@
 #import <TDSGlobalSDKCoreKit/TDSGlobalTrackManager.h>
 #import <TDSGlobalSDKCoreKit/TDSGlobalReportManager.h>
 #import <TDSGlobalSDKCoreKit/TDSGlobalMomentManager.h>
+#import <TDSGlobalSDKCoreKit/TDSGlobalMessageManager.h>
 #import <TDSGlobalSDKCoreKit/TDSGlobalShareManager.h>
 #import <TDSGlobalSDKCoreKit/TDSGlobalUser.h>
 #import <TDSGlobalSDKCoreKit/TDSGlobalUserDataManager.h>
 #import <TDSGlobalSDKCoreKit/TDSGlobalUserToken.h>
 
-#define TDSGLOBALSDK_VERSION @"1.1.5"
+#define TDSGLOBALSDK_VERSION @"1.2.0"
 #define TDSGLOBALSDK_NAME @"TDSGlobalSDK"
 
 
