@@ -1,5 +1,8 @@
 # ChangeLog
 
+## v1.2.4
+* 更新 Android 设备唯一标识机制
+
 ## v1.2.3
 
 ### Feature
