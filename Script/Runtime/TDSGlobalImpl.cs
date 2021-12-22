@@ -123,6 +123,12 @@ namespace TDSGlobal
             Command command = new Command(TDSGlobalBridgeName.LOGIN_SERVICE_NAME, "logout", false, null);
             EngineBridge.GetInstance().CallHandler(command);
         }
+        
+        public void AccountCancellation()
+        {
+            Command command = new Command(TDSGlobalBridgeName.LOGIN_SERVICE_NAME, "accountCancellation", false, null);
+            EngineBridge.GetInstance().CallHandler(command);
+        }
 
         public void AddUserStatusChangeCallback(Action<int, string> callback)
         {

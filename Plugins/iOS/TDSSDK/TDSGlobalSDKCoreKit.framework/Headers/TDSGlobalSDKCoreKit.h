@@ -15,6 +15,8 @@
 #import <TDSGlobalSDKCoreKit/TDSGlobalUser.h>
 #import <TDSGlobalSDKCoreKit/TDSGlobalUserDataManager.h>
 #import <TDSGlobalSDKCoreKit/TDSGlobalUserToken.h>
+#import <TDSGlobalSDKCoreKit/TDSGlobalConfigManager.h>
+#import <TDSGlobalSDKCoreKit/TDSGlobalGame.h>
 
 #define TDSGLOBALSDK_VERSION @"1.2.0"
 #define TDSGLOBALSDK_NAME @"TDSGlobalSDK"

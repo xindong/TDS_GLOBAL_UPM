@@ -13,6 +13,7 @@ namespace TDSGlobal
         void LoginByType(LoginType loginType, Action<TDSGlobalUser> callback, Action<TDSGlobalError> errorCallback);
 
         void Logout();
+        void AccountCancellation();
 
         void AddUserStatusChangeCallback(Action<int, string> callback);
 

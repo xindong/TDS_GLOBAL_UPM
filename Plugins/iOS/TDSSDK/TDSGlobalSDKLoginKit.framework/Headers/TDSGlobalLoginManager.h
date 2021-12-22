@@ -49,6 +49,8 @@ typedef void (^TDSGlobalUserStateChangeHandler)(TDSGlobalUserStateChangeCode use
     2. if step 1 failed, show login buttons ,and call with corresponding type when user tapped.
  */
 + (void)loginByType:(TDSGlobalSDKEntryType)loginType loginHandler:(TDSGlobalLoginManagerRequestHandler)handler;
+
++ (void)accountCancellation;
 @end
 
 NS_ASSUME_NONNULL_END

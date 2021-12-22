@@ -26,7 +26,10 @@ namespace TDSGlobal
         {
             TDSGlobalImpl.GetInstance().Logout();
         }
-
+        public static void AccountCancellation()
+        {
+            TDSGlobalImpl.GetInstance().AccountCancellation();
+        }
         public static void UserCenter()
         {
             TDSGlobalImpl.GetInstance().UserCenter();
