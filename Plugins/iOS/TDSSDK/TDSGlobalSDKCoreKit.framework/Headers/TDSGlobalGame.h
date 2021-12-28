@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,assign) NSInteger languageLocale;               // 语言
 
+@property (nonatomic,copy) NSString *logoutUrl;                      // 账户注销地址
+
 /**
  协议
  */
