@@ -1,33 +1,20 @@
-// Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
-//
-// You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
-// copy, modify, and distribute this software in source code or binary form for use
-// in connection with the web services and APIs provided by Facebook.
-//
-// As with any software that integrates with the Facebook platform, your use of
-// this software is subject to the Facebook Developer Principles and Policies
-// [http://developers.facebook.com/policy/]. This copyright notice shall be
-// included in all copies or substantial portions of the software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-// FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-// COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-// IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-// CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
-
-#import "TargetConditionals.h"
+/*
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ * All rights reserved.
+ *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
 #if !TARGET_OS_TV
 
-#import "FBSDKProfilePictureView.h"
+#import <FBSDKCoreKit/FBSDKProfilePictureView.h>
 
-@class FBSDKAuthenticationTokenClaims;
+@class FBSDKLocation;
 @class FBSDKProfile;
+@class FBSDKUserAgeRange;
 
 NS_ASSUME_NONNULL_BEGIN
-
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
 
 /**
   Notification indicating that the `currentProfile` has changed.
@@ -38,20 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 FOUNDATION_EXPORT NSNotificationName const FBSDKProfileDidChangeNotification
 NS_SWIFT_NAME(ProfileDidChange);
-
-#else
-
-/**
- Notification indicating that the `currentProfile` has changed.
-
- the userInfo dictionary of the notification will contain keys
- `FBSDKProfileChangeOldKey` and
- `FBSDKProfileChangeNewKey`.
- */
-FOUNDATION_EXPORT NSString *const FBSDKProfileDidChangeNotification
-NS_SWIFT_NAME(ProfileDidChangeNotification);
-
-#endif
 
 /*   key in notification's userInfo object for getting the old profile.
 
@@ -73,14 +46,14 @@ NS_SWIFT_NAME(ProfileChangeNewKey);
  @param error the error during the request, if any
 
  */
-typedef void (^FBSDKProfileBlock)(FBSDKProfile *_Nullable profile, NSError *_Nullable error)
+typedef void (^ FBSDKProfileBlock)(FBSDKProfile *_Nullable profile, NSError *_Nullable error)
 NS_SWIFT_NAME(ProfileBlock);
 
 /**
  Represents the unique identifier for an end user
  */
 typedef NSString FBSDKUserIdentifier
-NS_SWIFT_NAME(UserIdentifier);
+  NS_SWIFT_NAME(UserIdentifier);
 
 /**
   Represents an immutable Facebook profile
@@ -95,7 +68,7 @@ NS_SWIFT_NAME(UserIdentifier);
  You can use this class to build your own `FBSDKProfilePictureView` or in place of typical requests to "/me".
  */
 NS_SWIFT_NAME(Profile)
-@interface FBSDKProfile : NSObject<NSCopying, NSSecureCoding>
+@interface FBSDKProfile : NSObject <NSCopying, NSSecureCoding>
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -119,7 +92,6 @@ NS_SWIFT_NAME(Profile)
                    refreshDate:(nullable NSDate *)refreshDate;
 
 /**
-  initializes a new instance.
  @param userID the user ID
  @param firstName the user's first name
  @param middleName the user's middle name
@@ -129,6 +101,15 @@ NS_SWIFT_NAME(Profile)
  @param refreshDate the optional date this profile was fetched. Defaults to [NSDate date].
  @param imageURL an optional URL to use for fetching a user's profile image
  @param email the user's email
+ @param friendIDs a list of identifiers for the user's friends
+ @param birthday the user's birthday
+ @param ageRange the user's age range
+ @param hometown the user's hometown
+ @param location the user's location
+ @param gender the user's gender
+ @param isLimited indicates if the information provided is incomplete in some way.
+ When true, `loadCurrentProfileWithCompletion:` will assume the profile is
+ incomplete and disregard any cached profile. Defaults to false.
  */
 - (instancetype)initWithUserID:(FBSDKUserIdentifier *)userID
                      firstName:(nullable NSString *)firstName
@@ -139,7 +120,13 @@ NS_SWIFT_NAME(Profile)
                    refreshDate:(nullable NSDate *)refreshDate
                       imageURL:(nullable NSURL *)imageURL
                          email:(nullable NSString *)email
-DEPRECATED_MSG_ATTRIBUTE("This constructor will be removed in the next major release.");
+                     friendIDs:(nullable NSArray<FBSDKUserIdentifier *> *)friendIDs
+                      birthday:(nullable NSDate *)birthday
+                      ageRange:(nullable FBSDKUserAgeRange *)ageRange
+                      hometown:(nullable FBSDKLocation *)hometown
+                      location:(nullable FBSDKLocation *)location
+                        gender:(nullable NSString *)gender
+                     isLimited:(BOOL)isLimited;
 
 /**
   initializes a new instance.
@@ -153,6 +140,11 @@ DEPRECATED_MSG_ATTRIBUTE("This constructor will be removed in the next major rel
  @param imageURL an optional URL to use for fetching a user's profile image
  @param email the user's email
  @param friendIDs a list of identifiers for the user's friends
+ @param birthday the user's birthday
+ @param ageRange the user's age range
+ @param hometown the user's hometown
+ @param location the user's location
+ @param gender the user's gender
  */
 - (instancetype)initWithUserID:(FBSDKUserIdentifier *)userID
                      firstName:(nullable NSString *)firstName
@@ -164,7 +156,12 @@ DEPRECATED_MSG_ATTRIBUTE("This constructor will be removed in the next major rel
                       imageURL:(nullable NSURL *)imageURL
                          email:(nullable NSString *)email
                      friendIDs:(nullable NSArray<FBSDKUserIdentifier *> *)friendIDs
-NS_DESIGNATED_INITIALIZER;
+                      birthday:(nullable NSDate *)birthday
+                      ageRange:(nullable FBSDKUserAgeRange *)ageRange
+                      hometown:(nullable FBSDKLocation *)hometown
+                      location:(nullable FBSDKLocation *)location
+                        gender:(nullable NSString *)gender
+  NS_DESIGNATED_INITIALIZER;
 
 /**
  The current profile instance and posts the appropriate notification
@@ -174,29 +171,29 @@ NS_DESIGNATED_INITIALIZER;
  */
 
 /// The current profile
-@property (class, nonatomic, strong, nullable) FBSDKProfile *currentProfile
+@property (class, nullable, nonatomic, strong) FBSDKProfile *currentProfile
 NS_SWIFT_NAME(current);
 
 /**
   The user id
  */
-@property (nonatomic, copy, readonly) FBSDKUserIdentifier *userID;
+@property (nonatomic, readonly, copy) FBSDKUserIdentifier *userID;
 /**
   The user's first name
  */
-@property (nonatomic, copy, readonly, nullable) NSString *firstName;
+@property (nullable, nonatomic, readonly, copy) NSString *firstName;
 /**
   The user's middle name
  */
-@property (nonatomic, copy, readonly, nullable) NSString *middleName;
+@property (nullable, nonatomic, readonly, copy) NSString *middleName;
 /**
   The user's last name
  */
-@property (nonatomic, copy, readonly, nullable) NSString *lastName;
+@property (nullable, nonatomic, readonly, copy) NSString *lastName;
 /**
   The user's complete name
  */
-@property (nonatomic, copy, readonly, nullable) NSString *name;
+@property (nullable, nonatomic, readonly, copy) NSString *name;
 /**
   A URL to the user's profile.
 
@@ -205,7 +202,7 @@ NS_SWIFT_NAME(current);
  Consider using `FBSDKAppLinkResolver` to resolve this
  to an app link to link directly to the user's profile in the Facebook app.
  */
-@property (nonatomic, readonly, nullable) NSURL *linkURL;
+@property (nullable, nonatomic, readonly) NSURL *linkURL;
 
 /**
   The last time the profile data was fetched.
@@ -214,21 +211,54 @@ NS_SWIFT_NAME(current);
 /**
   A URL to use for fetching a user's profile image.
  */
-@property (nonatomic, readonly, nullable) NSURL *imageURL;
+@property (nullable, nonatomic, readonly) NSURL *imageURL;
 /**
   The user's email.
 
  IMPORTANT: This field will only be populated if your user has granted your application the 'email' permission.
  */
-@property (nonatomic, copy, readonly, nullable) NSString *email;
+@property (nullable, nonatomic, readonly, copy) NSString *email;
 /**
   A list of identifiers of the user's friends.
 
-  IMPORTANT: This field will only be populated if your user has granted your application the 'user_friends' permission.
-  We are building out this field in Limited Login with the intention to roll it out in the coming months, though it is
- not broadly available to developers at this time.
+ IMPORTANT: This field will only be populated if your user has granted your application the 'user_friends' permission.
  */
-@property (nonatomic, copy, readonly, nullable) NSArray<FBSDKUserIdentifier *> *friendIDs;
+@property (nullable, nonatomic, readonly, copy) NSArray<FBSDKUserIdentifier *> *friendIDs;
+
+/**
+  The user's birthday.
+
+ IMPORTANT: This field will only be populated if your user has granted your application the 'user_birthday' permission.
+ */
+@property (nullable, nonatomic, readonly, copy) NSDate *birthday;
+
+/**
+  The user's age range
+
+ IMPORTANT: This field will only be populated if your user has granted your application the 'user_age_range' permission.
+ */
+@property (nullable, nonatomic, readonly, copy) FBSDKUserAgeRange *ageRange;
+
+/**
+  The user's hometown
+
+ IMPORTANT: This field will only be populated if your user has granted your application the 'user_hometown' permission.
+ */
+@property (nullable, nonatomic, readonly, copy) FBSDKLocation *hometown;
+
+/**
+  The user's location
+
+ IMPORTANT: This field will only be populated if your user has granted your application the 'user_location' permission.
+ */
+@property (nullable, nonatomic, readonly, copy) FBSDKLocation *location;
+
+/**
+  The user's gender
+
+ IMPORTANT: This field will only be populated if your user has granted your application the 'user_gender' permission.
+ */
+@property (nullable, nonatomic, readonly, copy) NSString *gender;
 
 /**
   Indicates if `currentProfile` will automatically observe `FBSDKAccessTokenDidChangeNotification` notifications
@@ -240,8 +270,10 @@ NS_SWIFT_NAME(current);
  Note that if `[FBSDKAccessToken currentAccessToken]` is unset, the `currentProfile` instance remains. It's also possible
  for `currentProfile` to return nil until the data is fetched.
  */
+// UNCRUSTIFY_FORMAT_OFF
 + (void)enableUpdatesOnAccessTokenChange:(BOOL)enable
 NS_SWIFT_NAME(enableUpdatesOnAccessTokenChange(_:));
+// UNCRUSTIFY_FORMAT_ON
 
 /**
   Loads the current profile and passes it to the completion block.
@@ -257,8 +289,10 @@ NS_SWIFT_NAME(enableUpdatesOnAccessTokenChange(_:));
  @param mode The picture mode
  @param size The height and width. This will be rounded to integer precision.
  */
+// UNCRUSTIFY_FORMAT_OFF
 - (nullable NSURL *)imageURLForPictureMode:(FBSDKProfilePictureMode)mode size:(CGSize)size
 NS_SWIFT_NAME(imageURL(forMode:size:));
+// UNCRUSTIFY_FORMAT_ON
 
 /**
   Returns YES if the profile is equivalent to the receiver.

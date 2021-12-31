@@ -243,7 +243,8 @@ namespace TDSEditor
             string unityAppControllerPath = pathToBuildProject + "/Classes/UnityAppController.mm";
             TDSEditor.TDSScriptStreamWriterHelper UnityAppController = new TDSEditor.TDSScriptStreamWriterHelper(unityAppControllerPath);
             //在指定代码后面增加一行代码
-            UnityAppController.WriteBelow(@"#import <OpenGLES/ES2/glext.h>", @"#import <TDSGlobalSDKCoreKit/TDSGlobalSDK.h>");
+            UnityAppController.WriteBelow(@"#import <AVFoundation/AVFoundation.h>", @"#import <TDSGlobalSDKCoreKit/TDSGlobalSDK.h>");
+            UnityAppController.WriteBelow(@"#import <AVFoundation/AVFoundation.h>", @"#import <TapSDK/TapLoginHelper.h>");
             UnityAppController.WriteBelow(@"[KeyboardDelegate Initialize];",@"[TDSGlobalSDK application:application didFinishLaunchingWithOptions:launchOptions];");
             UnityAppController.WriteBelow(@"AppController_SendNotificationWithArg(kUnityOnOpenURL, notifData);",@"[TDSGlobalSDK application:app openURL:url options:options];");
             if(CheckoutUniversalLinkHolder(unityAppControllerPath,@"NSURL* url = userActivity.webpageURL;"))
