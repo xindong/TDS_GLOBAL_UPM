@@ -69,6 +69,12 @@ namespace TDSGlobal
             TDSGlobalImpl.GetInstance().PayWithWeb(serverId, roleId, callback);
         }
 
+        public static void InlinePay(string orderId, string productId, string productName, string region, string serverid,
+            string roleId, Action<TDSGlobalInlinePayResult> callback)
+        {
+            TDSGlobalImpl.GetInstance().InlinePay(orderId, productId, productName, region, serverid, roleId, callback);
+        }
+
         public static void QueryWithProductIds(string[] productIds, Action<List<TDSGlobalSkuDetail>> callback,
             Action<TDSGlobalError> errorCallback)
         {

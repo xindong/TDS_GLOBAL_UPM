@@ -71,16 +71,16 @@ public class TDSAndroidPostBuildProcessor : IPostGenerateGradleAndroidProject
 
                 writeHelper.WriteBelow(@"implementation fileTree(dir: 'libs', include: ['*.jar'])", @"
 
-                implementation 'com.google.firebase:firebase-core:17.2.2'
+                implementation 'com.google.firebase:firebase-core:18.0.0'
                 implementation 'com.google.firebase:firebase-messaging:21.1.0'
 
                 implementation 'com.google.code.gson:gson:2.8.6'
                 implementation 'com.google.android.gms:play-services-auth:16.0.1'
-                implementation 'com.facebook.android:facebook-login:5.15.3'
-                implementation 'com.facebook.android:facebook-share:5.15.3'
-                implementation 'com.appsflyer:af-android-sdk:4.11.0'
+                implementation 'com.facebook.android:facebook-login:12.0.0'
+                implementation 'com.facebook.android:facebook-share:12.0.0'
+                implementation 'com.appsflyer:af-android-sdk:6.4.3'
                 implementation 'com.adjust.sdk:adjust-android:4.24.1'
-                implementation 'com.android.installreferrer:installreferrer:2.1'
+                implementation 'com.android.installreferrer:installreferrer:2.2'
                 implementation 'com.android.billingclient:billing:3.0.0'
                 implementation 'com.android.support:support-annotations:28.0.0'
                 implementation 'com.android.support:appcompat-v7:28.0.0'
@@ -182,17 +182,17 @@ public class TDSAndroidPostBuildProcessor : IPostGenerateGradleAndroidProject
                 new TDSEditor.TDSScriptStreamWriterHelper(unityLibraryGradle);
             writerHelper.WriteBelow(@"implementation fileTree(dir: 'libs', include: ['*.jar'])", @"
 
-                implementation 'com.google.firebase:firebase-core:17.2.2'
+                implementation 'com.google.firebase:firebase-core:18.0.0'
                 implementation 'com.google.firebase:firebase-messaging:21.1.0'
     
                 implementation 'com.google.code.gson:gson:2.8.6'
 
                 implementation 'com.google.android.gms:play-services-auth:16.0.1'
-                implementation 'com.facebook.android:facebook-login:5.15.3'
-                implementation 'com.facebook.android:facebook-share:5.15.3'
-                implementation 'com.appsflyer:af-android-sdk:4.11.0'
+                implementation 'com.facebook.android:facebook-login:12.0.0'
+                implementation 'com.facebook.android:facebook-share:12.0.0'
+                implementation 'com.appsflyer:af-android-sdk:6.4.3'
                 implementation 'com.adjust.sdk:adjust-android:4.24.1'
-                implementation 'com.android.installreferrer:installreferrer:2.1'
+                implementation 'com.android.installreferrer:installreferrer:2.2'
                 implementation 'com.android.billingclient:billing:3.0.0'
     
                 implementation 'com.android.support:support-annotations:28.0.0'

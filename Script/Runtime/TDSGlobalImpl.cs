@@ -232,6 +232,33 @@ namespace TDSGlobal
                 callback(error);
             });
         }
+        
+        public void InlinePay(string orderId, string productId, string productName, string region, string serverid,
+            string roleId, Action<TDSGlobalInlinePayResult> callback)
+        {
+            var dic = new Dictionary<string, object>();
+            dic.Add("orderId", orderId);
+            dic.Add("productId", productId);
+            dic.Add("productName", productName);
+            dic.Add("region", region);
+            dic.Add("serverId", serverid);
+            dic.Add("roleId", roleId);
+            Command command = new Command(TDSGlobalBridgeName.IAP_SERVICE_NAME, "inlinePay", true, dic);
+            EngineBridge.GetInstance().CallHandler(command, (result) =>
+            {
+                Debug.Log("InlinePay bridge result:" + result.toJSON());
+                if (!checkResultSuccess(result))
+                {
+                    var payResult = new TDSGlobalInlinePayResult(TDSGlobalUnKnowError.UN_KNOW,
+                        $"InlinePay Failed:{result.message}");
+                    
+                    callback(payResult);
+                    return;
+                }
+
+                callback(new TDSGlobalInlinePayResult(result.content));
+            });
+        }
 
         public void QueryWithProductIds(string[] productIds, Action<List<TDSGlobalSkuDetail>> callback,
             Action<TDSGlobalError> errorCallback)
