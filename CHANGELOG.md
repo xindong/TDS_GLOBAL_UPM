@@ -1,6 +1,22 @@
 # ChangeLog
 
+## v1.3.0
+
+Feature
+
+[Android]
+
+* 新增内嵌网页支付功能
+* 升级 AppsFlyer SDK 版本 (4.11.0 -> 6.4.3、installReferrerVersion: 2.1 -> 2.2)
+* 升级 FirebaseCore SDK 版本 (17.2.2 -> 18.0.0)
+
+[iOS]
+
+* 账号注销功能
+* 升级 Firebase 库 -> 8.3.0
+
 ## v1.2.4
+
 * 更新 Android 设备唯一标识机制
 
 ## v1.2.3

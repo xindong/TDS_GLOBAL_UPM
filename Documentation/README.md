@@ -1,7 +1,9 @@
 # TDSGlobal-Unity
 
 ## 1.基本要求
+
 ### 环境要求
+
 * 安装Unity **2018.3**或更高版本
 
 * IOS **10**或更高版本，xcode 12.3+
@@ -9,15 +11,18 @@
 * Android 目标为**API21**或更高版本
 
 ### 权限声明
+
 #### Android
+
 android.permission.WRITE_EXTERNAL_STORAG 允许应用读取外部储存，用于内嵌动态、TapDB  
 android.permission.READ_EXTERNAL_STORAGE 允许应用写入外部储存，用于内嵌动态、TapDB
 
 #### iOS
+
 NSUserTrackingUsageDescription iOS14以上获取IDFA需要配置改权限，用TapDB  
 NSPhotoLibraryUsageDescription 相册权限，用于内嵌动态  
 NSCameraUsageDescription 相机，用于内嵌动态  
-NSMicrophoneUsageDescription 麦克风，用于内嵌动态  
+NSMicrophoneUsageDescription 麦克风，用于内嵌动态
 
 ## 2.导入SDK
 
@@ -26,18 +31,18 @@ NSMicrophoneUsageDescription 麦克风，用于内嵌动态
 ```json
 //在Packages/manifest.json 中添加TDSGlobal SDK
 {
-    "dependencies":{
-        "com.tds.sdk":"https://github.com/xindong/TAPSDK_UPM.git#1.1.9",
-        "com.tds.global":"https://github.com/xindong/TDS_GLOBAL_UPM.git#1.2.4",
-    }
+  "dependencies": {
+    "com.tds.sdk": "https://github.com/xindong/TAPSDK_UPM.git#1.1.9",
+    "com.tds.global": "https://github.com/xindong/TDS_GLOBAL_UPM.git#1.3.0"
+  }
 }
 ```
 
 ## 3.配置SDK
 
-获取针对当前平台的TDSGlobal配置文件 ，请联系平台获取以下四个文件 
+获取针对当前平台的TDSGlobal配置文件 ，请联系平台获取以下四个文件
 
-- IOS 将**TDSGlobal-Info.plist**、**TDS-Info.plist**配置文件复制到**Assets/Plugins/iOS/Resource**中  
+- IOS 将**TDSGlobal-Info.plist**、**TDS-Info.plist**配置文件复制到**Assets/Plugins/iOS/Resource**中
 - Android 将**TDSGlobal_info.json**、**google-Service.json** 文件复制到**Assets/Plugins/Android/assets**中
 
 自动配置脚本参考 [注意事项](#tips)
@@ -67,7 +72,7 @@ TDSGlobal Unity SDK会自动配置 iOS 相关依赖，但需要开发者确认�
 	AppTrackingTransparency.framework
 	AdServices.framework
 	iAd.framework
-	
+
 若运行时遇到相关依赖库加载报错，可改为 Optional 尝试。
 
 #### 3.1.3 检查配置的URL Types
@@ -90,49 +95,53 @@ TDSGlobal Unity SDK会自动配置 iOS 相关依赖，但需要开发者确认�
 
 ```xml
     <!-- 添加权限 -->
-    <uses-permission android:name="com.android.vending.BILLING" />
-    <!-- 获取用户设备信息用 -->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+<uses-permission android:name="com.android.vending.BILLING"/>
+        <!-- 获取用户设备信息用 -->
+<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 ```
 
 facebook相关配置，如未使用到可以不配
 
 ```xml
- <meta-data
-android:name="com.facebook.sdk.ApplicationId"
-android:value="{facebook-cliendId}" />
 
-     <activity
-        android:name="com.facebook.FacebookActivity"
-        android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-        android:label="@string/app_name" />
+<meta-data
+        android:name="com.facebook.sdk.ApplicationId"
+        android:value="{facebook-cliendId}"/>
 
-    <activity
-        android:name="com.facebook.CustomTabActivity"
-        android:exported="true">
-        <intent-filter>
-<action android:name="android.intent.action.VIEW" />
-<category android:name="android.intent.category.DEFAULT" />
-<category android:name="android.intent.category.BROWSABLE" />
-<data android:scheme="{facebook-scheme}" />
-        </intent-filter>
-    </activity>
+<activity
+android:name="com.facebook.FacebookActivity"
+android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+android:label="@string/app_name"/>
 
-    <!-- Facebook 分享图片使用 -->
-    <provider
-        android:name="com.facebook.FacebookContentProvider"
-        android:authorities="com.facebook.app.FacebookContentProvider{facebook-cliendId}"
-        android:exported="true" />
+<activity
+android:name="com.facebook.CustomTabActivity"
+android:exported="true">
+<intent-filter>
+    <action android:name="android.intent.action.VIEW"/>
+    <category android:name="android.intent.category.DEFAULT"/>
+    <category android:name="android.intent.category.BROWSABLE"/>
+    <data android:scheme="{facebook-scheme}"/>
+</intent-filter>
+</activity>
+
+        <!-- Facebook 分享图片使用 -->
+<provider
+android:name="com.facebook.FacebookContentProvider"
+android:authorities="com.facebook.app.FacebookContentProvider{facebook-cliendId}"
+android:exported="true"/>
 ```
 
 ***NOTE:*** 如果游戏需要游客登录在 Android 11及以上的版本上卸载重装之后保留游客账号信息，或访问非游戏的其他文件目录，则需要添加以下权限:
+
 ```xml
-<uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+
+<uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
 ```
+
 PS: 该权限涉及用户敏感权限，在 Google Play 上提交应用审核是需要对此权限进行权限说明申请，否则可能无法通过审核，谨慎使用！！！
 
-
 ## 4 4.接口使用
+
 引入命名空间`using TDSGlobal;`
 
 ### 4.1 初始化
@@ -149,6 +158,7 @@ TDSGlobal.TDSGlobalSDK.Init((success)=>
 ```c#
 TDSGlobal.TDSGlobalSDK.SetLanguage(TDSGlobal.TDSGlobalLanguage.ZH_CN);
 ```
+
 ##### 语言类型说明
 
 ```c#
@@ -184,6 +194,7 @@ public class TDSGlobalLanguage
 ### 4.3 用户
 
 #### 4.3.1 登陆
+
 ```c#
 // 唤起 TDSG 登陆界面
 TDSGlobal.TDSGlobalSDK.Login((tdsUser)=>
@@ -202,9 +213,8 @@ TDSGlobal.TDSGlobalSDK.LoginByType(loginType,(tdsUser)=>{
 });
 ```
 
-
-
 #### 4.3.2 获取用户信息
+
 ```c#
 TDSGlobal.TDSGlobalSDK.GetUser((tdsUser)=>
 {
@@ -214,7 +224,9 @@ TDSGlobal.TDSGlobalSDK.GetUser((tdsUser)=>
     //获取失败
 });
 ```
+
 #### 4.3.3 添加用户状态回调
+
 ```c#
 TDSGlobal.TDSGlobalSDK.AddUserStatusChangeCallback((code,message)=>
 {
@@ -230,7 +242,9 @@ TDSGlobal.TDSGlobalSDK.AddUserStatusChangeCallback((code,message)=>
     }
 });
 ```
+
 #### 4.3.4 用户中心
+
 ```c#
 TDSGlobal.TDSGlobalSDK.UserCenter();
 ```
@@ -275,6 +289,7 @@ public class TDSGlobalUser
 #### 4.4 支付
 
 ##### 4.4.1 购买商品
+
 ```c#
 /*
  * orderId 订单ID。游戏侧订单号，服务端支付回调会包含该字段
@@ -293,6 +308,7 @@ TDSGlobal.TDSGlobalSDK.PayWithProduct(orderId,productId,roleId,serverId,ext,(ord
 ```
 
 ##### 4.4.2 查询商品信息
+
 ```c#
 /**
  * productIds 查询的商品Id数组
@@ -307,6 +323,7 @@ TDSGlobal.TDSGlobalSDK.QueryWithProductIds(productIds,(skuList)=>
 ```
 
 ##### 4.4.3 查询未完成的订单
+
 ```c#
 TDSGlobal.TDSGlobalSDK.QueryRestoredPurchases((transactions)=>
 {
@@ -315,9 +332,57 @@ TDSGlobal.TDSGlobalSDK.QueryRestoredPurchases((transactions)=>
 ```
 
 ##### 4.4.4 网页支付(Android)
+
 ```c#
 TDSGlobal.TDSGlobalSDK.PayWithWeb(serverId,roleId,(tdsError)=>{
     // 返回结果
+});
+```
+
+##### 4.4.5 内嵌支付(Android)
+
+- 内嵌支付网页地址连接配置需要在 TDSGlobal_info.json 文件中增加配置项：
+
+```json
+"inline_web_pay_url": "#{内嵌支付地址}",
+```
+
+```c#
+
+/** 
+     * 内嵌网页支付
+     * @param orderId 订单ID。游戏侧订单号，服务端支付回调会包含该字段,如无该字段，传空。
+     * @param productId 商品ID。游戏的商品ID，必填
+     * @param productName 商品名称。用于内嵌支付内部显示，必填
+     * @param region 国家/地区。游戏当前商品售卖国家或地区
+     * @param serverId 服务器ID。所在服务器ID，不能有特殊字符，服务端支付回调会包含该字段，必填
+     * @param roleId 角色ID。支付角色ID，服务端支付回调会包含该字段，必填
+     * @param callback 支付结果回调
+     */
+TDSGlobal.TDSGlobalSDK.InlinePay(orderId, productId, productName, region, serverid, roleId, (result) => {
+    // 返回结果
+    var code = result.code;
+    var message = result.message;
+    if (result.code == TDSGlobalPaymentResponseCode.OK)
+    {
+        // 支付成功
+    }
+    else if (result.code == TDSGlobalPaymentResponseCode.ERROR)
+    {
+        // 支付失败 
+    }
+    else if (result.code == TDSGlobalPaymentResponseCode.NETWORK_ERROR)
+    {
+        // 网络错误
+    }
+    else if (result.code == TDSGlobalPaymentResponseCode.USER_CANCEL)
+    {
+        // 支付取消
+    }
+    else if (result.code == TDSGlobalPaymentResponseCode.PURCHASE_PROCESSING)
+    {
+        // 订单处理中
+    }
 });
 ```
 
@@ -369,18 +434,21 @@ TDSGlobal.TDSGlobalSDK.StoreReview();
 ```
 
 #### 4.9 版本判断
+
 ```c#
 // 当前手机版本是否是 Android 11 及以上
 TDSGlobal.TDSGlobalSDK.IsBuildVersionAboveAndroid11()
 ```
 
 #### 4.10 是否有外部存储管理权限
+
 ```c#
 // 当前是否有外部存储管理权限(在 Android 11及以上调用此方法才生效，否则都是 false)
 TDSGlobal.TDSGlobalSDK.IsBuildVersionAboveAndroid11()
 ```
 
 #### 4.11 请求获取外部存储管理权限
+
 ```c#
 /*
  * 方法中的 requestCode 作为跳转到外部的一个请求码,
@@ -397,6 +465,7 @@ TDSGlobal.TDSGlobalSDK.RequestExternalStorageManagerPermission(int requestCode)
 **TDSGlobal/Script/Editor** 目录下的脚本，会帮助游戏自动配置。
 
 #### 5.1 Android
+
 确保 **TDSGlobal_info.json**、**google-Service.json** 拷贝到 **Asssets/Plugins/Android/Assets** 目录中。
 
 ```c#
@@ -424,15 +493,15 @@ writerHelper.WriteBelow(@"apply plugin: 'com.android.application'",@"apply plugi
 writerHelper.WriteBelow(@"apply plugin: 'com.android.application'",@"apply plugin: 'com.google.firebase.crashlytics'");
 //添加项目所需要的依赖
 writerHelper.WriteBelow(@"implementation fileTree(dir: 'libs', include: ['*.jar'])",@"
-        implementation 'com.google.firebase:firebase-core:17.2.2'
+        implementation 'com.google.firebase:firebase-core:18.0.0'
         implementation 'com.google.firebase:firebase-messaging:21.1.0'
 
         implementation 'com.google.android.gms:play-services-auth:16.0.1'
-        implementation 'com.facebook.android:facebook-login:5.15.3'
-        implementation 'com.facebook.android:facebook-share:5.15.3'
-        implementation 'com.appsflyer:af-android-sdk:4.11.0'
+        implementation 'com.facebook.android:facebook-login:12.0.0'
+        implementation 'com.facebook.android:facebook-share:12.0.0'
+        implementation 'com.appsflyer:af-android-sdk:6.4.3'
         implementation 'com.adjust.sdk:adjust-android:4.24.1'
-        implementation 'com.android.installreferrer:installreferrer:2.1'
+        implementation 'com.android.installreferrer:installreferrer:2.2'
         implementation 'com.android.billingclient:billing:3.0.0'
     
         implementation 'com.android.support:support-annotations:28.0.0'
