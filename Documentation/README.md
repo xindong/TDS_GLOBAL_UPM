@@ -460,6 +460,12 @@ TDSGlobal.TDSGlobalSDK.IsBuildVersionAboveAndroid11()
 TDSGlobal.TDSGlobalSDK.RequestExternalStorageManagerPermission(int requestCode)
 ```
 
+#### 4.12 iOS打开注销页面
+
+```c#
+TDSGlobalSDK.AccountCancellation();
+```
+
 ### 5.注意事项<a id="tips"></a>
 
 **TDSGlobal/Script/Editor** 目录下的脚本，会帮助游戏自动配置。
