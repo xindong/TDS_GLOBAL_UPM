@@ -240,7 +240,7 @@ namespace TDSGlobal
         }
         
         public void InlinePay(string orderId, string productId, string productName, string region, string serverid,
-            string roleId, Action<TDSGlobalInlinePayResult> callback)
+            string roleId, string ext, Action<TDSGlobalInlinePayResult> callback)
         {
             var dic = new Dictionary<string, object>();
             dic.Add("orderId", orderId);
@@ -249,6 +249,7 @@ namespace TDSGlobal
             dic.Add("region", region);
             dic.Add("serverId", serverid);
             dic.Add("roleId", roleId);
+            dic.Add("ext", ext);
             Command command = new Command(TDSGlobalBridgeName.IAP_SERVICE_NAME, "inlinePay", true, dic);
             EngineBridge.GetInstance().CallHandler(command, (result) =>
             {

@@ -33,7 +33,7 @@ namespace TDSGlobal
         void PayWithWeb(string serverId, string roleId, Action<TDSGlobalError> callback);
 
         void InlinePay(string orderId, string productId, string productName, string region, string serverid,
-            string roleId, Action<TDSGlobalInlinePayResult> callback);
+            string roleId, string ext, Action<TDSGlobalInlinePayResult> callback);
 
         void QueryWithProductIds(string[] productIds, Action<List<TDSGlobalSkuDetail>> callback,
             Action<TDSGlobalError> errorCallback);
