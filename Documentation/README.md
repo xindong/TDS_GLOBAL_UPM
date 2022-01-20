@@ -33,7 +33,7 @@ NSMicrophoneUsageDescription 麦克风，用于内嵌动态
 {
   "dependencies": {
     "com.tds.sdk": "https://github.com/xindong/TAPSDK_UPM.git#1.1.9",
-    "com.tds.global": "https://github.com/xindong/TDS_GLOBAL_UPM.git#1.3.0"
+    "com.tds.global": "https://github.com/xindong/TDS_GLOBAL_UPM.git#1.3.1"
   }
 }
 ```
@@ -357,9 +357,10 @@ TDSGlobal.TDSGlobalSDK.PayWithWeb(serverId,roleId,(tdsError)=>{
      * @param region 国家/地区。游戏当前商品售卖国家或地区
      * @param serverId 服务器ID。所在服务器ID，不能有特殊字符，服务端支付回调会包含该字段，必填
      * @param roleId 角色ID。支付角色ID，服务端支付回调会包含该字段，必填
+     * @param ext 透传参数。服务端支付回调会包含该字段。可用于标记区分充值回调地址，如需使用该功能，请联系平台进行配置。
      * @param callback 支付结果回调
      */
-TDSGlobal.TDSGlobalSDK.InlinePay(orderId, productId, productName, region, serverid, roleId, (result) => {
+TDSGlobal.TDSGlobalSDK.InlinePay(orderId, productId, productName, region, serverid, roleId, ext, (result) => {
     // 返回结果
     var code = result.code;
     var message = result.message;

@@ -1,5 +1,13 @@
 # ChangeLog
 
+## v1.3.1
+
+Feature
+
+[Android]
+* 内嵌支付增加 game_ext 字段
+* 内嵌支付、网页支付支持现有 Intent Scheme 跳转三方 App 规则
+
 ## v1.3.0
 
 Feature
