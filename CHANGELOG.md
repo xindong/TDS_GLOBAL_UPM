@@ -1,5 +1,12 @@
 # ChangeLog
 
+## v1.5.0
+
+Feature
+
+[Android]
+- 更新 Google 结算库版本至 4.1.0
+
 ## v1.3.1
 
 Feature

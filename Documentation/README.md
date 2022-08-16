@@ -14,7 +14,7 @@
 
 #### Android
 
-android.permission.WRITE_EXTERNAL_STORAG 允许应用读取外部储存，用于内嵌动态、TapDB  
+android.permission.WRITE_EXTERNAL_STORAGE 允许应用读取外部储存，用于内嵌动态、TapDB  
 android.permission.READ_EXTERNAL_STORAGE 允许应用写入外部储存，用于内嵌动态、TapDB
 
 #### iOS
@@ -32,8 +32,8 @@ NSMicrophoneUsageDescription 麦克风，用于内嵌动态
 //在Packages/manifest.json 中添加TDSGlobal SDK
 {
   "dependencies": {
-    "com.tds.sdk": "https://github.com/xindong/TAPSDK_UPM.git#1.1.9",
-    "com.tds.global": "https://github.com/xindong/TDS_GLOBAL_UPM.git#1.3.1"
+    "com.tds.sdk": "https://github.com/xindong/TAPSDK_UPM.git#1.2.3",
+    "com.tds.global": "https://github.com/xindong/TDS_GLOBAL_UPM.git#1.5.0"
   }
 }
 ```
@@ -506,14 +506,14 @@ writerHelper.WriteBelow(@"implementation fileTree(dir: 'libs', include: ['*.jar'
         implementation 'com.google.android.gms:play-services-auth:16.0.1'
         implementation 'com.facebook.android:facebook-login:12.0.0'
         implementation 'com.facebook.android:facebook-share:12.0.0'
-        implementation 'com.appsflyer:af-android-sdk:6.4.3'
+        implementation 'com.appsflyer:af-android-sdk:6.5.2'
         implementation 'com.adjust.sdk:adjust-android:4.24.1'
         implementation 'com.android.installreferrer:installreferrer:2.2'
-        implementation 'com.android.billingclient:billing:3.0.0'
+        implementation 'com.android.billingclient:billing:4.1.0'
     
-        implementation 'com.android.support:support-annotations:28.0.0'
-        implementation 'com.android.support:appcompat-v7:28.0.0'
-        implementation 'com.android.support:recyclerview-v7:28.0.0'
+        implementation 'androidx.annotation:annotation:1.2.0'
+        implementation 'androidx.appcompat:appcompat:1.2.0'
+        implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
         implementation 'com.twitter.sdk.android:twitter:3.3.0'
         implementation 'com.twitter.sdk.android:tweet-composer:3.3.0'
