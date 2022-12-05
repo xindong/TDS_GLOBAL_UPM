@@ -1,5 +1,12 @@
 # ChangeLog
 
+## v1.5.1
+
+Feature
+
+[iOS]
+- 支付接口新增 region_code 字段
+
 ## v1.5.0
 
 Feature

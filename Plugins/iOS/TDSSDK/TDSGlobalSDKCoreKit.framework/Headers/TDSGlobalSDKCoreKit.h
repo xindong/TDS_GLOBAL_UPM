@@ -18,7 +18,7 @@
 #import <TDSGlobalSDKCoreKit/TDSGlobalConfigManager.h>
 #import <TDSGlobalSDKCoreKit/TDSGlobalGame.h>
 
-#define TDSGLOBALSDK_VERSION @"1.3.0"
+#define TDSGLOBALSDK_VERSION @"1.5.1"
 #define TDSGLOBALSDK_NAME @"TDSGlobalSDK"
 
 
