@@ -88,56 +88,29 @@ namespace TDSGlobal
     [Serializable]
     public class TDSGlobalSkuDetail
     {
+        private string _originString;
         public string description;
-
-        public string freeTrialPeriod;
-
-        public string iconUrl;
-
-        public string introductoryPrice;
-
-        public long introductoryPriceAmountMicros;
-
-        public int introductoryPriceCycles;
-
-        public string originJson;
-
-        public string originPrice;
-
-        public long originPriceAmountMicors;
-
-        public string price;
-
-        public long priceAmountMicros;
-
-        public string priceCurrencyCode;
-
+        public string name;
         public string productId;
-
-        public string subscriptionPeroid;
-
+        public string productType;
         public string title;
+        public GoogleOneTimePurchaseOfferDetails googleOneTimePurchaseOfferDetails;
 
-        public string type;
+        public override string ToString()
+        {
+            return _originString;
+        }
 
         public TDSGlobalSkuDetail(Dictionary<string,object> dic)
         {
-            this.description = SafeDictionary.GetValue<string>(dic,"description");
-            this.freeTrialPeriod = SafeDictionary.GetValue<string>(dic,"freeTrialPeriod");
-            this.iconUrl = SafeDictionary.GetValue<string>(dic,"iconUrl");
-            this.introductoryPrice = SafeDictionary.GetValue<string>(dic,"introductoryPrice");
-            this.introductoryPriceAmountMicros =SafeDictionary.GetValue<long>(dic,"introductoryPriceAmountMicros");
-            this.introductoryPriceCycles = SafeDictionary.GetValue<int>(dic,"introductoryPriceCycles");
-            this.originJson = SafeDictionary.GetValue<string>(dic,"originJson");
-            this.originPrice = SafeDictionary.GetValue<string>(dic,"originPrice");
-            this.originPriceAmountMicors = SafeDictionary.GetValue<long>(dic,"originPriceAmountMicors");
-            this.price = SafeDictionary.GetValue<string>(dic,"price");
-            this.priceAmountMicros = SafeDictionary.GetValue<long>(dic,"priceAmountMicros");
-            this.priceCurrencyCode = SafeDictionary.GetValue<string>(dic,"priceCurrencyCode");
-            this.productId = SafeDictionary.GetValue<string>(dic,"productId");
-            this.subscriptionPeroid = SafeDictionary.GetValue<string>(dic,"subscriptionPeroid");
-            this.title = SafeDictionary.GetValue<string>(dic,"title");
-            this.type = SafeDictionary.GetValue<string>(dic,"type");
+            if (dic == null) return;
+            _originString = SafeDictionary.GetValue<string>(dic, "originString");
+            description = SafeDictionary.GetValue<string>(dic, "description");
+            name = SafeDictionary.GetValue<string>(dic, "name");
+            productId = SafeDictionary.GetValue<string>(dic, "productId");
+            productType = SafeDictionary.GetValue<string>(dic, "productType");
+            title = SafeDictionary.GetValue<string>(dic, "title");
+            googleOneTimePurchaseOfferDetails = new GoogleOneTimePurchaseOfferDetails(SafeDictionary.GetValue<Dictionary<string, object>>(dic, "googleOneTimePurchaseOfferDetails"));
         }
 
 
@@ -146,6 +119,21 @@ namespace TDSGlobal
         }
 
     }
+    
+        [Serializable]
+        public class GoogleOneTimePurchaseOfferDetails
+        {
+            public string formattedPrice;
+            public long priceAmountMicros;
+            public string priceCurrencyCode;
+
+            public GoogleOneTimePurchaseOfferDetails(Dictionary<string, object> dic)
+            {
+                formattedPrice = SafeDictionary.GetValue<string>(dic, "formattedPrice");
+                priceAmountMicros = SafeDictionary.GetValue<long>(dic, "priceAmountMicros");
+                priceCurrencyCode = SafeDictionary.GetValue<string>(dic, "priceCurrencyCode");
+            }
+        }
 #elif UNITY_EDITOR
      public class TDSGlobalSkuDetail
      {

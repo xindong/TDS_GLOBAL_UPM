@@ -1,5 +1,13 @@
 # ChangeLog
 
+## v1.6.0
+
+Feature
+
+[Android]
+- 升级 Google 结算库版本至 5.2.0
+- 适配 Android 13 (ApiLeve 33)
+
 ## v1.5.1
 
 Feature

@@ -33,7 +33,7 @@ NSMicrophoneUsageDescription 麦克风，用于内嵌动态
 {
   "dependencies": {
     "com.tds.sdk": "https://github.com/xindong/TAPSDK_UPM.git#1.2.3",
-    "com.tds.global": "https://github.com/xindong/TDS_GLOBAL_UPM.git#1.5.1"
+    "com.tds.global": "https://github.com/xindong/TDS_GLOBAL_UPM.git#1.6.0"
   }
 }
 ```
@@ -94,8 +94,6 @@ TDSGlobal Unity SDK会自动配置 iOS 相关依赖，但需要开发者确认�
 添加SDK权限
 
 ```xml
-    <!-- 添加权限 -->
-<uses-permission android:name="com.android.vending.BILLING"/>
         <!-- 获取用户设备信息用 -->
 <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 ```
@@ -509,7 +507,7 @@ writerHelper.WriteBelow(@"implementation fileTree(dir: 'libs', include: ['*.jar'
         implementation 'com.appsflyer:af-android-sdk:6.5.2'
         implementation 'com.adjust.sdk:adjust-android:4.24.1'
         implementation 'com.android.installreferrer:installreferrer:2.2'
-        implementation 'com.android.billingclient:billing:4.1.0'
+        implementation 'com.android.billingclient:billing:5.2.0'
     
         implementation 'androidx.annotation:annotation:1.2.0'
         implementation 'androidx.appcompat:appcompat:1.2.0'
