@@ -33,7 +33,7 @@ NSMicrophoneUsageDescription 麦克风，用于内嵌动态
 {
   "dependencies": {
     "com.tds.sdk": "https://github.com/xindong/TAPSDK_UPM.git#1.2.3",
-    "com.tds.global": "https://github.com/xindong/TDS_GLOBAL_UPM.git#1.7.1"
+    "com.tds.global": "https://github.com/xindong/TDS_GLOBAL_UPM.git#1.8.0"
   }
 }
 ```
@@ -510,7 +510,7 @@ writerHelper.WriteBelow(@"implementation fileTree(dir: 'libs', include: ['*.jar'
         implementation 'com.android.billingclient:billing:7.0.0'
     
         implementation 'androidx.annotation:annotation:1.2.0'
-        implementation 'androidx.appcompat:appcompat:1.2.0'
+        implementation 'androidx.appcompat:appcompat:1.3.1'
         implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
         implementation 'com.twitter.sdk.android:twitter:3.3.0'

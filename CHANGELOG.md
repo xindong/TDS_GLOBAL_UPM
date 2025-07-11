@@ -1,5 +1,12 @@
 # ChangeLog
 
+## v1.8.0
+
+Feature
+
+[Android]
+- 适配 Android 15 (ApiLevel 35)
+
 ## v1.7.1
 
 [Android]

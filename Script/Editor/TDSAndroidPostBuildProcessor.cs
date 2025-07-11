@@ -83,7 +83,7 @@ public class TDSAndroidPostBuildProcessor : IPostGenerateGradleAndroidProject
                 implementation 'com.android.installreferrer:installreferrer:2.2'
                 implementation 'com.android.billingclient:billing:7.0.0'
                 implementation 'androidx.annotation:annotation:1.2.0'
-                implementation 'androidx.appcompat:appcompat:1.2.0'
+                implementation 'androidx.appcompat:appcompat:1.3.1'
                 implementation 'androidx.recyclerview:recyclerview:1.2.1'
                 implementation 'com.google.android.gms:play-services-ads-identifier:17.0.0'
                 implementation 'com.twitter.sdk.android:twitter:3.3.0'
@@ -194,7 +194,7 @@ public class TDSAndroidPostBuildProcessor : IPostGenerateGradleAndroidProject
                 implementation 'com.android.billingclient:billing:7.0.0'
     
                 implementation 'androidx.annotation:annotation:1.2.0'
-                implementation 'androidx.appcompat:appcompat:1.2.0'
+                implementation 'androidx.appcompat:appcompat:1.3.1'
                 implementation 'androidx.recyclerview:recyclerview:1.2.1'
                 implementation 'com.google.android.gms:play-services-ads-identifier:17.0.0'
                 
