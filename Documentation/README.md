@@ -138,6 +138,20 @@ android:exported="true"/>
 
 PS: 该权限涉及用户敏感权限，在 Google Play 上提交应用审核是需要对此权限进行权限说明申请，否则可能无法通过审核，谨慎使用！！！
 
+Google Play Billing Library 8.3.0 要求 minSdkVersion 为 23 或更高版本。使用 Android Google 支付的包体，请将游戏工程的 minSdkVersion 设置为 23 或更高版本。
+
+如包体不需要使用 Google 支付，且仍需保持 minSdkVersion 21，可在 AndroidManifest.xml 的 `<manifest>` 节点下添加以下配置，用于忽略相关依赖的打包警告：
+
+```xml
+<manifest
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-sdk tools:overrideLibrary="com.android.billingclient, com.google.android.gms.common"/>
+
+</manifest>
+```
+
 ## 4 4.接口使用
 
 引入命名空间`using TDSGlobal;`
