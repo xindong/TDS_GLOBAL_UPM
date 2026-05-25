@@ -164,9 +164,12 @@ public class TDSAndroidPostBuildProcessor : IPostGenerateGradleAndroidProject
         if (File.Exists(baseProjectGradle))
         {
             Debug.Log("write project gradle");
-            TDSEditor.TDSScriptStreamWriterHelper writerHelper =
-                new TDSEditor.TDSScriptStreamWriterHelper(baseProjectGradle);
-			writerHelper.WriteBelow(@"classpath 'com.android.tools.build:gradle:", @"allprojects {
+            string baseProjectGradleText = File.ReadAllText(baseProjectGradle);
+            if (baseProjectGradleText.Contains("classpath 'com.android.tools.build:gradle:"))
+            {
+                TDSEditor.TDSScriptStreamWriterHelper writerHelper =
+                    new TDSEditor.TDSScriptStreamWriterHelper(baseProjectGradle);
+                writerHelper.WriteBelow(@"classpath 'com.android.tools.build:gradle:", @"allprojects {
     buildscript {
         dependencies {
             classpath 'com.google.gms:google-services:4.3.15'
@@ -174,6 +177,7 @@ public class TDSAndroidPostBuildProcessor : IPostGenerateGradleAndroidProject
         }
     }
 }");
+            }
         }
 
         if (File.Exists(unityLibraryGradle))
