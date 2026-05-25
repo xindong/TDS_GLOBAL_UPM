@@ -95,6 +95,7 @@ namespace TDSGlobal
         public string productType;
         public string title;
         public GoogleOneTimePurchaseOfferDetails googleOneTimePurchaseOfferDetails;
+        public List<GoogleOneTimePurchaseOfferDetails> oneTimePurchaseOfferDetailsList;
 
         public override string ToString()
         {
@@ -110,7 +111,28 @@ namespace TDSGlobal
             productId = SafeDictionary.GetValue<string>(dic, "productId");
             productType = SafeDictionary.GetValue<string>(dic, "productType");
             title = SafeDictionary.GetValue<string>(dic, "title");
-            googleOneTimePurchaseOfferDetails = new GoogleOneTimePurchaseOfferDetails(SafeDictionary.GetValue<Dictionary<string, object>>(dic, "googleOneTimePurchaseOfferDetails"));
+            var offerDetails = SafeDictionary.GetValue<Dictionary<string, object>>(dic, "googleOneTimePurchaseOfferDetails");
+            if (offerDetails != null)
+            {
+                googleOneTimePurchaseOfferDetails = new GoogleOneTimePurchaseOfferDetails(offerDetails);
+            }
+            oneTimePurchaseOfferDetailsList = new List<GoogleOneTimePurchaseOfferDetails>();
+            List<object> offerList = SafeDictionary.GetValue<List<object>>(dic, "oneTimePurchaseOfferDetailsList");
+            if (offerList != null)
+            {
+                foreach (var offer in offerList)
+                {
+                    var offerDic = offer as Dictionary<string, object>;
+                    if (offerDic != null)
+                    {
+                        oneTimePurchaseOfferDetailsList.Add(new GoogleOneTimePurchaseOfferDetails(offerDic));
+                    }
+                }
+            }
+            if (googleOneTimePurchaseOfferDetails == null && oneTimePurchaseOfferDetailsList.Count > 0)
+            {
+                googleOneTimePurchaseOfferDetails = oneTimePurchaseOfferDetailsList[0];
+            }
         }
 
 

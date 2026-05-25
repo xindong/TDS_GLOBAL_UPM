@@ -33,7 +33,7 @@ NSMicrophoneUsageDescription 麦克风，用于内嵌动态
 {
   "dependencies": {
     "com.tds.sdk": "https://github.com/xindong/TAPSDK_UPM.git#1.2.3",
-    "com.tds.global": "https://github.com/xindong/TDS_GLOBAL_UPM.git#1.8.0"
+    "com.tds.global": "https://github.com/xindong/TDS_GLOBAL_UPM.git#1.9.0"
   }
 }
 ```
@@ -487,8 +487,8 @@ writerHelper.WriteBelow(@"task clean(type: Delete) {
 }",@"allprojects {
     buildscript {
         dependencies {
-            classpath 'com.google.gms:google-services:4.0.2'
-            classpath 'com.google.firebase:firebase-crashlytics-gradle:2.2.1'
+            classpath 'com.google.gms:google-services:4.3.15'
+            classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.5'
         }
     }
 }");
@@ -504,10 +504,10 @@ writerHelper.WriteBelow(@"implementation fileTree(dir: 'libs', include: ['*.jar'
         implementation 'com.google.android.gms:play-services-auth:16.0.1'
         implementation 'com.facebook.android:facebook-login:12.0.0'
         implementation 'com.facebook.android:facebook-share:12.0.0'
-        implementation 'com.appsflyer:af-android-sdk:6.15.0'
+        implementation 'com.appsflyer:af-android-sdk:6.15.2'
         implementation 'com.adjust.sdk:adjust-android:4.24.1'
         implementation 'com.android.installreferrer:installreferrer:2.2'
-        implementation 'com.android.billingclient:billing:7.0.0'
+        implementation 'com.android.billingclient:billing:8.3.0'
     
         implementation 'androidx.annotation:annotation:1.2.0'
         implementation 'androidx.appcompat:appcompat:1.3.1'

@@ -1,5 +1,13 @@
 # ChangeLog
 
+## v1.9.0
+
+Feature
+
+[Android]
+- 升级 Google 结算库版本至 8.3.0
+- 适配 Android 16 (ApiLevel 36)
+
 ## v1.8.0
 
 Feature

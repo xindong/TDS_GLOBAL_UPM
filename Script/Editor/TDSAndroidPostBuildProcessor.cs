@@ -32,6 +32,8 @@ public class TDSAndroidPostBuildProcessor : IPostGenerateGradleAndroidProject
         writer.WriteLine("org.gradle.jvmargs=-Xmx4096M");
         writer.WriteLine("android.useAndroidX=true");
         writer.WriteLine("android.enableJetifier=true");
+        writer.WriteLine("android.suppressUnsupportedCompileSdk=36");
+        writer.WriteLine("android.aapt2Version=8.13.2-14304508");
         writer.WriteLine("unityStreamingAssets=.unity3d, google-services-desktop.json, google-services.json, GoogleService-Info.plist");
         writer.Flush();
         writer.Close();
@@ -65,9 +67,9 @@ public class TDSAndroidPostBuildProcessor : IPostGenerateGradleAndroidProject
                 writeHelper.WriteBelow(@"apply plugin: 'com.android.application'",
                     @"apply plugin: 'com.google.firebase.crashlytics'");
                 writeHelper.WriteBelow(@"apply plugin: 'com.android.application'",
-                    @"buildscript {dependencies {classpath 'com.google.gms:google-services:4.0.2'}}");
+                    @"buildscript {dependencies {classpath 'com.google.gms:google-services:4.3.15'}}");
                 writeHelper.WriteBelow(@"apply plugin: 'com.android.application'",
-                    @"buildscript {dependencies {classpath 'com.google.firebase:firebase-crashlytics-gradle:2.2.1'}}");
+                    @"buildscript {dependencies {classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.5'}}");
 
                 writeHelper.WriteBelow(@"implementation fileTree(dir: 'libs', include: ['*.jar'])", @"
 
@@ -78,10 +80,10 @@ public class TDSAndroidPostBuildProcessor : IPostGenerateGradleAndroidProject
                 implementation 'com.google.android.gms:play-services-auth:16.0.1'
                 implementation 'com.facebook.android:facebook-login:12.0.0'
                 implementation 'com.facebook.android:facebook-share:12.0.0'
-                implementation 'com.appsflyer:af-android-sdk:6.15.0'
+                implementation 'com.appsflyer:af-android-sdk:6.15.2'
                 implementation 'com.adjust.sdk:adjust-android:4.24.1'
                 implementation 'com.android.installreferrer:installreferrer:2.2'
-                implementation 'com.android.billingclient:billing:7.0.0'
+                implementation 'com.android.billingclient:billing:8.3.0'
                 implementation 'androidx.annotation:annotation:1.2.0'
                 implementation 'androidx.appcompat:appcompat:1.3.1'
                 implementation 'androidx.recyclerview:recyclerview:1.2.1'
@@ -167,8 +169,8 @@ public class TDSAndroidPostBuildProcessor : IPostGenerateGradleAndroidProject
 			writerHelper.WriteBelow(@"classpath 'com.android.tools.build:gradle:", @"allprojects {
     buildscript {
         dependencies {
-            classpath 'com.google.gms:google-services:4.0.2'
-            classpath 'com.google.firebase:firebase-crashlytics-gradle:2.2.1'
+            classpath 'com.google.gms:google-services:4.3.15'
+            classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.5'
         }
     }
 }");
@@ -188,10 +190,10 @@ public class TDSAndroidPostBuildProcessor : IPostGenerateGradleAndroidProject
                 implementation 'com.google.android.gms:play-services-auth:16.0.1'
                 implementation 'com.facebook.android:facebook-login:12.0.0'
                 implementation 'com.facebook.android:facebook-share:12.0.0'
-                implementation 'com.appsflyer:af-android-sdk:6.15.0'
+                implementation 'com.appsflyer:af-android-sdk:6.15.2'
                 implementation 'com.adjust.sdk:adjust-android:4.24.1'
                 implementation 'com.android.installreferrer:installreferrer:2.2'
-                implementation 'com.android.billingclient:billing:7.0.0'
+                implementation 'com.android.billingclient:billing:8.3.0'
     
                 implementation 'androidx.annotation:annotation:1.2.0'
                 implementation 'androidx.appcompat:appcompat:1.3.1'
